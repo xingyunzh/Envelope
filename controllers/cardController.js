@@ -44,3 +44,29 @@ exports.createCard = function(req, res){
         res.json(util.wrapBody(card));
     }).catch(util.responseInternalError(res));
 };
+
+exports.getCardbyId = function(req, res){
+    cardRepository.getCardById(req.params.id).then(function(card){
+        return util.wrapBody(card);
+    }).catch(util.responseInternalError(res));
+};
+
+exports.collectCard = function(req, res){
+    cardRepository.getLatestCardBySender(req.body.sender).then(function(card){
+        return cardRepository.createCollectedCard({collector:req.body.me, card:card});
+    }).then(function(collectedCard){
+        res.json(util.wrapBody(collectedCard));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.getCollectedCardsByUser = function(req, res){
+    cardRepository.getCollectedCardsByUser(req.params.id).then(function(cCards){
+        res.json(util.wrapBody(cCards));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.countCollectedCardsByUser = function(req, res){
+    cardRepository.countCollectedCardsByUser(req.params.id).then(function(count){
+        res.json(util.wrapBody(count));
+    }).catch(util.responseInternalError(res));
+};
