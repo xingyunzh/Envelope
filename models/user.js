@@ -14,16 +14,6 @@ var userSchema = Schema({
 	},
 
 	uid:String,
-
-	roles:[{
-		type:String,
-		index:true
-	}],
-
-	skills:[String],
-
-	sector:String,
-
 	headImgUrl:String
 });
 

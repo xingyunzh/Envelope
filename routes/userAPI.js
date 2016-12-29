@@ -31,9 +31,6 @@ router.get('/profile/:id',userController.getProfileById);
 //	required:
 //	optional:
 //		nickName:String
-//		roles:[String] (coach/player)
-//		sector:String
-//		skills:[String]
 //		headImgUrl: String
 //response:
 //{user:UserEntity}
@@ -45,8 +42,6 @@ router.post('/profile/update/:id',authenticator.authenticate,userController.upda
 //		pageNum:Number
 //		pageSize:Number
 //		keyword:String (for name)
-//		role:String (coach/player)
-//		sector:String
 //response:
 //{total:TotalNumber,ideas:[UserEntities]}
 router.get('/list',userController.listUser);

@@ -15,7 +15,7 @@ var router = require('./routes/router');
 var scr = require('./repositories/systemConfigRepository');
 
 
-var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
+var contextRoot = "/envelope";  //Not set any contextRoot at the moment, but let's make it as easy to config
 
 mongoose.Promise = q.Promise;
 var envMongo = scr.getMongoEnv();

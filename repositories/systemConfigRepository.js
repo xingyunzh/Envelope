@@ -5,10 +5,11 @@ var fs = require('fs');
 var q = require('q');
 
 var cacheHere = null;
+var SystemConfigKeysFile = "/root/keys/envelopeKeys.json";
 
 exports.getOSSConfig = function(){
     var deferred = q.defer();
-    fs.readFile("/root/keys/envelopeKeys.json", "utf8", function(err, data){
+    fs.readFile("SystemConfigKeysFile", "utf8", function(err, data){
         if (err) {
             deferred.reject(err);
         }
@@ -23,13 +24,13 @@ exports.getOSSConfig = function(){
 
 exports.getMongoEnv = function(){
 
-    var data = fs.readFileSync("/root/keys/envelopeKeys.json", "utf8");
+    var data = fs.readFileSync(SystemConfigKeysFile, "utf8");
     var mongodb = JSON.parse(data).mongodb;
     return mongodb;
 }
 
 exports.getTokenSecret = function(){
-    var data = fs.readFileSync("/root/keys/envelopeKeys.json", "utf8");
+    var data = fs.readFileSync(SystemConfigKeysFile, "utf8");
     var jwt = JSON.parse(data).jwt;
     return jwt;
 }

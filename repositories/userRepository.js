@@ -31,20 +31,10 @@ exports.updateById = function(id,data){
 };
 
 exports.query = function(options){
-	
-
 	var conditions = {};
 
 	if ('nickname' in options) {
 		conditions.alphabetName = repositoryUtil.buildSearchRegExp(options.nickname);
-	}
-
-	if ('role' in options) {
-		conditions.roles = options.role;
-	}
-
-	if ('sector' in options) {
-		conditions.sector = options.sector;
 	}
 
 	return repositoryUtil.paging(User,conditions,options,'');

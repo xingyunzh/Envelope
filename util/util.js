@@ -32,6 +32,12 @@
 		return wrapper;
 	};
 
+	util.responseInternalError = function(res){
+		return function(error){
+			return res.json(util.wrapBody("Internal Error"+JSON.stringify(error), 'E'));
+		}
+	};
+
 	///methods for enumeration Types
 	//Do not directly call them. Assign the methods to your own enumeration type to use, or use apply function.
 	util.isDefinedEnumMethod = function(st) {
