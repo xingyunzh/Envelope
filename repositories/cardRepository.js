@@ -23,6 +23,10 @@ exports.createCard = function (param) {
     return Card.create(param);
 };
 
+exports.listAllCards = function(){
+    return Card.find().populate("sender theme").sort("-createDate").lean().exec();
+};
+
 exports.countCollectedCardsByUser = function(user){
     return CollectedCard.count({collector:user}).exec();
 }
@@ -34,4 +38,8 @@ exports.getCollectedCardsByUser = function(user){
 exports.createCollectedCard = function(param){
     param.createDate = new Date();
     return CollectedCard.create(param);
+};
+
+exports.listAllCollectedCards = function(){
+    return CollectedCard.find().sort("-createDate").populate("card", "sender theme").exec();
 };

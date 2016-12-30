@@ -33,3 +33,15 @@ exports.getCandidateThemes = function(req, res){
         return themeRepository.getThemesByCategory(config.category);
     }).catch(util.responseInternalError(res));
 };
+
+exports.listAllThemes = function(req, res){
+    themeRepository.listAllThemes().then(function(data){
+        res.json(util.wrapBody(data));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.listAllThemeConfigs = function(req, res){
+    themeRepository.listAllThemeConfigs().then(function(data){
+        res.json(util.wrapBody(data));
+    }).catch(util.responseInternalError(res));
+};

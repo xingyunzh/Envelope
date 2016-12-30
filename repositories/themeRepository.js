@@ -27,3 +27,11 @@ exports.getLatestThemeConfig = function() {
         return configs[0];
     });
 };
+
+exports.listAllThemes = function () {
+    return Theme.find().sort("-createDate").lean().exec();
+};
+
+exports.listAllThemeConfigs = function(){
+    return ThemeConfig.find().sort("-createDate").lean().exec();
+};

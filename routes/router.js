@@ -22,7 +22,7 @@ module.exports = function(app, contextRoot) {
 
     //id - user id
     //main method to render the card view
-    rootRouter.get('/card/:id', cardController.getCardViewByUserId);
+    rootRouter.get('/api/card/:id', cardController.getCardViewByUserId);
 
     // body
     //
@@ -32,16 +32,16 @@ module.exports = function(app, contextRoot) {
     // text:String
     //
     // return card entity
-    rootRouter.post('/card', cardController.createCard);
+    rootRouter.post('/api/card', cardController.createCard);
 
     // body
     // category:String
     // textCandidates:[String],
     // return themeConfig entity
-    rootRouter.post('/tconfig', themeController.createThemeConfig);
+    rootRouter.post('/api/tconfig', themeController.createThemeConfig);
 
     //return theme entity
-    rootRouter.get('/tconfig', themeController.getThemeConfig);
+    rootRouter.get('/api/tconfig', themeController.getThemeConfig);
 
     //body
     // category:String
@@ -51,31 +51,38 @@ module.exports = function(app, contextRoot) {
     //     headiconCSS:String,
     //     spriteCSS:String
     //return - theme entity
-    rootRouter.post('/theme', themeController.createTheme);
+    rootRouter.post('/api/theme', themeController.createTheme);
 
     //id - theme id
     //return theme entity
-    rootRouter.get('/theme/:id', themeController.getThemeById);
+    rootRouter.get('/api/theme/:id', themeController.getThemeById);
 
     //get all candidates themes
     //return [theme entity]
-    rootRouter.get('/theme', themeController.getCandidateThemes);
+    rootRouter.get('/api/theme', themeController.getCandidateThemes);
 
     //body params
     //sender:id
     //me:id
     //return collectCard entity
-    rootRouter.post('/collect', cardController.collectCard);
+    rootRouter.post('/api/collect', cardController.collectCard);
 
     //param id - user id
     //return [cards entity]
-    rootRouter.get('/collect/cards/:id', cardController.getCollectedCardsByUser);
+    rootRouter.get('/api/collect/cards/:id', cardController.getCollectedCardsByUser);
 
     //param id - user id
     //return count:Integer
-    rootRouter.get('/collect/count/:id', cardController.countCollectedCardsByUser);
+    rootRouter.get('/api/collect/count/:id', cardController.countCollectedCardsByUser);
 
     //param id - card id
     //return card entity
-    rootRouter.get('/card/id/:id', cardController.getCardById);
+    rootRouter.get('/api/card/id/:id', cardController.getCardById);
+    
+    
+    //for test only
+    rootRouter.get('/test/cards', cardController.listAllCards);
+    rootRouter.get('/test/collect/cards', cardController.listAllCollectedCards);
+    rootRouter.get('/test/themes', themeController.listAllThemes);
+    rootRouter.get('/test/themeconfigs', themeController.listAllThemeConfigs);
 };

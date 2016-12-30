@@ -45,7 +45,7 @@ exports.createCard = function(req, res){
     }).catch(util.responseInternalError(res));
 };
 
-exports.getCardbyId = function(req, res){
+exports.getCardById = function(req, res){
     cardRepository.getCardById(req.params.id).then(function(card){
         return util.wrapBody(card);
     }).catch(util.responseInternalError(res));
@@ -68,5 +68,18 @@ exports.getCollectedCardsByUser = function(req, res){
 exports.countCollectedCardsByUser = function(req, res){
     cardRepository.countCollectedCardsByUser(req.params.id).then(function(count){
         res.json(util.wrapBody(count));
+    }).catch(util.responseInternalError(res));
+};
+
+//test api
+exports.listAllCards = function(req, res){
+    cardRepository.listAllCards().then(function(cards){
+        res.json(util.wrapBody(cards));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.listAllCollectedCards = function(req, res){
+    cardRepository.listAllCollectedCards().then(function(collects){
+        res.json(util.wrapBody(collects));
     }).catch(util.responseInternalError(res));
 };
