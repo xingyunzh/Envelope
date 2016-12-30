@@ -1,0 +1,20 @@
+{
+  "name": "Envelope",
+  "description": "",
+  "main": "",
+  "authors": [
+    "William Yu <william.yu>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/xingyunzh/Envelope",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
