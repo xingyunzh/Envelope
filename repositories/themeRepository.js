@@ -28,6 +28,14 @@ exports.getLatestThemeConfig = function() {
     });
 };
 
+exports.updateTheme = function(id, content){
+    return Theme.findByIdAndUpdate(id, content).lean().exec();
+};
+
+exports.updateThemeConfig = function(id, content){
+    return ThemeConfig.findByIdAndUpdate(id, content).lean().exec();
+};
+
 exports.listAllThemes = function () {
     return Theme.find().sort("-createDate").lean().exec();
 };

@@ -40,6 +40,11 @@ module.exports = function(app, contextRoot) {
     // return themeConfig entity
     rootRouter.post('/api/tconfig', themeController.createThemeConfig);
 
+    // params id - theme config id
+    // body: config entity
+    // return config enetity
+    rootRouter.post('/api/tconfig/:id', themeController.updateThemeConfig);
+
     //return theme entity
     rootRouter.get('/api/tconfig', themeController.getThemeConfig);
 
@@ -52,6 +57,11 @@ module.exports = function(app, contextRoot) {
     //     spriteCSS:String
     //return - theme entity
     rootRouter.post('/api/theme', themeController.createTheme);
+
+    //params id - theme id
+    //body: content (theme entity)
+    //return - theme entity
+    rootRouter.post('/api/theme/:id', themeController.updateTheme);
 
     //id - theme id
     //return theme entity
