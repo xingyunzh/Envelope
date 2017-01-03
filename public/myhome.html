@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyHome</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/myhome.css">
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/lodash/lodash.js"></script>
+
+    <script src="js/myhome.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h2>我的菠萝卡</h2>
+</div>
+
+<div class="container debug">
+    <div class="row">
+        for user email: <input type="text" id="myhome-debug-email"><button class="btn btn-primary">CreateCard</button>
+    </div>
+    <div class="row">
+        <span id="myhome-debug-result"><a target="_blank"></a></span>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div style="background-color: #00b3ee" class="text-center">
+            <a onclick="console.log('click image.')">
+                <img class="img-thumbnail" src="./images/duizi.jpg" alt="main card">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div style="background-color:lightgreen" class="text-center">
+            <a onclick="console.log('text clicked.')">
+                鸡年大吉,鸿运当头!
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-right chicken">
+        <img src="./images/logo.png" alt="logo" width="60">
+    </div>
+</div>
+
+<div class="container">
+    <div class="list-group">
+        <a class="list-group-item" onclick="console.log('sampleCard')">From Jacky</a>
+        <a class="list-group-item">From Sue</a>
+        <a class="list-group-item">From Gymbo</a>
+    </div>
+</div>
+
+</body>
+</html>

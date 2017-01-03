@@ -14,6 +14,7 @@ var CardThemeSchema = Schema({
     createDate:Date,
 
     imageURL:String,
+    iconURL:String,
     nicknameCSS:String,
     headiconCSS:String,
     spriteCSS:String

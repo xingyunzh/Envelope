@@ -28,7 +28,7 @@ function cellForConfig(config){
     var formatted = '<table class="table table-bordered">';
     formatted += '<tr><td>_id</td><td>'+config._id+'<button class="btn btn-sm btn-danger delete pull-right" onclick=' + onDelete + '><span class="glyphicon glyphicon-remove"></span></button></td>';
     formatted += '<tr><td>Category</td><td>'+config.category+'</td>';
-    formatted += '<tr><td>Candidates Text</td><td>'+JSON.stringify(config.textCandidates)+'</td>';
+    formatted += '<tr><td>Text Candidates</td><td>'+JSON.stringify(config.textCandidates)+'</td>';
     formatted += '<tr><td>CreateDate</td><td>'+new Date(config.createDate).toLocaleString()+'</td>'
     formatted += '</table>';
     return formatted;
