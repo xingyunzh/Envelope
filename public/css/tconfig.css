@@ -1,0 +1,7 @@
+input, textarea{
+    width: 100%;
+}
+
+button.delete {
+    display: block;
+}

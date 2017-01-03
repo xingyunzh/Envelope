@@ -29,11 +29,21 @@ exports.getLatestThemeConfig = function() {
 };
 
 exports.updateTheme = function(id, content){
+    content.createDate = new Date();
     return Theme.findByIdAndUpdate(id, content).lean().exec();
 };
 
+exports.deleteTheme = function(id){
+    return Theme.findByIdAndRemove(id).lean().exec();
+};
+
 exports.updateThemeConfig = function(id, content){
+    content.createDate = new Date();
     return ThemeConfig.findByIdAndUpdate(id, content).lean().exec();
+};
+
+exports.deleteThemeConfig = function(id){
+    return ThemeConfig.findByIdAndRemove(id).lean().exec();
 };
 
 exports.listAllThemes = function () {

@@ -16,6 +16,18 @@ exports.createThemeConfig = function(req, res){
     }).catch(util.responseInternalError(res));
 };
 
+exports.deleteThemeConfig = function(req, res){
+    themeRepository.deleteThemeConfig(req.params.id).then(function(data){
+        res.json(util.wrapBody(data));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.deleteTheme = function(req, res){
+    themeRepository.deleteTheme(req.params.id).then(function(data){
+        res.json(util.wrapBody(data));
+    }).catch(util.responseInternalError(res));
+};
+
 exports.createTheme = function(req, res){
     themeRepository.createTheme(req.body).then(function(data){
         res.json(util.wrapBody(data));

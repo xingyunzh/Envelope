@@ -38,15 +38,17 @@ module.exports = function(app, contextRoot) {
     // category:String
     // textCandidates:[String],
     // return themeConfig entity
-    rootRouter.post('/api/tconfig', themeController.createThemeConfig);
+    rootRouter.post('/api/tconfig/create', themeController.createThemeConfig);
 
     // params id - theme config id
     // body: config entity
     // return config enetity
-    rootRouter.post('/api/tconfig/:id', themeController.updateThemeConfig);
+    rootRouter.post('/api/tconfig/id/:id', themeController.updateThemeConfig);
 
     //return theme entity
-    rootRouter.get('/api/tconfig', themeController.getThemeConfig);
+    rootRouter.get('/api/tconfig/current', themeController.getThemeConfig);
+
+    rootRouter.get('/api/tconfig/delete/:id', themeController.deleteThemeConfig);
 
     //body
     // category:String
@@ -56,16 +58,17 @@ module.exports = function(app, contextRoot) {
     //     headiconCSS:String,
     //     spriteCSS:String
     //return - theme entity
-    rootRouter.post('/api/theme', themeController.createTheme);
+    rootRouter.post('/api/theme/create', themeController.createTheme);
 
     //params id - theme id
     //body: content (theme entity)
     //return - theme entity
-    rootRouter.post('/api/theme/:id', themeController.updateTheme);
+    rootRouter.post('/api/theme/id/:id', themeController.updateTheme);
 
     //id - theme id
     //return theme entity
-    rootRouter.get('/api/theme/:id', themeController.getThemeById);
+    rootRouter.get('/api/theme/id/:id', themeController.getThemeById);
+    rootRouter.get('/api/theme/delete/:id', themeController.deleteTheme);
 
     //get all candidates themes
     //return [theme entity]
@@ -88,11 +91,14 @@ module.exports = function(app, contextRoot) {
     //param id - card id
     //return card entity
     rootRouter.get('/api/card/id/:id', cardController.getCardById);
-    
+
+    //console api
+    rootRouter.get('/console/themes', themeController.listAllThemes);
+    rootRouter.get('/console/themeconfigs', themeController.listAllThemeConfigs);
+
     
     //for test only
     rootRouter.get('/test/cards', cardController.listAllCards);
     rootRouter.get('/test/collect/cards', cardController.listAllCollectedCards);
-    rootRouter.get('/test/themes', themeController.listAllThemes);
-    rootRouter.get('/test/themeconfigs', themeController.listAllThemeConfigs);
+
 };

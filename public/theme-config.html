@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Theme Config Console</title>
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/tconfig.css">
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/lodash/lodash.js"></script>
+
+    <script src="js/tconfig.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Theme Config</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered" id="theThemeConfigPanel">
+            <tr><td>Category</td><td><input type="text" id="theThemeConfigCategory"></td></tr>
+            <tr><td>Text Candidates</td><td><textarea id="theThemeConfigTextCandidates" rows="10"></textarea></td></tr>
+            <tr><td>Actions</td><td><div class="text-center"><span><button class="btn btn-primary" onclick="onSubmitButton()">Submit</button> <button class="btn btn-default" onclick="onResetButton()">Reset</button></span></div></td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <div id="theme-config-panel-ul">
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
