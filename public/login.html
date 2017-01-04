@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Envelope Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/lodash/lodash.js"></script>
+
+    <script src="js/httpHelper.js"></script>
+    <script src="js/login.js"></script>
+</head>
+<body>
+
+<div class="container text-center">
+    <h1>CamproZ 用户登录<small>(测试)</small></h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="center-block login-panel">
+            <div class="form-inline text-center">
+                <label class="sr-only">邮箱:</label>
+                <input type="text" id="email-input" placeholder="Email">
+                <label class="sr-only">密码:</label>
+                <input type="password" id="password-input" placeholder="Password">
+                <button class="btn btn-primary btn-login" onclick="onLoginButton()">登录</button>
+                <button class="btn btn-default btn-clear" onclick="onClearButton()">清空</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="login-status text-center">
+            正在登录中...
+        </div>
+        <div class="login-result text-center">
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

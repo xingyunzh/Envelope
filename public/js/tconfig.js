@@ -7,18 +7,12 @@ $(function(){
 });
 
 function refreshThemeConfigs(){
-    $.get({url:'./console/themeconfigs',
-        contentType:'application/json'}).then(function(data){
-        if(data.status == "S"){
-            var configs = data.body;
-            _.forEach(configs, function(config){
-                $('#theme-config-panel-ul').append(cellForConfig(config));
-            });
-        }
-        else {
-            throw config.body;
-        }
-    }).fail(function(error){
+    httpHelper.request('GET', './console/themeconfigs').then(function (data) {
+        var configs = data;
+        _.forEach(configs, function (config) {
+            $('#theme-config-panel-ul').append(cellForConfig(config));
+        });
+    }).fail(function (error) {
         alert(error);
     });
 }
@@ -47,15 +41,8 @@ function onSubmitButton(){
         textCandidates : candidates
     };
 
-    $.post({url:'./api/tconfig/create',
-        data:JSON.stringify(params),
-        contentType:'application/json'}).then(function(data){
-        if(data.status == "S"){
-            location.reload();
-        }
-        else {
-            throw data.body;
-        }
+    httpHelper.request("POST", './api/tconfig/create', params).then(function(data){
+        location.reload();
     }).fail(function(error){
         alert(error);
     });
@@ -67,13 +54,8 @@ function onResetButton(){
 }
 
 function deleteConfig(config){
-    $.get({url:'./api/tconfig/delete/'+config._id, contentType:'application/json'}).then(function(data){
-        if(data.status == "S"){
-            location.reload();
-        }
-        else {
-            throw data.body;
-        }
+    httpHelper.request("GET", './api/tconfig/delete/'+config._id).then(function(data){
+        location.reload();
     }).fail(function(error){
         alert(error);
     });

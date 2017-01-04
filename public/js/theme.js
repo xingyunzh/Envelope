@@ -10,18 +10,14 @@ $(function(){
 
 });
 
-function refreshThemes(){
-    $.get("./console/themes").then(function(data){
-        if(data.status == 'S'){
-            var themes = data.body;
-            _.forEach(themes, function(theme){
-                $('#theme-panel-ul').append(cellForTheme(theme));
-            });
-        }
-        else {
-            throw data.body;
-        }
-    }).catch(function(error){
+function refreshThemes() {
+    httpHelper().request("GET", "./console/themes").then(function (data) {
+        var themes = data;
+        _.forEach(themes, function (theme) {
+            $('#theme-panel-ul').append(cellForTheme(theme));
+        });
+
+    }).catch(function (error) {
         alert(error);
     });
 }
@@ -101,44 +97,24 @@ function onSubmitButton(){
         spriteCSS: $('#theThemeSpriteCSS').val()
     };
 
+    var url = './api/theme/create';
     if (id.length > 4) {
         //update
-        $.post('./api/theme/id/'+id, data).then(function(res){
-            if(res.status == "S"){
-                location.reload();
-            }
-            else {
-                throw res.body;
-            }
-        }).fail(function(error){
-            alert(error);
-        });
+        url = './api/theme/id/'+id;
     }
-    else {
-        // create
-        $.post('./api/theme/create', data).then(function(res){
-            if(res.status == "S"){
-                location.reload();
-            }
-            else {
-                throw res.body;
-            }
-        }).fail(function(error){
-            alert(error);
-        });
-    }
+
+    httpHelper().request("POST", url, data).then(function(res){
+        location.reload();
+    }).fail(function(error){
+        alert(error);
+    });
 }
 
 function deleteTheme(theme){
     var id = theme._id;
     if(id){
-        $.get('./api/theme/delete/'+id).then(function(res){
-            if(res.status == "S"){
-                location.reload();
-            }
-            else {
-                throw res.body;
-            }
+        httpHelper().request("GET", './api/theme/delete/'+id).then(function(res){
+            location.reload();
         }).fail(function(error){
             alert(error);
         });
