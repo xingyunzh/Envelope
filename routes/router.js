@@ -27,7 +27,6 @@ module.exports = function(app, contextRoot) {
     // body
     //
     // sender:id
-    // createDate: Date
     // theme:id
     // text:String
     //
@@ -84,6 +83,9 @@ module.exports = function(app, contextRoot) {
     //return [cards entity]
     rootRouter.get('/api/collect/cards/:id', cardController.getCollectedCardsByUser);
 
+    // id - CollectedCard
+    rootRouter.get('/api/collect/delete/:id', cardController.deleteCollectedCardById);
+
     //param id - user id
     //return count:Integer
     rootRouter.get('/api/collect/count/:id', cardController.countCollectedCardsByUser);
@@ -91,6 +93,9 @@ module.exports = function(app, contextRoot) {
     //param id - card id
     //return card entity
     rootRouter.get('/api/card/id/:id', cardController.getCardById);
+
+    //id card
+    rootRouter.get('/api/card/delete/:id', cardController.deleteCardById);
 
     //console api
     rootRouter.get('/console/themes', themeController.listAllThemes);

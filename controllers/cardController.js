@@ -11,6 +11,9 @@ var theSpecificSenderDataPlaceHolder = "'theSpecificSenderDataPlaceHolderToRepla
 var theMetaDescContentPlaceHolder = "theHeadMetaDescriptionContent";
 
 function populateCardHtml(html, card){
+    //hijack user icon
+    card.sender.headImgUrl = "http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg";
+
     var theSpecificSenderData = {
         theCardTheme:card.theme,
         theCardText:card.text,
@@ -45,9 +48,15 @@ exports.createCard = function(req, res){
     }).catch(util.responseInternalError(res));
 };
 
+exports.deleteCardById = function(req, res){
+    cardRepository.deleteCardById(req.params.id).then(function(card){
+        res.json(util.wrapBody(card));
+    }).catch(util.responseInternalError(res));
+}
+
 exports.getCardById = function(req, res){
     cardRepository.getCardById(req.params.id).then(function(card){
-        return util.wrapBody(card);
+         res.json(util.wrapBody(card));
     }).catch(util.responseInternalError(res));
 };
 
@@ -56,6 +65,18 @@ exports.collectCard = function(req, res){
         return cardRepository.createCollectedCard({collector:req.body.me, card:card});
     }).then(function(collectedCard){
         res.json(util.wrapBody(collectedCard));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.getCollectedCardById = function(req, res){
+    cardRepository.getCollectedCardById(req.params.id).then(function(card){
+        res.json(util.wrapBody(card));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.deleteCollectedCardById = function(req, res){
+    cardRepository.deleteCollectedCardById(req.params.id).then(function(card){
+        res.json(util.wrapBody(card));
     }).catch(util.responseInternalError(res));
 };
 

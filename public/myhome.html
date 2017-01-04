@@ -25,6 +25,7 @@
     <div class="pull-right user-panel">
         <button class="btn btn-primary login-button">登录</button>
         <span id="nickname-span"></span>
+        <button class="btn btn-default create-button" onclick="createCard()">生成卡片</button>
     </div>
 </div>
 
@@ -32,13 +33,13 @@
     <div class="row">
         <div style="background-color: #00b3ee" class="text-center">
             <a onclick="console.log('click image.')">
-                <img class="img-thumbnail" src="./images/duizi.jpg" alt="main card">
+                <img class="img-thumbnail" alt="main card" id="master-img">
             </a>
         </div>
     </div>
     <div class="row">
         <div style="background-color:lightgreen" class="text-center">
-            <a onclick="console.log('text clicked.')">
+            <a onclick="console.log('text clicked.')" id="text-a">
                 鸡年大吉,鸿运当头!
 
             </a>
@@ -49,11 +50,12 @@
 <div class="container">
     <div class="row text-right chicken">
         <img src="./images/logo.png" alt="logo" width="60">
+        <span id="#count-span"></span>
     </div>
 </div>
 
 <div class="container">
-    <div class="list-group">
+    <div class="list-group" id="#collects-list-div">
         <a class="list-group-item" onclick="console.log('sampleCard')">From Jacky</a>
         <a class="list-group-item">From Sue</a>
         <a class="list-group-item">From Gymbo</a>

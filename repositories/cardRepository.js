@@ -8,6 +8,10 @@ exports.getCardById = function(id){
     return Card.findById(id).populate("sender theme").lean().exec();
 };
 
+exports.deleteCardById = function(id){
+    return Card.findByIdAndRemove(id).lean().exec();
+};
+
 exports.getCardsBySender = function(user){
     return Card.find({sender:user}).populate("sender theme").lean().exec();
 };
@@ -27,9 +31,17 @@ exports.listAllCards = function(){
     return Card.find().populate("sender theme").sort("-createDate").lean().exec();
 };
 
+exports.getCollectedCardById = function(id){
+    return CollectedCard.findById(id).lean().exec();
+};
+
+exports.deleteCollectedCardById = function(id){
+    return CollectedCard.findByIdAndRemove(id).lean().exec();
+};
+
 exports.countCollectedCardsByUser = function(user){
     return CollectedCard.count({collector:user}).exec();
-}
+};
 
 exports.getCollectedCardsByUser = function(user){
     return CollectedCard.find({collector:user}).sort("createDate").populate("card", "sender theme").exec();

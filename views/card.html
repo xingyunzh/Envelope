@@ -11,6 +11,7 @@
 
     <script src="/envelope/lib/jquery/dist/jquery.min.js"></script>
     <script src="/envelope/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/envelope/js/httpHelper.js"></script>
 
     <script src="/envelope/js/card.js"></script>
     <link rel="stylesheet" href="/envelope/lib/bootstrap/dist/css/bootstrap.min.css">
@@ -24,16 +25,22 @@
 <body>
 
 <div class="ev-head">
-    <img src="/envelope/images/duizi.jpg" alt="过年好!">
+    <img src="/envelope/images/duizi.jpg" alt="过年好!" id="master-img">
 </div>
 
 <div class="ev-content">
-    <p class="ev-content-body">
-        <span id="ev-card-text-id">风也过，雨也走，2016不再有；亦有喜，亦有悲，2016已成灰；酸也品，甜也尝，2017更辉煌；望过去，展未来，2017新舞台！祝新春愉快！</span>
-    </p>
+    <div class="ev-content-body">
+        <div>
+            <span id="ev-card-text-id">风也过，雨也走，2016不再有；亦有喜，亦有悲，2016已成灰；酸也品，甜也尝，2017更辉煌；望过去，展未来，2017新舞台！祝新春愉快！</span>
+
+        </div>
+        <div class="text-center">
+            <img id="sprite-img"> <span id="count-span"></span>
+        </div>
+    </div>
 
     <p class="ev-content-signature">
-        <span><span class="signed-name">Camproz</span>敬上</span>
+        <span><span class="signed-name">Camproz</span><span><img id="userIcon-img"></span>敬上</span>
     </p>
 </div>
 
