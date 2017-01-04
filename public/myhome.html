@@ -13,6 +13,7 @@
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/lodash/lodash.js"></script>
 
+    <script src="js/httpHelper.js"></script>
     <script src="js/myhome.js"></script>
 </head>
 <body>
@@ -20,12 +21,10 @@
     <h2>我的菠萝卡</h2>
 </div>
 
-<div class="container debug">
-    <div class="row">
-        for user email: <input type="text" id="myhome-debug-email"><button class="btn btn-primary">CreateCard</button>
-    </div>
-    <div class="row">
-        <span id="myhome-debug-result"><a target="_blank"></a></span>
+<div class="container">
+    <div class="pull-right user-panel">
+        <button class="btn btn-primary login-button">登录</button>
+        <span id="nickname-span"></span>
     </div>
 </div>
 

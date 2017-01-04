@@ -24,7 +24,7 @@ function onLoginButton(){
 
     httpHelper().authRequest("POST", "./api/user/login/email", params).then(function(data){
         if(data.user != null){
-            localStorage.user = data.user;
+            localStorage.user = JSON.stringify(data.user);
         }
         else {
             throw "用户名或密码不正确。";
