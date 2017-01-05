@@ -24,19 +24,24 @@
 </head>
 <body>
 
-<div class="container user-panel">
+<div class="container-fluid user-panel">
     <div class="row">
-        <div class="center-block width-container text-right">
-            <span id="nickname-span"></span>
-            <button class="btn btn-default card-collected" disabled="true">已收藏</button>
-            <button class="btn btn-primary collect-card" onclick="handleCollectCard()">存入卡包</button>
+        <div class="center-block width-container">
+            <div class="pull-left">
+                <a class="btn btn-primary" href="/envelope/myhome.html">卡片之家</a>
+            </div>
+            <div class="pull-right">
+                <span id="nickname-span"></span>
+                <button class="btn btn-default card-collected" disabled="true">已收藏</button>
+                <button class="btn btn-primary collect-card" onclick="handleCollectCard()">存入卡包</button>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="container master-img-head">
     <div class="row text-center">
-        <img src="/envelope/images/duizi.jpg" alt="过年好!" id="master-img" width="300px">
+        <img alt="过年好!" id="master-img" width="300px">
     </div>
 </div>
 

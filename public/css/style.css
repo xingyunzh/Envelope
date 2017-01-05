@@ -20,5 +20,10 @@ footer img {
 
 .user-panel {
     margin: 8px auto;
+    line-height: 44px;
+}
 
+#master-img {
+    border-top: solid 1px lightgray;
+    padding-top: 10px;
 }

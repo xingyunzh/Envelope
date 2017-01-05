@@ -112,7 +112,7 @@ function createCard(){
         sender:theUser._id,
         text:theThemeConfig.textCandidates[theTextIndex]
     }).then(function(data){
-        alert("Card Created Successfully!");
+        window.location.href = '/envelope/api/card/view/user/'+theUser._id;
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });

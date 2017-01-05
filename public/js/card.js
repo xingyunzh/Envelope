@@ -14,7 +14,7 @@ $(function(){
     $('#userIcon-img').attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
 
     if(theUser){
-        $('#nickname-span').text(theUser.nickname);
+        // $('#nickname-span').text(theUser.nickname);
         if(theUser._id == theSpecificSenderData.theCard.sender._id){
             $('.card-collected').hide();
             $('.collect-card').hide();
