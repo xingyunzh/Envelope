@@ -34,7 +34,7 @@ function onLoginButton(){
         $('.login-status').hide();
         $('.btn-login').removeAttr("disabled");
 
-        history.go(-1);
+        history.back();
         location.reload();
     }).fail(function(data){
         $('.login-result').text("登录失败!" + JSON.stringify(data));
