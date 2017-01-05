@@ -1,57 +1,24 @@
-body{
-    font-size: 10px;
-}
-
-.ev-head {
-    width: 100%;
-    text-align: center;
-    position: relative;
-}
-
-.ev-head img {
-    max-width: 90%;
-}
-
-.ev-content {
-    width: 300px;
-    margin: 10px auto;
-}
-
-.ev-content .ev-content-body {
-    width: 100%;
-    font-size: 1.1rem;
-}
-
-.ev-content-body span {
-    display: block;
-    padding:20px;
-
-    line-height: 1.5rem;
-}
-
-.ev-content-signature {
-    text-align: right;
-}
-
-.ev-content-signature span {
-    padding-right: 40px;
-}
-
-.ev-content-signature .ev-signed-name {
-    font-size: 1.3rem;
-}
-
 footer {
     margin-top: 50px;
-    text-align: center;
 }
 
 footer img {
-    height: 22px;
+    display: inline-block;
+    height: 30px;
+    margin-right: 8px;
+    margin-bottom: 15px;
+}
 
-    transform:rotate(10deg);
-    -ms-transform:rotate(10deg); 	/* IE 9 */
-    -moz-transform:rotate(10deg); 	/* Firefox */
-    -webkit-transform:rotate(10deg); /* Safari 和 Chrome */
-    -o-transform:rotate(10deg); 	/* Opera */
+#ev-card-text-id {
+    font-size: 2rem;
+    color: red;
+}
+
+.width-container {
+    width:300px;
+}
+
+.user-panel {
+    margin: 8px auto;
+
 }

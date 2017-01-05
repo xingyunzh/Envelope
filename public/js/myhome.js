@@ -16,57 +16,70 @@ $(function(){
        $('.login-button').hide();
    }
    else {
-       delete localStorage.user
-       delete localStorage.token
+       delete localStorage.user;
+       delete localStorage.token;
 
-       $('#nickname-span').hide();
+       $('#nickname-span').text("我");
        $('.login-button').show();
        $('.create-button').hide();
+       $('.logout-button').hide();
    }
 
     $('.login-button').click(function(){
         window.location.href = './login.html';
     });
 
-    getThemes();
-    getThemeConfig();
-    getUserCount();
+    $.when(getThemes(), getThemeConfig()).then(function (value) {
+        return getCurrentCard();
+    }).then(function(card){
+        if(card){
+            _.forEach(theThemes, function(item, index){
+                if(item._id == card.theme._id){
+                    theThemeIndex = index;
+                    return false;
+                }
+            });
+
+            _.forEach(theThemeConfig.textCandidates, function(item, index){
+                if(item == card.text){
+                    theTextIndex = index;
+                    return false;
+                }
+            });
+        }
+
+        configMyHomeWithTheme();
+        configMyHomeWithThemeConfig();
+    }).fail(function(error){
+        alert("Server Error:"+JSON.stringify(error));
+    });
+
     getCollects();
 });
 
 function getThemes(){
-    httpHelper().request('GET', '/envelope/api/theme').then(function(themes){
+    return httpHelper().request('GET', '/envelope/api/theme').then(function(themes){
         theThemes = themes;
-        configMyHomeWithTheme(themes[0]);
-    }).fail(function(error){
-        alert("Server Error:"+JSON.stringify(error));
+
+        return true;
     });
 }
 
 function getThemeConfig(){
-    httpHelper().request('GET', '/envelope/api/tconfig/current').then(function(config){
+    return httpHelper().request('GET', '/envelope/api/tconfig/current').then(function(config){
        theThemeConfig = config;
-        configMyHomeWithThemeConfig(config);
-    }).fail(function(error){
-        alert("Server Error:"+JSON.stringify(error));
-    });
-}
 
-function getUserCount(){
-    if(theUser){
-        httpHelper().request('GET', '/envelope/api/collect/count/'+theUser._id).then(function(count){
-            $('#count-span').text(""+count);
-        }).fail(function(error){
-            alert("Server Error:"+JSON.stringify(error));
-        });
-    }
+        return true;
+    });
 }
 
 function getCollects(){
     if(theUser){
-        httpHelper().request('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(cards){
-            _.forEach(cards, function(card){
-                $('#collects-list-div').append('<a class="list-group-item">'+card.sender.nickname+'</a>');
+        httpHelper().request('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(collects){
+            $('#count-span').text(""+collects.length);
+
+            _.forEach(collects, function(collect){
+                $('#collects-list-div').append('<a class="list-group-item" href="/envelope/api/card/view/id/'+collect.card._id+'"> <i>From: </i>'+collect.card.sender.nickname+'</a>');
             });
 
         }).fail(function(error){
@@ -75,18 +88,27 @@ function getCollects(){
     }
 }
 
-function configMyHomeWithTheme(theme){
-    $('#master-img').attr('src', theme.imageURL);
+function getCurrentCard(){
+    if(theUser){
+        return httpHelper().request('GET', '/envelope/api/card/user/'+theUser._id);
+    }
+    else {
+        return null;
+    }
 }
 
-function configMyHomeWithThemeConfig(config){
-    $('#text-a').text(config.textCandidates[0]);
+function configMyHomeWithTheme(){
+    $('#master-img').attr('src', theThemes[theThemeIndex].imageURL);
+}
+
+function configMyHomeWithThemeConfig(){
+    $('#text-a').text(theThemeConfig.textCandidates[theTextIndex]);
 }
 
 //event
 function createCard(){
-    httpHelper().authRequest("POST", '/envelope/api/card', {
-        theme:theThemes[theThemeIndex],
+    httpHelper().authRequest("POST", '/envelope/api/card/create', {
+        theme:theThemes[theThemeIndex]._id,
         sender:theUser._id,
         text:theThemeConfig.textCandidates[theTextIndex]
     }).then(function(data){
@@ -94,4 +116,33 @@ function createCard(){
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
+}
+
+function logout(){
+    delete localStorage.user;
+    delete localStorage.token;
+
+    location.reload();
+}
+
+function handleThemeClick(){
+    if(theThemeIndex < theThemes.length - 1){
+        theThemeIndex++;
+    }
+    else {
+        theThemeIndex = 0;
+    }
+
+    configMyHomeWithTheme();
+}
+
+function handleTextClick(){
+    if(theTextIndex < theThemeConfig.textCandidates.length - 1){
+        theTextIndex++;
+    }
+    else {
+        theTextIndex = 0;
+    }
+
+    configMyHomeWithThemeConfig();
 }

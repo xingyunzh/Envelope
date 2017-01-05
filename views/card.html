@@ -24,28 +24,47 @@
 </head>
 <body>
 
-<div class="ev-head">
-    <img src="/envelope/images/duizi.jpg" alt="过年好!" id="master-img">
-</div>
-
-<div class="ev-content">
-    <div class="ev-content-body">
-        <div>
-            <span id="ev-card-text-id">风也过，雨也走，2016不再有；亦有喜，亦有悲，2016已成灰；酸也品，甜也尝，2017更辉煌；望过去，展未来，2017新舞台！祝新春愉快！</span>
-
-        </div>
-        <div class="text-center">
-            <img id="sprite-img"> <span id="count-span"></span>
+<div class="container user-panel">
+    <div class="row">
+        <div class="center-block width-container text-right">
+            <span id="nickname-span"></span>
+            <button class="btn btn-default card-collected" disabled="true">已收藏</button>
+            <button class="btn btn-primary collect-card" onclick="handleCollectCard()">存入卡包</button>
         </div>
     </div>
-
-    <p class="ev-content-signature">
-        <span><span class="signed-name">Camproz</span><span><img id="userIcon-img"></span>敬上</span>
-    </p>
 </div>
 
-<footer>
-    <span><img src="/envelope/images/logo.png" alt="Campro"> &nbsp;提供 | 联系我们</span>
+<div class="container master-img-head">
+    <div class="row text-center">
+        <img src="/envelope/images/duizi.jpg" alt="过年好!" id="master-img" width="300px">
+    </div>
+</div>
+
+<div class="container">
+    <div style="display:none;"><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png"></div>
+    <div class="row">
+        <div class="text-center">
+            <span id="ev-card-text-id">新春快乐!</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-block width-container">
+            <div class="text-right">
+                <span><span class="signed-name">Camproz</span><span><img id="userIcon-img"></span>&nbsp;敬上</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-block width-container">
+            <div class="text-right">
+                <span><img id="sprite-img">&nbsp;<span id="count-span"></span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center">
+    <span><img src="/envelope/images/logo.png" alt="Camproz">Campro | <a href="mailto:camproz@xingyunzh.com">联系我们</a></span>
 </footer>
 
 </body>

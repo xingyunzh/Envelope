@@ -18,49 +18,56 @@
 </head>
 <body>
 <div class="container text-center">
-    <h2>我的菠萝卡</h2>
+    <h2><span id="nickname-span"></span>的菠萝卡</h2>
 </div>
 
 <div class="container">
-    <div class="pull-right user-panel">
-        <button class="btn btn-primary login-button">登录</button>
-        <span id="nickname-span"></span>
-        <button class="btn btn-default create-button" onclick="createCard()">生成卡片</button>
+    <div class="row">
+        <div class="width-container center-block">
+            <div class="pull-right user-panel">
+                <button class="btn btn-primary login-button">登录</button>
+                <button class="btn btn-primary create-button" onclick="createCard()">生成卡片</button>
+                <button class="btn btn-default logout-button" onclick="logout()">退出登录</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <div style="background-color: #00b3ee" class="text-center">
-            <a onclick="console.log('click image.')">
-                <img class="img-thumbnail" alt="main card" id="master-img">
+        <div class="width-container center-block text-center">
+            <a onclick="handleThemeClick()">
+                <img class="img-thumbnail" alt="Main Card" id="master-img">
             </a>
         </div>
     </div>
-    <div class="row">
-        <div style="background-color:lightgreen" class="text-center">
-            <a onclick="console.log('text clicked.')" id="text-a">
+    <div class="row  wish-text-container">
+        <div class="list-group width-container center-block text-center">
+            <a class="list-group-item" onclick="handleTextClick()" id="text-a">
                 鸡年大吉,鸿运当头!
-
             </a>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row text-right chicken">
-        <img src="./images/logo.png" alt="logo" width="60">
-        <span id="#count-span"></span>
+    <div class="row">
+        <div class="width-container center-block text-right chicken">
+            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/chicken.jpg" alt="Chicken" width="60">
+            <span id="count-span"></span>
+        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="list-group" id="#collects-list-div">
-        <a class="list-group-item" onclick="console.log('sampleCard')">From Jacky</a>
-        <a class="list-group-item">From Sue</a>
-        <a class="list-group-item">From Gymbo</a>
+    <div class="list-group width-container center-block" id="collects-list-div">
     </div>
 </div>
+
+<footer class="text-center">
+    <span><img src="/envelope/images/logo.png" alt="Camproz">Campro | <a href="mailto:camproz@xingyunzh.com">联系我们</a></span>
+</footer>
+
 
 </body>
 </html>

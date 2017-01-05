@@ -22,7 +22,13 @@ module.exports = function(app, contextRoot) {
 
     //id - user id
     //main method to render the card view
-    rootRouter.get('/api/card/:id', cardController.getCardViewByUserId);
+    rootRouter.get('/api/card/view/user/:id', cardController.getCardViewByUserId);
+
+    //id - card id
+    rootRouter.get('/api/card/view/id/:id', cardController.getCardViewByCardId);
+
+    //return json of the card for the user
+    rootRouter.get('/api/card/user/:id', cardController.getCardByUserId);
 
     // body
     //
@@ -31,7 +37,14 @@ module.exports = function(app, contextRoot) {
     // text:String
     //
     // return card entity
-    rootRouter.post('/api/card', cardController.createCard);
+    rootRouter.post('/api/card/create', cardController.createCard);
+
+    //param id - card id
+    //return card entity
+    rootRouter.get('/api/card/id/:id', cardController.getCardById);
+
+    //id card
+    rootRouter.get('/api/card/delete/:id', cardController.deleteCardById);
 
     // body
     // category:String
@@ -90,12 +103,9 @@ module.exports = function(app, contextRoot) {
     //return count:Integer
     rootRouter.get('/api/collect/count/:id', cardController.countCollectedCardsByUser);
 
-    //param id - card id
-    //return card entity
-    rootRouter.get('/api/card/id/:id', cardController.getCardById);
-
-    //id card
-    rootRouter.get('/api/card/delete/:id', cardController.deleteCardById);
+    //query.me
+    //query.card
+    rootRouter.get('/api/collect/exist', cardController.isCardCollected);
 
     //console api
     rootRouter.get('/console/themes', themeController.listAllThemes);

@@ -15,10 +15,7 @@ function populateCardHtml(html, card){
     card.sender.headImgUrl = "http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg";
 
     var theSpecificSenderData = {
-        theCardTheme:card.theme,
-        theCardText:card.text,
-        theCardDescription:card.text,
-        theCardSender:card.sender
+        theCard:card
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.text);
@@ -42,6 +39,28 @@ exports.getCardViewByUserId = function(req, res){
     }).catch(util.responseInternalError(res));
 };
 
+exports.getCardViewByCardId = function(req, res){
+    var actions = [];
+    actions[0] = q.nfbind(fs.readFile)("./views/card.html", "utf-8");
+    actions[1] = cardRepository.getCardById(req.params.id);
+
+    q.all(actions).then(function(dataGroup){
+        var cardHtml = dataGroup[0];
+        var card = dataGroup[1];
+        if(card){
+            cardHtml = populateCardHtml(cardHtml, card);
+        }
+
+        res.send(cardHtml);
+    }).catch(util.responseInternalError(res));
+};
+
+exports.getCardByUserId = function(req, res){
+    cardRepository.getLatestCardBySender(req.params.id).then(function(card){
+        res.json(util.wrapBody(card));
+    }).catch(util.responseInternalError(res));
+};
+
 exports.createCard = function(req, res){
     cardRepository.createCard(req.body).then(function (card) {
         res.json(util.wrapBody(card));
@@ -52,7 +71,7 @@ exports.deleteCardById = function(req, res){
     cardRepository.deleteCardById(req.params.id).then(function(card){
         res.json(util.wrapBody(card));
     }).catch(util.responseInternalError(res));
-}
+};
 
 exports.getCardById = function(req, res){
     cardRepository.getCardById(req.params.id).then(function(card){
@@ -89,6 +108,12 @@ exports.getCollectedCardsByUser = function(req, res){
 exports.countCollectedCardsByUser = function(req, res){
     cardRepository.countCollectedCardsByUser(req.params.id).then(function(count){
         res.json(util.wrapBody(count));
+    }).catch(util.responseInternalError(res));
+};
+
+exports.isCardCollected = function(req, res){
+    cardRepository.isCardCollected(req.query.me, req.query.card).then(function(collect){
+        res.json(util.wrapBody(!!collect));
     }).catch(util.responseInternalError(res));
 };
 
