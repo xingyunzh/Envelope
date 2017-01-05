@@ -36,6 +36,7 @@ $(function(){
         $('#nickname-span').text("");
         $('.card-collected').hide();
         $('.collect-card').show();
+        $('.collect-card').text("登录收集");
     }
 
     updateCount();

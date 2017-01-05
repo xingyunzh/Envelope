@@ -8,6 +8,8 @@ var theUser = null;
 var theThemeIndex = 0;
 var theTextIndex = 0;
 
+var theCurrentCard = null;
+
 $(function(){
    if(localStorage.user && localStorage.token){
        theUser = JSON.parse(localStorage.user);
@@ -33,6 +35,7 @@ $(function(){
         return getCurrentCard();
     }).then(function(card){
         if(card){
+            theCurrentCard = card;
             _.forEach(theThemes, function(item, index){
                 if(item._id == card.theme._id){
                     theThemeIndex = index;
@@ -107,6 +110,13 @@ function configMyHomeWithThemeConfig(){
 
 //event
 function createCard(){
+    if (theCurrentCard.theme._id == theThemes[theThemeIndex]._id
+        && theCurrentCard.text == theThemeConfig.textCandidates[theTextIndex]) {
+        window.location.href = '/envelope/api/card/view/user/' + theUser._id;
+
+        return;
+    }
+
     httpHelper().authRequest("POST", '/envelope/api/card/create', {
         theme:theThemes[theThemeIndex]._id,
         sender:theUser._id,
