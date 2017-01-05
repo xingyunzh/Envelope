@@ -17,7 +17,9 @@ var CardThemeSchema = Schema({
     iconURL:String,
     nicknameCSS:String,
     headiconCSS:String,
-    spriteCSS:String
+    spriteCSS:String,
+
+    title:String
 });
 
 var CardTheme = mongoose.model("CardTheme", CardThemeSchema);

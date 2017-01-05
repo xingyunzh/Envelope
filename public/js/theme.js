@@ -77,6 +77,7 @@ function refreshTheThemePanel(clear){
     $('#theThemeNicknameCSS').val(data.nicknameCSS);
     $('#theThemeHeadIconCSS').val(data.headiconCSS);
     $('#theThemeSpriteCSS').val(data.spriteCSS);
+    $('#theThemeTitle').val(data.title);
 }
 
 function onCreateNewButton(){
@@ -94,7 +95,8 @@ function onSubmitButton(){
         iconURL:$('#theThemeIcon').val(),
         nicknameCSS: $('#theThemeNicknameCSS').val(),
         headiconCSS: $('#theThemeHeadIconCSS').val(),
-        spriteCSS: $('#theThemeSpriteCSS').val()
+        spriteCSS: $('#theThemeSpriteCSS').val(),
+        title:$('#theThemeTitle').val()
     };
 
     var url = './api/theme/create';

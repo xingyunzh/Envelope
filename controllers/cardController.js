@@ -9,6 +9,7 @@ var q = require("q");
 
 var theSpecificSenderDataPlaceHolder = "'theSpecificSenderDataPlaceHolderToReplace'";
 var theMetaDescContentPlaceHolder = "theHeadMetaDescriptionContent";
+var theTitlePlaceHolderToReplace = "theTitlePlaceHolderToReplace";
 
 function populateCardHtml(html, card){
     //hijack user icon
@@ -19,6 +20,7 @@ function populateCardHtml(html, card){
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.text);
+    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + ':' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     return cardHtml;
 }
