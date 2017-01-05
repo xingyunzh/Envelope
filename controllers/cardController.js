@@ -20,7 +20,7 @@ function populateCardHtml(html, card){
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.text);
-    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + ':' + card.theme.title);
+    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝:' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     return cardHtml;
 }
