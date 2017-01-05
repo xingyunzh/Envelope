@@ -2,7 +2,7 @@
  * Created by brillwill on 2016/12/29.
  */
 var Theme = require("../models/cardTheme");
-var ThemeConfig = require("../models/themeConfig.js");
+var ThemeConfig = require("../models/themeConfig");
 
 exports.getThemeById = function(id){
     return Theme.findById(id).lean().exec();

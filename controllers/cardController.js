@@ -25,7 +25,7 @@ function populateCardHtml(html, card){
 
 exports.getCardViewByUserId = function(req, res){
     var actions = [];
-    actions[0] = q.nfbind(fs.readFile)("./views/card.html", "utf-8");
+    actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
     actions[1] = cardRepository.getLatestCardBySender(req.params.id);
 
     q.all(actions).then(function(dataGroup){
@@ -41,7 +41,7 @@ exports.getCardViewByUserId = function(req, res){
 
 exports.getCardViewByCardId = function(req, res){
     var actions = [];
-    actions[0] = q.nfbind(fs.readFile)("./views/card.html", "utf-8");
+    actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
     actions[1] = cardRepository.getCardById(req.params.id);
 
     q.all(actions).then(function(dataGroup){
