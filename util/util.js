@@ -32,8 +32,11 @@
 		return wrapper;
 	};
 
-	util.responseInternalError = function(res){
+	util.responseInternalError = function(res, preHook){
 		return function(error){
+			if(preHook){
+				preHook(error);
+			}
 			return res.json(util.wrapBody("Internal Error"+JSON.stringify(error), 'E'));
 		}
 	};

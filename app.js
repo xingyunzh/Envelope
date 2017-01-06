@@ -13,6 +13,7 @@ var mongoose = require('mongoose');
 var q = require('q');
 var router = require('./routes/router');
 var scr = require('./repositories/systemConfigRepository');
+var logRepository = require('./repositories/logRepository');
 
 
 var contextRoot = "/envelope";  //Not set any contextRoot at the moment, but let's make it as easy to config
@@ -30,15 +31,20 @@ var	mongoURL = 'mongodb://' + envMongo.user +
 // create a new express server
 var app = express();
 
+app.use(function(req, res, next){
+    if (req.url.endsWith(".html")){
+        logRepository.add(logRepository.ActionType.View, req.url);
+    }
+    next();
+});
 // serve the files out of ./public as our main files
 app.use(contextRoot, express.static(__dirname + '/public'));
 
-app.use(logger('dev'))
-app.use(bodyParser.json())
+app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended : false
-}))
-
+}));
 
 router(app, contextRoot);
 

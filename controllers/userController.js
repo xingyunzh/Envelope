@@ -3,6 +3,8 @@ var uidHelper = require('../util/uidHelper');
 var util = require('../util/util');
 var stringHelper = require('../util/shared/stringHelper');
 var authenticator = require('../authenticate/authenticator');
+var log = require('../repositories/logRepository');
+
 var q = require('q');
 var CamproError = require('../models/CamproError');
 
@@ -151,9 +153,11 @@ function login(req,res,type){
 			isFirstTimeLogin:isFirstTimeLogin
 		};
 
+        log.add(log.ActionType.Login, JSON.stringify(isFirstTimeLogin), user._id);
 		res.send(util.wrapBody(responseBody));
 	}).catch(function(err){
 		console.log(err);
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:err, channel:type}));
 		res.send(util.wrapBody('Internal Error','E'));
 	});
 

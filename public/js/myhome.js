@@ -61,7 +61,7 @@ $(function(){
 });
 
 function getThemes(){
-    return httpHelper().request('GET', '/envelope/api/theme').then(function(themes){
+    return httpHelper().authRequest('GET', '/envelope/api/theme').then(function(themes){
         theThemes = themes;
 
         return true;
@@ -69,7 +69,7 @@ function getThemes(){
 }
 
 function getThemeConfig(){
-    return httpHelper().request('GET', '/envelope/api/tconfig/current').then(function(config){
+    return httpHelper().authRequest('GET', '/envelope/api/tconfig/current').then(function(config){
        theThemeConfig = config;
 
         return true;
@@ -78,7 +78,7 @@ function getThemeConfig(){
 
 function getCollects(){
     if(theUser){
-        httpHelper().request('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(collects){
+        httpHelper().authRequest('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(collects){
             $('#count-span').text(""+collects.length);
 
             _.forEach(collects, function(collect){
@@ -93,7 +93,7 @@ function getCollects(){
 
 function getCurrentCard(){
     if(theUser){
-        return httpHelper().request('GET', '/envelope/api/card/user/'+theUser._id);
+        return httpHelper().authRequest('GET', '/envelope/api/card/user/'+theUser._id);
     }
     else {
         return null;

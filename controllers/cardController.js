@@ -3,6 +3,7 @@
  */
 var cardRepository = require("../repositories/cardRepository");
 var themeRepository = require("../repositories/themeRepository");
+var log = require("../repositories/logRepository");
 var util = require("../util/util");
 var fs = require("fs");
 var q = require("q");
@@ -37,11 +38,16 @@ exports.getCardViewByUserId = function(req, res){
             cardHtml = populateCardHtml(cardHtml, card);
         }
 
+        log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
         res.send(cardHtml);
-    }).catch(util.responseInternalError(res));
+    }).catch(util.responseInternalError(res, function(error){
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+    }));
 };
 
 exports.getCardViewByCardId = function(req, res){
+    log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
+
     var actions = [];
     actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
     actions[1] = cardRepository.getCardById(req.params.id);
@@ -54,7 +60,9 @@ exports.getCardViewByCardId = function(req, res){
         }
 
         res.send(cardHtml);
-    }).catch(util.responseInternalError(res));
+    }).catch(util.responseInternalError(res, function(error){
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+    }));
 };
 
 exports.getCardByUserId = function(req, res){
@@ -66,7 +74,10 @@ exports.getCardByUserId = function(req, res){
 exports.createCard = function(req, res){
     cardRepository.createCard(req.body).then(function (card) {
         res.json(util.wrapBody(card));
-    }).catch(util.responseInternalError(res));
+        log.add(log.ActionType.Create, null, req.token.userId);
+    }).catch(util.responseInternalError(res), function(error){
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+    });
 };
 
 exports.deleteCardById = function(req, res){
@@ -86,7 +97,10 @@ exports.collectCard = function(req, res){
         return cardRepository.createCollectedCard({collector:req.body.me, card:card});
     }).then(function(collectedCard){
         res.json(util.wrapBody(collectedCard));
-    }).catch(util.responseInternalError(res));
+        log.add(log.ActionType.Collect, null, req.token.userId);
+    }).catch(util.responseInternalError(res, function(error){
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+    }));
 };
 
 exports.getCollectedCardById = function(req, res){
