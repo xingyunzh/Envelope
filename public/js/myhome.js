@@ -31,6 +31,8 @@ $(function(){
         window.location.href = './login.html';
     });
 
+    $('.create-button').text('加载中').attr('disabled', true);
+
     $.when(getThemes(), getThemeConfig()).then(function (value) {
         return getCurrentCard();
     }).then(function(card){
@@ -53,6 +55,8 @@ $(function(){
 
         configMyHomeWithTheme();
         configMyHomeWithThemeConfig();
+
+        $('.create-button').text('生成卡片').removeAttr('disabled');
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -110,7 +114,7 @@ function configMyHomeWithThemeConfig(){
 
 //event
 function createCard(){
-    if (theCurrentCard.theme._id == theThemes[theThemeIndex]._id
+    if (theCurrentCard && theCurrentCard.theme._id == theThemes[theThemeIndex]._id
         && theCurrentCard.text == theThemeConfig.textCandidates[theTextIndex]) {
         window.location.href = '/envelope/api/card/view/user/' + theUser._id;
 
