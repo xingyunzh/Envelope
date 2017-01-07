@@ -77,6 +77,7 @@ function refreshTheThemePanel(clear){
     $('#theThemeNicknameCSS').val(data.nicknameCSS);
     $('#theThemeHeadIconCSS').val(data.headiconCSS);
     $('#theThemeSpriteCSS').val(data.spriteCSS);
+    $('#theThemeWordsCSS').val(data.wordsCSS);
     $('#theThemeTitle').val(data.title);
 }
 
@@ -96,6 +97,7 @@ function onSubmitButton(){
         nicknameCSS: $('#theThemeNicknameCSS').val(),
         headiconCSS: $('#theThemeHeadIconCSS').val(),
         spriteCSS: $('#theThemeSpriteCSS').val(),
+        wordsCSS:$('#theThemeWordsCSS').val(),
         title:$('#theThemeTitle').val()
     };
 

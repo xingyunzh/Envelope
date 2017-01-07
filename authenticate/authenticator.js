@@ -27,7 +27,7 @@ function generate(id,callback){
 	jwt.sign({
 		userId:id
 	},getSecret(),{
-		expiresIn:60 * 60 * 24
+		expiresIn:60 * 60 * 24 * 45
 	},callback);
 }
 

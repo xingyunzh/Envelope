@@ -18,6 +18,7 @@ var CardThemeSchema = Schema({
     nicknameCSS:String,
     headiconCSS:String,
     spriteCSS:String,
+    wordsCSS:String,
 
     title:String
 });

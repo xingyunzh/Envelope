@@ -121,10 +121,15 @@ function createCard(){
         return;
     }
 
+    var ms = new Date().getMilliseconds();
+    var logoIndex = ms % theThemeConfig.logoCandidates.length;
+
     httpHelper().authRequest("POST", '/envelope/api/card/create', {
         theme:theThemes[theThemeIndex]._id,
+        themeConfig:theThemeConfig._id,
         sender:theUser._id,
-        text:theThemeConfig.textCandidates[theTextIndex]
+        textIndex:theTextIndex,
+        logoIndex:logoIndex
     }).then(function(data){
         window.location.href = '/envelope/api/card/view/user/'+theUser._id;
     }).fail(function(error){

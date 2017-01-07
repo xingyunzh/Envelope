@@ -4,14 +4,22 @@
 var theUser = localStorage.user ? JSON.parse(localStorage.user) : null;
 
 $(function(){
-    $("#ev-card-text-id").text(theSpecificSenderData.theCard.text);
+    if(!theSpecificSenderData.theCard){
+        alert("此人卡片未创建!");
+        return;
+    }
+
+    var textIndex = theSpecificSenderData.theCard.textIndex;
+    $("#ev-card-text-id").attr('style', theSpecificSenderData.theCard.theme.wordsCSS)
+        .text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
+
 
     $('#sprite-img').attr('style', theSpecificSenderData.theCard.theme.spriteCSS);
     $('#master-img').attr('src', theSpecificSenderData.theCard.theme.imageURL);
-    $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname);
-    $('.signed-name').attr('style', theSpecificSenderData.theCard.theme.nicknameCSS);
-    $('#userIcon-img').attr('src', theSpecificSenderData.theCard.sender.headImgUrl);
-    $('#userIcon-img').attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
+    $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname)
+        .attr('style', theSpecificSenderData.theCard.theme.nicknameCSS);
+    $('#userIcon-img').attr('src', theSpecificSenderData.theCard.sender.headImgUrl)
+        .attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
 
     if(theUser){
         // $('#nickname-span').text(theUser.nickname);
