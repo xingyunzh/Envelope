@@ -35,13 +35,10 @@ module.exports.pass = function(req, res, next){
     var tokenString = req.get('x-access-token');
     if(!!tokenString){
         jwt.verify(tokenString,getSecret(),function(err,tokenObject){
-            if (err) {
-                console.log(err);
-                res.send(util.wrapBody('Invalid token','E'));
-            }else{
+            if (!err) {
                 req.token = tokenObject;
-                next();
             }
+            next();
         });
     }
     else {

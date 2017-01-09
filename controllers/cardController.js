@@ -14,7 +14,7 @@ var theTitlePlaceHolderToReplace = "theTitlePlaceHolderToReplace";
 
 function populateCardHtml(html, card){
     //hijack user icon
-    card.sender.headImgUrl = "http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg";
+    card.sender.headImgUrl = "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
 
     var theSpecificSenderData = {
         theCard:card

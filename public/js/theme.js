@@ -26,7 +26,10 @@ function cellForTheme(theme){
     var onSelect = "setTheTheme("+ JSON.stringify(theme) +")";
     var onDelete = "deleteTheme(" + JSON.stringify(theme) + ")";
 
-    var formatted = '<table class="table table-bordered"><caption><button class="btn btn-primary" onclick='+ onSelect +'>Select</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick='+ onDelete +'>Delete</button></caption>';
+    onSelect = onSelect.replace(/"/g, "'");
+    onDelete = onDelete.replace(/"/g, "'");
+
+    var formatted = '<table class="table table-bordered"><caption><button class="btn btn-primary" onclick="'+ onSelect +'">Select</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="'+ onDelete +'">Delete</button></caption>';
     for(var key in theme){
         if(key == "imageURL" || key == "iconURL"){
             formatted += '<tr><td>' + key + '</td>' + '<td><a href="'+ theme[key] +'">'+theme[key]+'</a></td><tr>';
