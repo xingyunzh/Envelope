@@ -4,14 +4,23 @@
 var theUser = localStorage.user ? JSON.parse(localStorage.user) : null;
 
 $(function(){
-    $("#ev-card-text-id").text(theSpecificSenderData.theCard.text);
+    if(!theSpecificSenderData.theCard){
+        alert("此人卡片未创建!");
+        return;
+    }
+
+    var textIndex = theSpecificSenderData.theCard.textIndex;
+    $("#ev-card-text-id").attr('style', theSpecificSenderData.theCard.theme.wordsCSS)
+        .text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
+
 
     $('#sprite-img').attr('style', theSpecificSenderData.theCard.theme.spriteCSS);
     $('#master-img').attr('src', theSpecificSenderData.theCard.theme.imageURL);
-    $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname);
-    $('.signed-name').attr('style', theSpecificSenderData.theCard.theme.nicknameCSS);
-    $('#userIcon-img').attr('src', theSpecificSenderData.theCard.sender.headImgUrl);
-    $('#userIcon-img').attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
+    $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname)
+        .attr('style', theSpecificSenderData.theCard.theme.nicknameCSS);
+    $('#userIcon-img').attr('src', theSpecificSenderData.theCard.sender.headImgUrl)
+        .attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
+    $('.wx_pic>img').attr('src', theSpecificSenderData.theCard.themeConfig.logoCandidates[theSpecificSenderData.theCard.logoIndex]);
 
     if(theUser){
         // $('#nickname-span').text(theUser.nickname);
@@ -43,7 +52,7 @@ $(function(){
 });
 
 function updateCount() {
-    httpHelper().request("GET", "/envelope/api/collect/count/" + theSpecificSenderData.theCard.sender._id)
+    httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theSpecificSenderData.theCard.sender._id)
         .then(function (count) {
             $('#count-span').text("" + count);
             $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/chicken.jpg");

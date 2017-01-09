@@ -5,11 +5,17 @@ var imageAPI = require('./imageAPI');
 var rootRouter = require("express").Router();
 var systemConfigRouter = require("./systemConfigRouter");
 
+var auth = require('../authenticate/authenticator');
+
 var cardController = require("../controllers/cardController");
 var themeController = require("../controllers/themeController");
+var logController = require("../controllers/logController");
 
 module.exports = function(app, contextRoot) {
     app.use(contextRoot, rootRouter);
+
+    //extract token
+    rootRouter.use(auth.pass);
 
     //Please make any business router under the rootRouter, so that it will be easy for contextRoot config.
 
@@ -37,7 +43,7 @@ module.exports = function(app, contextRoot) {
     // text:String
     //
     // return card entity
-    rootRouter.post('/api/card/create', cardController.createCard);
+    rootRouter.post('/api/card/create', auth.authenticate ,cardController.createCard);
 
     //param id - card id
     //return card entity
@@ -111,8 +117,15 @@ module.exports = function(app, contextRoot) {
     rootRouter.get('/console/themes', themeController.listAllThemes);
     rootRouter.get('/console/themeconfigs', themeController.listAllThemeConfigs);
 
-    
+
+    //logger
+    rootRouter.get('/api/log/count/action/:action', logController.countByActionWithResourceMatch);
+    rootRouter.get('/api/log/count/user/:id', logController.countByUser);
+    rootRouter.get('/api/log/count/resource/:reg', logController.countByResourceMatch);
+    rootRouter.get('/api/log/recent/:limit', logController.getRecent);
+
     //for test only
+    rootRouter.post('/api/log/count/create', logController.create);
     rootRouter.get('/test/cards', cardController.listAllCards);
     rootRouter.get('/test/collect/cards', cardController.listAllCollectedCards);
 

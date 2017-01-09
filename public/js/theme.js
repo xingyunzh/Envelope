@@ -11,7 +11,7 @@ $(function(){
 });
 
 function refreshThemes() {
-    httpHelper().request("GET", "./console/themes").then(function (data) {
+    httpHelper().authRequest("GET", "./console/themes").then(function (data) {
         var themes = data;
         _.forEach(themes, function (theme) {
             $('#theme-panel-ul').append(cellForTheme(theme));
@@ -26,7 +26,10 @@ function cellForTheme(theme){
     var onSelect = "setTheTheme("+ JSON.stringify(theme) +")";
     var onDelete = "deleteTheme(" + JSON.stringify(theme) + ")";
 
-    var formatted = '<table class="table table-bordered"><caption><button class="btn btn-primary" onclick='+ onSelect +'>Select</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick='+ onDelete +'>Delete</button></caption>';
+    onSelect = onSelect.replace(/"/g, "'");
+    onDelete = onDelete.replace(/"/g, "'");
+
+    var formatted = '<table class="table table-bordered"><caption><button class="btn btn-primary" onclick="'+ onSelect +'">Select</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="'+ onDelete +'">Delete</button></caption>';
     for(var key in theme){
         if(key == "imageURL" || key == "iconURL"){
             formatted += '<tr><td>' + key + '</td>' + '<td><a href="'+ theme[key] +'">'+theme[key]+'</a></td><tr>';
@@ -77,6 +80,7 @@ function refreshTheThemePanel(clear){
     $('#theThemeNicknameCSS').val(data.nicknameCSS);
     $('#theThemeHeadIconCSS').val(data.headiconCSS);
     $('#theThemeSpriteCSS').val(data.spriteCSS);
+    $('#theThemeWordsCSS').val(data.wordsCSS);
     $('#theThemeTitle').val(data.title);
 }
 
@@ -96,6 +100,7 @@ function onSubmitButton(){
         nicknameCSS: $('#theThemeNicknameCSS').val(),
         headiconCSS: $('#theThemeHeadIconCSS').val(),
         spriteCSS: $('#theThemeSpriteCSS').val(),
+        wordsCSS:$('#theThemeWordsCSS').val(),
         title:$('#theThemeTitle').val()
     };
 
@@ -105,7 +110,7 @@ function onSubmitButton(){
         url = './api/theme/id/'+id;
     }
 
-    httpHelper().request("POST", url, data).then(function(res){
+    httpHelper().authRequest("POST", url, data).then(function(res){
         location.reload();
     }).fail(function(error){
         alert(error);
@@ -115,7 +120,7 @@ function onSubmitButton(){
 function deleteTheme(theme){
     var id = theme._id;
     if(id){
-        httpHelper().request("GET", './api/theme/delete/'+id).then(function(res){
+        httpHelper().authRequest("GET", './api/theme/delete/'+id).then(function(res){
             location.reload();
         }).fail(function(error){
             alert(error);

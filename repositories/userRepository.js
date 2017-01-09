@@ -30,6 +30,10 @@ exports.updateById = function(id,data){
 	}).exec();
 };
 
+exports.countUser = function(){
+	return User.count().lean().exec();
+};
+
 exports.query = function(options){
 	var conditions = {};
 

@@ -3,6 +3,8 @@ var uidHelper = require('../util/uidHelper');
 var util = require('../util/util');
 var stringHelper = require('../util/shared/stringHelper');
 var authenticator = require('../authenticate/authenticator');
+var log = require('../repositories/logRepository');
+
 var q = require('q');
 var CamproError = require('../models/CamproError');
 
@@ -66,6 +68,19 @@ exports.listUser = function(req,res){
 			res.send(util.wrapBody('Internal Error','E'));
 		}
 	});
+};
+
+exports.countUser = function(req, res){
+    userRepository.countUser().then(function(result){
+        res.send(util.wrapBody(result));
+    }).catch(function(error){
+        console.log(error);
+        if (err instanceof CamproError) {
+            res.send(util.wrapBody(error.customMsg,'E'));
+        } else {
+            res.send(util.wrapBody('Internal Error','E'));
+        }
+    });
 };
 
 function login(req,res,type){
@@ -151,9 +166,11 @@ function login(req,res,type){
 			isFirstTimeLogin:isFirstTimeLogin
 		};
 
+        log.add(log.ActionType.Login, JSON.stringify(isFirstTimeLogin), user._id);
 		res.send(util.wrapBody(responseBody));
 	}).catch(function(err){
 		console.log(err);
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:err, channel:type}));
 		res.send(util.wrapBody('Internal Error','E'));
 	});
 

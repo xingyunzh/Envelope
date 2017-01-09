@@ -16,10 +16,16 @@ var cardSchema = Schema({
         theme:{
             type:Schema.Types.ObjectId,
             ref:"CardTheme",
-            required:true,
+            required:true
+        },
+        themeConfig:{
+            type:Schema.Types.ObjectId,
+            ref:"ThemeConfig",
+            required:true
         },
 
-        text:String
+        textIndex:Number,
+        logoIndex:Number,
 });
 
 var Card = mongoose.model("Card", cardSchema);

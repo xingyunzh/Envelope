@@ -31,6 +31,8 @@ $(function(){
         window.location.href = './login.html';
     });
 
+    $('.create-button').text('加载中').attr('disabled', true);
+
     $.when(getThemes(), getThemeConfig()).then(function (value) {
         return getCurrentCard();
     }).then(function(card){
@@ -53,6 +55,8 @@ $(function(){
 
         configMyHomeWithTheme();
         configMyHomeWithThemeConfig();
+
+        $('.create-button').text('生成卡片').removeAttr('disabled');
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -61,7 +65,7 @@ $(function(){
 });
 
 function getThemes(){
-    return httpHelper().request('GET', '/envelope/api/theme').then(function(themes){
+    return httpHelper().authRequest('GET', '/envelope/api/theme').then(function(themes){
         theThemes = themes;
 
         return true;
@@ -69,7 +73,7 @@ function getThemes(){
 }
 
 function getThemeConfig(){
-    return httpHelper().request('GET', '/envelope/api/tconfig/current').then(function(config){
+    return httpHelper().authRequest('GET', '/envelope/api/tconfig/current').then(function(config){
        theThemeConfig = config;
 
         return true;
@@ -78,7 +82,7 @@ function getThemeConfig(){
 
 function getCollects(){
     if(theUser){
-        httpHelper().request('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(collects){
+        httpHelper().authRequest('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(collects){
             $('#count-span').text(""+collects.length);
 
             _.forEach(collects, function(collect){
@@ -93,7 +97,7 @@ function getCollects(){
 
 function getCurrentCard(){
     if(theUser){
-        return httpHelper().request('GET', '/envelope/api/card/user/'+theUser._id);
+        return httpHelper().authRequest('GET', '/envelope/api/card/user/'+theUser._id);
     }
     else {
         return null;
@@ -110,17 +114,22 @@ function configMyHomeWithThemeConfig(){
 
 //event
 function createCard(){
-    if (theCurrentCard.theme._id == theThemes[theThemeIndex]._id
+    if (theCurrentCard && theCurrentCard.theme._id == theThemes[theThemeIndex]._id
         && theCurrentCard.text == theThemeConfig.textCandidates[theTextIndex]) {
         window.location.href = '/envelope/api/card/view/user/' + theUser._id;
 
         return;
     }
 
+    var ms = new Date().getMilliseconds();
+    var logoIndex = ms % theThemeConfig.logoCandidates.length;
+
     httpHelper().authRequest("POST", '/envelope/api/card/create', {
         theme:theThemes[theThemeIndex]._id,
+        themeConfig:theThemeConfig._id,
         sender:theUser._id,
-        text:theThemeConfig.textCandidates[theTextIndex]
+        textIndex:theTextIndex,
+        logoIndex:logoIndex
     }).then(function(data){
         window.location.href = '/envelope/api/card/view/user/'+theUser._id;
     }).fail(function(error){

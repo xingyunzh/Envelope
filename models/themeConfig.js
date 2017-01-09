@@ -11,6 +11,7 @@ var themeConfigSchema = Schema({
         index:true
     },
     textCandidates:[String],
+    logoCandidates:[String],
 
     createDate:Date
 });

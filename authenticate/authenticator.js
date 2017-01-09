@@ -27,41 +27,43 @@ function generate(id,callback){
 	jwt.sign({
 		userId:id
 	},getSecret(),{
-		expiresIn:60 * 60 * 24
+		expiresIn:60 * 60 * 24 * 45
 	},callback);
 }
 
+module.exports.pass = function(req, res, next){
+    var tokenString = req.get('x-access-token');
+    if(!!tokenString){
+        jwt.verify(tokenString,getSecret(),function(err,tokenObject){
+            if (!err) {
+                req.token = tokenObject;
+            }
+            next();
+        });
+    }
+    else {
+        next();
+    }
+};
+
 module.exports.authenticate = function(req, res, next) {
-
 	var tokenString = req.get('x-access-token');
-
-	if (!tokenString) {
+	if (!req.token) {
 		res.send(util.wrapBody('Invalid token','E'));
-	}else{
-		jwt.verify(tokenString,getSecret(),function(err,tokenObject){
-			if (err) {
-				console.log(err);
-				res.send(util.wrapBody('Invalid token','E'));
-			}else{
-				req.token = tokenObject;
+	}else {
+        if (req.token.exp - Math.floor(Date.now() / 1000) < 6 * 60 * 60) {
+            generate(req.token.userId, function (err, newTokenString) {
+                if (err) {
+                    console.log(err);
+                    res.send(util.wrapBody('Internal Error', 'E'));
+                } else {
+                    res.setHeader('set-token', newTokenString);
+                    next();
+                }
+            });
 
-				if (tokenObject.exp - Math.floor(Date.now() / 1000) < 6 * 60 * 60) {
-					generate(tokenObject.userId,function(err,newTokenString){
-						if(err){
-							console.log(err);
-							res.send(util.wrapBody('Internal Error','E'));
-						}else{
-							res.setHeader('set-token',newTokenString);
-							next();
-						}
-						
-					});
-
-				}else{
-					next();
-				}
-				
-			}
-		});
+        } else {
+            next();
+        }
 	}
 };

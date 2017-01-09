@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operation-Console</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/theme.css">
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/lodash/lodash.js"></script>
+
+    <script src="js/httpHelper.js"></script>
+    <script src="js/operation.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <table class="table table-bordered">
+        <caption>
+            CamproZ-Envelope Operation Console
+        </caption>
+        <thead>
+        <tr><th>Key</th><th>Count</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>User Count</td><td><span id="op-user-count"></span></td></tr>
+        <tr><td>User Login</td><td><span id="op-user-login-span"></span></td></tr>
+        <tr><td>Create Card</td><td><span id="op-create-card-span"></span></td></tr>
+        <tr><td>View Card by User</td><td><span id="op-view-card-span"></span></td></tr>
+        <tr><td>View Card by Id</td><td><span id="op-view-card-by-id-span"></span></td></tr>
+        <tr><td>View MyHome</td><td><span id="op-view-myhome-span"></span></td></tr>
+        <tr><td>Collect Card</td><td><span id="op-collect-card-span"></span></td></tr>
+        <tr><td>Error</td><td><span id="op-error-span"></span></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <div class="text-right">
+        <button class="btn btn-primary" onclick="refresh()">刷新</button>
+    </div>
+</div>
+
+
+</body>
+</html>

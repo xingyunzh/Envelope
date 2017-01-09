@@ -5,7 +5,7 @@ var Card = require("../models/card");
 var CollectedCard = require("../models/collectedCard");
 
 exports.getCardById = function(id){
-    return Card.findById(id).populate("sender theme").lean().exec();
+    return Card.findById(id).populate("sender theme themeConfig").lean().exec();
 };
 
 exports.deleteCardById = function(id){
@@ -13,11 +13,11 @@ exports.deleteCardById = function(id){
 };
 
 exports.getCardsBySender = function(user){
-    return Card.find({sender:user}).populate("sender theme").lean().exec();
+    return Card.find({sender:user}).populate("sender theme themeConfig").lean().exec();
 };
 
 exports.getLatestCardBySender = function(user){
-    return Card.find({sender:user}).sort("-createDate").populate("sender theme").limit(1).exec().then(function(cards){
+    return Card.find({sender:user}).sort("-createDate").populate("sender theme themeConfig").limit(1).exec().then(function(cards){
         return cards[0];
     });
 };
@@ -28,7 +28,7 @@ exports.createCard = function (param) {
 };
 
 exports.listAllCards = function(){
-    return Card.find().populate("sender theme").sort("-createDate").lean().exec();
+    return Card.find().populate("sender theme themeConfig").sort("-createDate").lean().exec();
 };
 
 exports.getCollectedCardById = function(id){
