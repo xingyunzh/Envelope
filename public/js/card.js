@@ -20,6 +20,7 @@ $(function(){
         .attr('style', theSpecificSenderData.theCard.theme.nicknameCSS);
     $('#userIcon-img').attr('src', theSpecificSenderData.theCard.sender.headImgUrl)
         .attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
+    $('#wx_pic img').attr('src', theSpecificSenderData.theCard.themeConfig.logoCandidates[theSpecificSenderData.theCard.logoIndex]);
 
     if(theUser){
         // $('#nickname-span').text(theUser.nickname);
