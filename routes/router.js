@@ -119,7 +119,7 @@ module.exports = function(app, contextRoot) {
 
 
     //logger
-    rootRouter.get('/api/log/count/action/:action', logController.countByAction);
+    rootRouter.get('/api/log/count/action/:action', logController.countByActionWithResourceMatch);
     rootRouter.get('/api/log/count/user/:id', logController.countByUser);
     rootRouter.get('/api/log/count/resource/:reg', logController.countByResourceMatch);
     rootRouter.get('/api/log/recent/:limit', logController.getRecent);

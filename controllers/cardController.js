@@ -46,7 +46,6 @@ exports.getCardViewByUserId = function(req, res){
 };
 
 exports.getCardViewByCardId = function(req, res){
-    log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
 
     var actions = [];
     actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
@@ -59,6 +58,7 @@ exports.getCardViewByCardId = function(req, res){
             cardHtml = populateCardHtml(cardHtml, card);
         }
 
+        log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
         res.send(cardHtml);
     }).catch(util.responseInternalError(res, function(error){
         log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);

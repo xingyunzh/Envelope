@@ -12,8 +12,13 @@ exports.countByAction = function(action){
   return Log.count({action:action}).exec();
 };
 
-exports.countByResourceMatch = function(resourceRegExp){
-  return Log.count({action:resourceRegExp}).exec();
+exports.countByActionWithResourceMatch = function(action, resourceRegExp){
+    var condition = {action:action};
+    if(resourceRegExp){
+        condition.resource = resourceRegExp;
+    }
+
+    return Log.count(condition).exec();
 };
 
 exports.countByUser = function(user){

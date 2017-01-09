@@ -70,6 +70,19 @@ exports.listUser = function(req,res){
 	});
 };
 
+exports.countUser = function(req, res){
+    userRepository.countUser().then(function(result){
+        res.send(util.wrapBody(result));
+    }).catch(function(error){
+        console.log(error);
+        if (err instanceof CamproError) {
+            res.send(util.wrapBody(error.customMsg,'E'));
+        } else {
+            res.send(util.wrapBody('Internal Error','E'));
+        }
+    });
+};
+
 function login(req,res,type){
 	var isFirstTimeLogin = false;
 

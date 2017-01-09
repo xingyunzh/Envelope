@@ -32,7 +32,7 @@ var	mongoURL = 'mongodb://' + envMongo.user +
 var app = express();
 
 app.use(function(req, res, next){
-    if (req.url.endsWith(".html")){
+    if (req.url.endsWith(".html") && !req.url.endsWith("console.html")){
         logRepository.add(logRepository.ActionType.View, req.url);
     }
     next();

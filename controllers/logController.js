@@ -13,8 +13,10 @@ exports.create = function(req, res){
     });
 };
 
-exports.countByAction = function (req, res) {
-    Logger.countByAction(req.params.action).then(function(data){
+exports.countByActionWithResourceMatch = function (req, res) {
+    var resourceMatch = req.query.resource ? RegExp(decodeURIComponent(req.query.resource)) : null;
+
+    Logger.countByActionWithResourceMatch(req.params.action, resourceMatch).then(function(data){
         res.json(util.wrapBody(data));
     }).catch(function(error){
         res.json(util.wrapBody(error, 'E'));
