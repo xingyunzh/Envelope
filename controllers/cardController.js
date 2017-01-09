@@ -20,7 +20,7 @@ function populateCardHtml(html, card){
         theCard:card
     };
 
-    var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.text);
+    var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.themeConfig.textCandidates[card.textIndex]);
     cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝:' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     return cardHtml;
