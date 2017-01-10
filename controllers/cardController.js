@@ -3,6 +3,7 @@
  */
 var cardRepository = require("../repositories/cardRepository");
 var themeRepository = require("../repositories/themeRepository");
+var wechatRepository = require("../repositories/wechatRepository");
 var log = require("../repositories/logRepository");
 var util = require("../util/util");
 var fs = require("fs");
@@ -11,8 +12,9 @@ var q = require("q");
 var theSpecificSenderDataPlaceHolder = "'theSpecificSenderDataPlaceHolderToReplace'";
 var theMetaDescContentPlaceHolder = "theHeadMetaDescriptionContent";
 var theTitlePlaceHolderToReplace = "theTitlePlaceHolderToReplace";
+var theWechatConfigPlaceHolder = "'theWechatConfigPlaceHolder'";
 
-function populateCardHtml(html, card){
+function populateCardHtml(html, card, config){
     //hijack user icon
     card.sender.headImgUrl = "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
 
@@ -23,19 +25,28 @@ function populateCardHtml(html, card){
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.themeConfig.textCandidates[card.textIndex]);
     cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝:' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
+    cardHtml = cardHtml.replace(theWechatConfigPlaceHolder,JSON.stringify(config));
     return cardHtml;
 }
+
+exports.getConfigParams = function(req,res){
+    wechatRepository.getConfigParams("").then(function(config){
+        res.send(config);
+    });
+};
 
 exports.getCardViewByUserId = function(req, res){
     var actions = [];
     actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
     actions[1] = cardRepository.getLatestCardBySender(req.params.id);
+    actions[2] = wechatRepository.getConfigParams("");
 
     q.all(actions).then(function(dataGroup){
         var cardHtml = dataGroup[0];
         var card = dataGroup[1];
+        var config = dataGroup[2];
         if(card){
-            cardHtml = populateCardHtml(cardHtml, card);
+            cardHtml = populateCardHtml(cardHtml, card, config);
         }
 
         log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
