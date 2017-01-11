@@ -41,7 +41,7 @@ $(function(){
                     $('.card-collected').hide();
                     $('.collect-card').show();
                 }
-            })
+            });
         }
     }
     else {
@@ -58,7 +58,7 @@ function wechatInit(){
     var card = theSpecificSenderData.theCard;
 
     wx.config({
-        debug:true,
+        debug:false,
         appId:wechatConfig.appId,
         timestamp:wechatConfig.timestamp,
         nonceStr:wechatConfig.nonceStr,
@@ -72,13 +72,13 @@ function wechatInit(){
     wx.ready(function(){
         console.log('ready');
         wx.onMenuShareTimeline({
-            title:'test',
-            link:'',
-            imgUrl:'',
+            title:card.sender.nickname + '祝:' + card.theme.title,
+            link:window.location.href,
+            imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             success:function(){
-
+                console.log('分享成功');
             },cancel:function(){
-
+                console.log('取消分享');
             }
         });
 
@@ -90,9 +90,9 @@ function wechatInit(){
             // type:'link',
             // dataUrl:null,
             success:function(){
-
+                console.log('分享成功');
             },cancel:function(){
-
+                console.log('取消分享');
             }
         });
     });
