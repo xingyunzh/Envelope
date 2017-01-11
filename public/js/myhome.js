@@ -79,7 +79,6 @@ function getUserInfoAndCollect(code,senderId){
     }).then(function(data){
         localStorage.user = JSON.stringify(data.user);
         theUser = data.user;
-        alert(localStorage.user);
         $('#nickname-span').text(theUser.nickname);
         $('#nickname-span').show();
         return true;
