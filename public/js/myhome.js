@@ -76,10 +76,10 @@ function getUserInfoAndCollect(code,senderId){
     httpHelper().authRequest('POST', '/envelope/api/user/login/wechat',{
         code:code,
         app:'camproz'
-    }).then(function(user){
-        localStorage.user = JSON.stringify(user);
-        theUser = user;
-        alert(theUser._id,localStorage.user);
+    }).then(function(data){
+        localStorage.user = JSON.stringify(data.user);
+        theUser = data.user;
+        alert(localStorage.user);
         $('#nickname-span').text(theUser.nickname);
         $('#nickname-span').show();
         return true;
