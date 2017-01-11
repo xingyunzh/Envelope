@@ -77,6 +77,7 @@ function getUserInfoAndCollect(code,senderId){
         code:code,
         app:'camproz'
     }).then(function(user){
+        alert(user);
         localStorage.user = JSON.stringify(user);
         theUser = user;
         $('#nickname-span').text(theUser.nickname);
