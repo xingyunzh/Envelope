@@ -34,9 +34,11 @@ $(function(){
    }
 
     $('.login-button').click(function(){
-        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
-        + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
-        + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
+        window.location.href = './login.html';
+        
+        // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
+        // + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
+        // + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
     });
 
     $('.create-button').text('加载中').attr('disabled', true);
