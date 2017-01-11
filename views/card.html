@@ -12,7 +12,7 @@
     <script src="/envelope/lib/jquery/dist/jquery.min.js"></script>
     <script src="/envelope/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/envelope/js/httpHelper.js"></script>
-
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="/envelope/js/card.js"></script>
     <link rel="stylesheet" href="/envelope/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/lib/bootstrap/dist/css/bootstrap.css">
@@ -22,6 +22,7 @@
     <!--do not modify below script area-->
     <script>
         var theSpecificSenderData = 'theSpecificSenderDataPlaceHolderToReplace';
+        var wechatConfig = 'theWechatConfigPlaceHolder';
     </script>
 </head>
 <body>
@@ -36,6 +37,7 @@
         <div class="center-block width-container">
             <div class="pull-left">
                 <a class="btn btn-primary" href="/envelope/myhome.html">卡片之家</a>
+                <a class="btn btn-primary" onclick="shareToFriend()">发给朋友</a>
             </div>
             <div class="pull-right">
                 <span id="nickname-span"></span>

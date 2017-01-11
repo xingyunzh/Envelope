@@ -20,14 +20,20 @@ exports.getOSSConfig = function(){
     });
 
     return deferred.promise;
-}
+};
+
+exports.getWechatCredentials = function(){
+    var data = fs.readFileSync(SystemConfigKeysFile, "utf8");
+    var wechat = JSON.parse(data).wechat;
+    return wechat;
+};
 
 exports.getMongoEnv = function(){
 
     var data = fs.readFileSync(SystemConfigKeysFile, "utf8");
     var mongodb = JSON.parse(data).mongodb;
     return mongodb;
-}
+};
 
 exports.getTokenSecret = function(){
     var data = fs.readFileSync(SystemConfigKeysFile, "utf8");

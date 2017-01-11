@@ -1,5 +1,5 @@
 var userRepository = require('../repositories/userRepository');
-var uidHelper = require('../util/uidHelper');
+var uidAdapter = require('../authenticate/uidAdapter');
 var util = require('../util/util');
 var stringHelper = require('../util/shared/stringHelper');
 var authenticator = require('../authenticate/authenticator');
@@ -91,7 +91,7 @@ function login(req,res,type){
 		var email = req.body.email;
 		var	password = req.body.password;
 
-		uidHelper.loginByEmail(email,password,function(err,result){
+		uidAdapter.loginByEmail(email,password,function(err,result){
 			if (err) {
 				deferred.reject(err);
 			}else{
@@ -100,7 +100,9 @@ function login(req,res,type){
 		});
 	}else if(type == 'wechat'){
 		var code = req.body.code;
-		uidHelper.loginByWechat(code,function(err,result){
+		var app = req.body.app;
+
+		uidAdapter.loginByWechat(code,app,function(err,result){
 			if (err) {
 				deferred.reject(err);
 			}else{
@@ -128,7 +130,6 @@ function login(req,res,type){
 				var newUser = {
 					uid:user._id,
 					headImgUrl:user.headImgUrl,
-					roles:['player']
 				};
 
 				if (!!user.nickname) {

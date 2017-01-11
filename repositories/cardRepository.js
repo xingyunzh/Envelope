@@ -17,9 +17,7 @@ exports.getCardsBySender = function(user){
 };
 
 exports.getLatestCardBySender = function(user){
-    return Card.find({sender:user}).sort("-createDate").populate("sender theme themeConfig").limit(1).exec().then(function(cards){
-        return cards[0];
-    });
+    return Card.findOne({sender:user}).sort("-createDate").populate("sender theme themeConfig").exec();
 };
 
 exports.createCard = function (param) {

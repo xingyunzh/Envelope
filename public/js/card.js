@@ -4,6 +4,9 @@
 var theUser = localStorage.user ? JSON.parse(localStorage.user) : null;
 
 $(function(){
+
+    wechatInit();
+
     if(!theSpecificSenderData.theCard){
         alert("此人卡片未创建!");
         return;
@@ -38,7 +41,7 @@ $(function(){
                     $('.card-collected').hide();
                     $('.collect-card').show();
                 }
-            })
+            });
         }
     }
     else {
@@ -50,6 +53,55 @@ $(function(){
 
     updateCount();
 });
+
+function wechatInit(){
+    var card = theSpecificSenderData.theCard;
+
+    wx.config({
+        debug:false,
+        appId:wechatConfig.appId,
+        timestamp:wechatConfig.timestamp,
+        nonceStr:wechatConfig.nonceStr,
+        signature:wechatConfig.signature,
+        jsApiList:[
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+        ]
+    });
+
+    wx.ready(function(){
+        console.log('ready');
+        wx.onMenuShareTimeline({
+            title:card.sender.nickname + '祝:' + card.theme.title,
+            link:window.location.href,
+            imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
+            success:function(){
+                console.log('分享成功');
+            },cancel:function(){
+                console.log('取消分享');
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title:card.sender.nickname + '祝:' + card.theme.title,
+            desc:card.themeConfig.textCandidates[card.textIndex],
+            link:window.location.href,
+            imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
+            // type:'link',
+            // dataUrl:null,
+            success:function(){
+                console.log('分享成功');
+            },cancel:function(){
+                console.log('取消分享');
+            }
+        });
+    });
+
+    wx.error(function(res){
+        console.log('error',res);
+    });
+
+}
 
 function updateCount() {
     httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theSpecificSenderData.theCard.sender._id)
@@ -78,6 +130,10 @@ function handleCollectCard(){
         });
     }
     else {
-        window.location.href = '/envelope/login.html';
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
+        + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
+        + '&response_type=code&scope=snsapi_userinfo&state='
+        +  theSpecificSenderData.theCard.sender._id
+        + '#wechat_redirect';
     }
 }

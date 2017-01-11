@@ -11,7 +11,13 @@ var theTextIndex = 0;
 var theCurrentCard = null;
 
 $(function(){
-   if(localStorage.user && localStorage.token){
+    var query = getQueryString();
+
+    if ('code' in query) {
+        $('.login-button').hide();
+        getUserInfoAndCollect(query.code,query.state);
+    }
+    else if(localStorage.user && localStorage.token){
        theUser = JSON.parse(localStorage.user);
        $('#nickname-span').text(theUser.nickname);
        $('#nickname-span').show();
@@ -29,6 +35,10 @@ $(function(){
 
     $('.login-button').click(function(){
         window.location.href = './login.html';
+        
+        // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
+        // + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
+        // + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
     });
 
     $('.create-button').text('加载中').attr('disabled', true);
@@ -63,6 +73,35 @@ $(function(){
 
     getCollects();
 });
+
+function getUserInfoAndCollect(code,senderId){
+    httpHelper().authRequest('POST', '/envelope/api/user/login/wechat',{
+        code:code,
+        app:'camproz'
+    }).then(function(data){
+        localStorage.user = JSON.stringify(data.user);
+        theUser = data.user;
+        $('#nickname-span').text(theUser.nickname);
+        $('#nickname-span').show();
+        return true;
+
+    }).then(function(){
+        if (senderId && senderId != '123') {
+            return httpHelper().authRequest('POST', '/envelope/api/collect', {
+                sender:senderId,
+                me:theUser._id
+            }).then(function(collect){
+                alert("已收藏 id:"+collect._id);
+                //window.location.reload();
+            });
+        }else{
+            return true;
+        }
+        
+    }).fail(function(error){
+        alert("Server Error" + JSON.stringify(error));
+    });
+}
 
 function getThemes(){
     return httpHelper().authRequest('GET', '/envelope/api/theme').then(function(themes){
@@ -142,6 +181,32 @@ function logout(){
     delete localStorage.token;
 
     location.reload();
+}
+
+function getQueryString(){
+    // This function is anonymous, is executed immediately and 
+    // the return value is assigned to QueryString!
+    var query_string = {};
+    var query = window.location.href.split('?')[1];
+    if (query !== undefined) {
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        } 
+    } 
+
+    return query_string;
 }
 
 function handleThemeClick(){
