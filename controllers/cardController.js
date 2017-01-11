@@ -16,7 +16,7 @@ var theWechatConfigPlaceHolder = "'theWechatConfigPlaceHolder'";
 
 function populateCardHtml(html, card, config){
     //hijack user icon
-    card.sender.headImgUrl = "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
+    //card.sender.headImgUrl = "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
 
     var theSpecificSenderData = {
         theCard:card
@@ -28,12 +28,6 @@ function populateCardHtml(html, card, config){
     cardHtml = cardHtml.replace(theWechatConfigPlaceHolder,JSON.stringify(config));
     return cardHtml;
 }
-
-exports.getConfigParams = function(req,res){
-    wechatRepository.getConfigParams("").then(function(config){
-        res.send(config);
-    });
-};
 
 exports.getCardViewByUserId = function(req, res){
     var actions = [];

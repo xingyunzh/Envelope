@@ -130,7 +130,6 @@ function login(req,res,type){
 				var newUser = {
 					uid:user._id,
 					headImgUrl:user.headImgUrl,
-					roles:['player']
 				};
 
 				if (!!user.nickname) {
