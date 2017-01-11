@@ -85,7 +85,7 @@ function getUserInfoAndCollect(code,senderId){
         return true;
 
     }).then(function(){
-        if (senderId) {
+        if (senderId && senderId != '123') {
             return httpHelper().authRequest('POST', '/envelope/api/collect', {
                 sender:senderId,
                 me:theUser._id
