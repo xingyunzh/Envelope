@@ -39,7 +39,8 @@ exports.getCardViewByUserId = function(req, res){
     var actions = [];
     actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
     actions[1] = cardRepository.getLatestCardBySender(req.params.id);
-    actions[2] = wechatRepository.getConfigParams("");
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    actions[2] = wechatRepository.getConfigParams(fullUrl);
 
     q.all(actions).then(function(dataGroup){
         var cardHtml = dataGroup[0];

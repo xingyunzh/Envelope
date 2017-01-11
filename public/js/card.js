@@ -55,6 +55,8 @@ $(function(){
 });
 
 function wechatInit(){
+    var card = theSpecificSenderData.theCard;
+
     wx.config({
         debug:true,
         appId:wechatConfig.appId,
@@ -70,7 +72,7 @@ function wechatInit(){
     wx.ready(function(){
         console.log('ready');
         wx.onMenuShareTimeline({
-            title:'',
+            title:'test',
             link:'',
             imgUrl:'',
             success:function(){
@@ -81,10 +83,10 @@ function wechatInit(){
         });
 
         wx.onMenuShareAppMessage({
-            title:'',
-            desc:'',
-            link:'',
-            imgUrl:'',
+            title:card.sender.nickname + '祝:' + card.theme.title,
+            desc:card.themeConfig.textCandidates[card.textIndex],
+            link:window.location.href,
+            imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             // type:'link',
             // dataUrl:null,
             success:function(){
