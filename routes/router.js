@@ -25,8 +25,6 @@ module.exports = function(app, contextRoot) {
 
 	rootRouter.use('/api/user',userAPI);
     rootRouter.use('/api/image',imageAPI);
-
-    rootRouter.get('/api/wechat/ticket',cardController.getConfigParams);
     
     //id - user id
     //main method to render the card view
