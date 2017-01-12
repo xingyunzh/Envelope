@@ -29,13 +29,25 @@ exports.getRecent = function(limitMax){
     return Log.find().sort("-date").limit(limitMax).lean().exec();
 };
 
+exports.getErrors = function(limitMax){
+    return Log.find({action:this.ActionType.Error}).sort("-date").limit(limitMax).lean().exec();
+};
+
 //convenient methods
-exports.add = function(action, resource, user, ip){
+exports.add = function(action, resource, req){
+
+    this.getClientIp = function(req) {
+        return req.headers['x-forwarded-for'] ||
+            req.connection.remoteAddress ||
+            req.socket.remoteAddress ||
+            req.connection.socket.remoteAddress;
+    };
+
     return this.create({
         action:action,
         resource:resource,
-        user:user,
-        ip:ip
+        user:req.token ? req.token.userId : null,
+        ip:this.getClientIp(req)
     });
 };
 

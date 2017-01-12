@@ -123,6 +123,7 @@ module.exports = function(app, contextRoot) {
     rootRouter.get('/api/log/count/user/:id', logController.countByUser);
     rootRouter.get('/api/log/count/resource/:reg', logController.countByResourceMatch);
     rootRouter.get('/api/log/recent/:limit', logController.getRecent);
+    rootRouter.get('/api/log/error/:limit', logController.getErrors);
 
     //for test only
     rootRouter.post('/api/log/count/create', logController.create);
