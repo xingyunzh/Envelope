@@ -44,10 +44,10 @@ exports.getCardViewByUserId = function(req, res){
             cardHtml = populateCardHtml(cardHtml, card, config);
         }
 
-        log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
+        log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
     }).catch(util.responseInternalError(res, function(error){
-        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
     }));
 };
 
@@ -64,10 +64,10 @@ exports.getCardViewByCardId = function(req, res){
             cardHtml = populateCardHtml(cardHtml, card);
         }
 
-        log.add(log.ActionType.View, req.url, req.token ? req.token.userId : null);
+        log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
     }).catch(util.responseInternalError(res, function(error){
-        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
     }));
 };
 
@@ -80,9 +80,9 @@ exports.getCardByUserId = function(req, res){
 exports.createCard = function(req, res){
     cardRepository.createCard(req.body).then(function (card) {
         res.json(util.wrapBody(card));
-        log.add(log.ActionType.Create, null, req.token.userId);
+        log.add(log.ActionType.Create, null, req);
     }).catch(util.responseInternalError(res), function(error){
-        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
     });
 };
 
@@ -103,9 +103,9 @@ exports.collectCard = function(req, res){
         return cardRepository.createCollectedCard({collector:req.body.me, card:card});
     }).then(function(collectedCard){
         res.json(util.wrapBody(collectedCard));
-        log.add(log.ActionType.Collect, null, req.token.userId);
+        log.add(log.ActionType.Collect, null, req);
     }).catch(util.responseInternalError(res, function(error){
-        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req.token ? req.token.userId : null);
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
     }));
 };
 

@@ -28,6 +28,7 @@ $(function(){
     if(theUser){
         // $('#nickname-span').text(theUser.nickname);
         if(theUser._id == theSpecificSenderData.theCard.sender._id){
+            //view my own card
             $('.card-collected').hide();
             $('.collect-card').hide();
         }
@@ -38,8 +39,7 @@ $(function(){
                     $('.collect-card').hide();
                 }
                 else {
-                    $('.card-collected').hide();
-                    $('.collect-card').show();
+                    doCollectCard();
                 }
             });
         }
@@ -119,15 +119,7 @@ function getIfCollected() {
 
 function handleCollectCard(){
     if(theUser){
-        httpHelper().authRequest('POST', '/envelope/api/collect', {
-            sender:theSpecificSenderData.theCard.sender._id,
-            me:theUser._id
-        }).then(function(collect){
-            alert("已收藏 id:"+collect._id);
-            window.location.reload();
-        }).fail(function(error){
-            alert("Server Error" + JSON.stringify(error));
-        });
+        doCollectCard();
     }
     else {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
@@ -136,4 +128,16 @@ function handleCollectCard(){
         +  theSpecificSenderData.theCard.sender._id
         + '#wechat_redirect';
     }
+}
+
+function doCollectCard(){
+    httpHelper().authRequest('POST', '/envelope/api/collect', {
+        sender:theSpecificSenderData.theCard.sender._id,
+        me:theUser._id
+    }).then(function(collect){
+        alert("已收藏 id:"+collect._id);
+        window.location.reload();
+    }).fail(function(error){
+        alert("Server Error" + JSON.stringify(error));
+    });
 }

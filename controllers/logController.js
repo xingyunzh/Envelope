@@ -46,3 +46,11 @@ exports.getRecent = function(req, res){
         res.json(util.wrapBody(error, 'E'));
     });
 };
+
+exports.getErrors = function(req, res){
+    Logger.getErrors(req.params.limit).then(function(data){
+        res.json(util.wrapBody(data));
+    }).catch(function(error){
+        res.json(util.wrapBody(error, 'E'));
+    });
+};

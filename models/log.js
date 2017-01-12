@@ -16,7 +16,8 @@ var logSchema = Schema({
             type:String,
             required:true,
             index:true
-        }
+        },
+        ip:String
 });
 
 var Log = mongoose.model("Log", logSchema);
