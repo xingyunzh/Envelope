@@ -167,11 +167,11 @@ function login(req,res,type){
 			isFirstTimeLogin:isFirstTimeLogin
 		};
 
-        log.add(log.ActionType.Login, JSON.stringify(isFirstTimeLogin), user._id);
+        log.add(log.ActionType.Login, JSON.stringify(isFirstTimeLogin), user._id, req.ip);
 		res.send(util.wrapBody(responseBody));
 	}).catch(function(err){
 		console.log(err);
-        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:err, channel:type}));
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:err, channel:type}), null, req.ip);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
 

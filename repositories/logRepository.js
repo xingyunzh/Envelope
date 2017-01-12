@@ -30,11 +30,12 @@ exports.getRecent = function(limitMax){
 };
 
 //convenient methods
-exports.add = function(action, resource, user){
+exports.add = function(action, resource, user, ip){
     return this.create({
         action:action,
         resource:resource,
-        user:user
+        user:user,
+        ip:ip
     });
 };
 
