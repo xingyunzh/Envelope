@@ -40,6 +40,7 @@ exports.getCardViewByUserId = function(req, res){
         var cardHtml = dataGroup[0];
         var card = dataGroup[1];
         var config = dataGroup[2];
+        
         if(card){
             cardHtml = populateCardHtml(cardHtml, card, config);
         }
