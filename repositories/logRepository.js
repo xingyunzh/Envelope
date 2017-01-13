@@ -2,8 +2,9 @@
  * Created by brillwill on 2017/1/6.
  */
 var Log = require("../models/log");
+var q = require("q");
 
-exports.create = function(params){
+function create(params){
     params.date = new Date();
   return Log.create(params);
 };
@@ -35,6 +36,11 @@ exports.getErrors = function(limitMax){
 
 //convenient methods
 exports.add = function(action, resource, req){
+    if(req && !req.app.locals.logging){
+        return q.fcall(function(){
+            return "logging is not enable!";
+        });
+    }
 
     this.getClientIp = function(req) {
         return req.headers['x-forwarded-for'] ||
@@ -43,11 +49,11 @@ exports.add = function(action, resource, req){
             req.connection.socket.remoteAddress;
     };
 
-    return this.create({
+    return create({
         action:action,
         resource:resource,
-        user:req.token ? req.token.userId : null,
-        ip:this.getClientIp(req)
+        user:req && req.token ? req.token.userId : null,
+        ip:req ? this.getClientIp(req) : null
     });
 };
 
