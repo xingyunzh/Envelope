@@ -26,7 +26,7 @@ var	mongoURL = 'mongodb://' + envMongo.user +
 				':' + envMongo.port + 
 				'/' + envMongo.db;
 
-
+mongoURL = 'mongodb://localhost:27017/envelope'
 
 // create a new express server
 var app = express();

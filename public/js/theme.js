@@ -76,11 +76,7 @@ function refreshTheThemePanel(clear){
     $('#theThemeCategory').val(data.category);
     $('#theThemeName').val(data.name);
     $('#theThemeImage').val(data.imageURL);
-    $('#theThemeIcon').val(data.iconURL);
-    $('#theThemeNicknameCSS').val(data.nicknameCSS);
-    $('#theThemeHeadIconCSS').val(data.headiconCSS);
-    $('#theThemeSpriteCSS').val(data.spriteCSS);
-    $('#theThemeWordsCSS').val(data.wordsCSS);
+    $('#theThemeCardTemplate').val(data.imageURL);
     $('#theThemeTitle').val(data.title);
 }
 
@@ -96,11 +92,7 @@ function onSubmitButton(){
         category: $('#theThemeCategory').val(),
         name: $('#theThemeName').val(),
         imageURL: $('#theThemeImage').val(),
-        iconURL:$('#theThemeIcon').val(),
-        nicknameCSS: $('#theThemeNicknameCSS').val(),
-        headiconCSS: $('#theThemeHeadIconCSS').val(),
-        spriteCSS: $('#theThemeSpriteCSS').val(),
-        wordsCSS:$('#theThemeWordsCSS').val(),
+        cardTemplate:$('#theThemeCardTemplate').val(),
         title:$('#theThemeTitle').val()
     };
 

@@ -9,11 +9,37 @@ footer img {
     margin-bottom: 15px;
 }
 
-.user-panel {
-    margin: 8px auto;
-    line-height: 44px;
+.card-status-bar {
+    height:20px;
+    font-size:10px;
+    color: #808080;
+    line-height: 20px;
 }
 
-#master-img {
+.card-area{
+    position: relative;
+}
 
+.card-bg-area{
+    display: block;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
+}
+
+.card-message-area{
+    display: table;
+    position: absolute;
+}
+
+.card-message {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.pet-group{
+    top:80%;
+    color: #ffffff;
+    width: 25%;
 }

@@ -107,7 +107,7 @@ function updateCount() {
     httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theSpecificSenderData.theCard.sender._id)
         .then(function (count) {
             $('#count-span').text("" + count);
-            $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/chicken.jpg");
+//            $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/chicken.jpg");
         }).fail(function (error) {
         alert("Server Error" + JSON.stringify(error));
     });
