@@ -167,12 +167,8 @@ function login(req,res,type){
 			isFirstTimeLogin:isFirstTimeLogin
 		};
 
-        log.create({
-            action:log.ActionType.Login,
-            resource:JSON.stringify(isFirstTimeLogin),
-            user:user._id,
-            ip:log.add.getClientIp(req)
-        });
+        req.token = {userId:user._id}; //fake token object for log.add
+        log.add(log.ActionType.Login, JSON.stringify(isFirstTimeLogin), req);
 
 		res.send(util.wrapBody(responseBody));
 	}).catch(function(err){

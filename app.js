@@ -31,9 +31,16 @@ var	mongoURL = 'mongodb://' + envMongo.user +
 // create a new express server
 var app = express();
 
+if(process.argv.indexOf("-log") != -1){
+    app.locals.logging = true;
+    logRepository.add(logRepository.ActionType.Error, "Server Restart");
+}
+
+console.log("app statistic logging : "+ !!app.locals.logging);
+
 app.use(function(req, res, next){
     if (req.url.endsWith(".html") && !req.url.endsWith("console.html")){
-        logRepository.add(logRepository.ActionType.View, req.url);
+        logRepository.add(logRepository.ActionType.View, req.url, req);
     }
     next();
 });
