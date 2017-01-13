@@ -22,6 +22,8 @@ $(function(){
        $('#nickname-span').text(theUser.nickname);
        $('#nickname-span').show();
        $('.login-button').hide();
+
+        $('#preview-iframe').attr("src", '/envelope/api/card/view/user/'+theUser._id);
    }
    else {
        delete localStorage.user;

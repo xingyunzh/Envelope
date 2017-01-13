@@ -13,30 +13,26 @@ $(function(){
     }
 
     var textIndex = theSpecificSenderData.theCard.textIndex;
-    $("#ev-card-text-id").attr('style', theSpecificSenderData.theCard.theme.wordsCSS)
-        .text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
+    $("#ev-card-text-id").text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
 
-
-    $('#sprite-img').attr('style', theSpecificSenderData.theCard.theme.spriteCSS);
     $('#master-img').attr('src', theSpecificSenderData.theCard.theme.imageURL);
-    $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname)
-        .attr('style', theSpecificSenderData.theCard.theme.nicknameCSS);
-    $('#userIcon-img').attr('src', theSpecificSenderData.theCard.sender.headImgUrl)
-        .attr('style', theSpecificSenderData.theCard.theme.headiconCSS);
+    $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname);
+    var userImage = theSpecificSenderData.theCard.sender.headImgUrl;
+    if(!userImage){
+        userImage="http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
+    }
+    $('#userIcon-img').attr('src', userImage);
     $('.wx_pic>img').attr('src', theSpecificSenderData.theCard.themeConfig.logoCandidates[theSpecificSenderData.theCard.logoIndex]);
 
     if(theUser){
-        // $('#nickname-span').text(theUser.nickname);
         if(theUser._id == theSpecificSenderData.theCard.sender._id){
             //view my own card
-            $('.card-collected').hide();
-            $('.collect-card').hide();
+            $('.card-status-bar').hide();
         }
         else {
             getIfCollected().then(function(collected){
                 if(collected){
-                    $('.card-collected').show();
-                    $('.collect-card').hide();
+                    $('.card-status-bar span').text("您已经收藏过此卡！");
                 }
                 else {
                     doCollectCard();
@@ -45,10 +41,7 @@ $(function(){
         }
     }
     else {
-        $('#nickname-span').text("");
-        $('.card-collected').hide();
-        $('.collect-card').show();
-        $('.collect-card').text("登录收集");
+        $('.card-status-bar span').text("此人卡片未创建!");
     }
 
     updateCount();
@@ -119,7 +112,12 @@ function getIfCollected() {
 
 function handleCollectCard(){
     if(theUser){
-        doCollectCard();
+        if(theSpecificSenderData.theCard.sender._id == theUser._id){
+            window.location.href = '/envelope/myhome.html';
+        }
+        else {
+            doCollectCard();
+        }
     }
     else {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
@@ -135,8 +133,9 @@ function doCollectCard(){
         sender:theSpecificSenderData.theCard.sender._id,
         me:theUser._id
     }).then(function(collect){
-        alert("已收藏 id:"+collect._id);
-        window.location.reload();
+        alert("收藏成功！");
+        $('.card-status-bar').show();
+        $('.card-status-bar span').text("成功收藏此卡！");
     }).fail(function(error){
         alert("Server Error" + JSON.stringify(error));
     });

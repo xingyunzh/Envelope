@@ -25,42 +25,45 @@
     <div class="row">
         <div class="width-container center-block">
             <div class="pull-right user-panel">
-                <button class="btn btn-primary login-button">登录</button>
+                <button class="btn btn-primary login-button">测试登录</button>
                 <button class="btn btn-primary create-button" onclick="createCard()">生成卡片</button>
-                <button class="btn btn-default logout-button" onclick="logout()">退出登录</button>
+                <button class="btn btn-default logout-button" onclick="logout()">测试退出登录</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="width-container center-block text-center">
-            <a onclick="handleThemeClick()">
-                <img class="img-thumbnail" alt="Main Card" id="master-img">
-            </a>
-        </div>
+        <span>选择祝福文字：</span>
     </div>
-    <div class="row  wish-text-container">
+    <div class="row">
         <div class="list-group width-container center-block text-center">
             <a class="list-group-item" onclick="handleTextClick()" id="text-a">
                 鸡年大吉,鸿运当头!
             </a>
         </div>
     </div>
-</div>
-
-<div class="container">
     <div class="row">
-        <div class="width-container center-block text-right chicken">
-            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/chicken.jpg" alt="Chicken" width="60">
-            <span id="count-span"></span>
-        </div>
+        <span>我的祝福：</span>
+    </div>
+    <div class="row">
+        <iframe frameborder="1" id="preview-iframe">
+        </iframe>
+    </div>
+    <div class="row text-center">
+        <button class="btn btn-primary">分享发送</button>
     </div>
 </div>
 
 <div class="container">
-    <div class="list-group width-container center-block" id="collects-list-div">
+    <div class="row">
+        我的收藏：
+    </div>
+
+    <div class="row">
+        <div class="list-group width-container center-block" id="collects-list-div">
+        </div>
     </div>
 </div>
 

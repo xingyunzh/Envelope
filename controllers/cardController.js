@@ -30,11 +30,11 @@ function populateCardHtml(html, card, config){
 }
 
 function getCardTemplate(name){
-    if (getCardTemplate.cache.hasOwnProperty(name)) {
-        return q.fcall(function(){
-            return getCardTemplate.cache[name];
-        });
-    }
+//    if (getCardTemplate.cache.hasOwnProperty(name)) {
+//        return q.fcall(function(){
+//            return getCardTemplate.cache[name];
+//        });
+//    }
 
     return q.nfbind(fs.readFile)(__dirname + "/../views/"+name, "utf-8").then(function(template){
         getCardTemplate.cache[name] = template;
@@ -117,6 +117,11 @@ exports.getCardById = function(req, res){
 };
 
 exports.collectCard = function(req, res){
+    if(req.body.me == req.body.sender){
+        res.json(util.wrapBody("can not collect yourself card", "E"));
+        return;
+    }
+
     cardRepository.getLatestCardBySender(req.body.sender).then(function(card){
         return cardRepository.createCollectedCard({collector:req.body.me, card:card});
     }).then(function(collectedCard){
