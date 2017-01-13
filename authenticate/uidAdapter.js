@@ -47,8 +47,8 @@ var postUID = function(path,body,token,callback){
 		  	if (resJSON.status == 'E'){
 		  		callback(new Error(resJSON.body));
 		  	}else{
-		  		var resBody = resJSON.body;
-		  		resBody.token = null;
+		  		// var resBody = resJSON.body;
+		  		// resBody.token = null;
 		  		callback(null,resJSON.body);
 		  	}
 		  	
@@ -67,4 +67,4 @@ var postUID = function(path,body,token,callback){
 	// write data to request body
 	req.write(postData);
 	req.end();
-}
+};
