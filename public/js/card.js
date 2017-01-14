@@ -41,7 +41,7 @@ $(function(){
         }
     }
     else {
-        $('.card-status-bar span').text("此人卡片未创建!");
+        $('.card-status-bar').hide();
     }
 
     updateCount();
