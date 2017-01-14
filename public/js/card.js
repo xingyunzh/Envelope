@@ -115,9 +115,6 @@ function handleCollectCard(){
         if(theSpecificSenderData.theCard.sender._id == theUser._id){
             window.location.href = '/envelope/myhome.html';
         }
-        else {
-            doCollectCard();
-        }
     }
     else {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
