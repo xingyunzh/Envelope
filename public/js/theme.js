@@ -31,7 +31,7 @@ function cellForTheme(theme){
 
     var formatted = '<table class="table table-bordered"><caption><button class="btn btn-primary" onclick="'+ onSelect +'">Select</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="'+ onDelete +'">Delete</button></caption>';
     for(var key in theme){
-        if(key == "imageURL" || key == "iconURL"){
+        if(key == "imageURL"){
             formatted += '<tr><td>' + key + '</td>' + '<td><a href="'+ theme[key] +'">'+theme[key]+'</a></td><tr>';
         }
         else if(key == "__v"){
@@ -76,11 +76,7 @@ function refreshTheThemePanel(clear){
     $('#theThemeCategory').val(data.category);
     $('#theThemeName').val(data.name);
     $('#theThemeImage').val(data.imageURL);
-    $('#theThemeIcon').val(data.iconURL);
-    $('#theThemeNicknameCSS').val(data.nicknameCSS);
-    $('#theThemeHeadIconCSS').val(data.headiconCSS);
-    $('#theThemeSpriteCSS').val(data.spriteCSS);
-    $('#theThemeWordsCSS').val(data.wordsCSS);
+    $('#theThemeCardTemplate').val(data.cardTemplate);
     $('#theThemeTitle').val(data.title);
 }
 
@@ -96,11 +92,7 @@ function onSubmitButton(){
         category: $('#theThemeCategory').val(),
         name: $('#theThemeName').val(),
         imageURL: $('#theThemeImage').val(),
-        iconURL:$('#theThemeIcon').val(),
-        nicknameCSS: $('#theThemeNicknameCSS').val(),
-        headiconCSS: $('#theThemeHeadIconCSS').val(),
-        spriteCSS: $('#theThemeSpriteCSS').val(),
-        wordsCSS:$('#theThemeWordsCSS').val(),
+        cardTemplate:$('#theThemeCardTemplate').val(),
         title:$('#theThemeTitle').val()
     };
 

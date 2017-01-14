@@ -12,13 +12,7 @@ var CardThemeSchema = Schema({
     },
     name:String,
     createDate:Date,
-
-    imageURL:String,
-    iconURL:String,
-    nicknameCSS:String,
-    headiconCSS:String,
-    spriteCSS:String,
-    wordsCSS:String,
+    cardTemplate:String,
 
     title:String
 });

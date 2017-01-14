@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>theTitlePlaceHolderToReplace</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--do not modify below line-->
+    <meta name="description" content="theHeadMetaDescriptionContent">
+
+    <script src="/envelope/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/envelope/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/envelope/js/httpHelper.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="/envelope/js/card.js"></script>
+    <link rel="stylesheet" href="/envelope/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/lib/bootstrap/dist/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/envelope/css/styleZeus.css">
+
+    <!--do not modify below script area-->
+    <script>
+        var theSpecificSenderData = 'theSpecificSenderDataPlaceHolderToReplace';
+        var wechatConfig = 'theWechatConfigPlaceHolder';
+    </script>
+</head>
+<body>
+
+<div class='wx_pic' style='margin:0 auto;display:none;'>
+    <img />
+</div>
+
+<div class="container-fluid card-status-bar text-center">
+    <span>收藏祝福成功</span>
+</div>
+
+<div class="container-fluid card-area">
+    <div>
+        <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg.png" alt="bg" class="img-responsive"/>
+        <img alt="main-card" id="master-img" class="card-bg-area"/>
+        <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/cardmask.png" alt="mask" class="card-bg-area"/>
+    </div>
+    <div class="card-bg-area card-message-area">
+        <div class="card-message">
+            <div class="card-message-text-area">
+                <div id="ev-card-text-id">
+                    金鸡来敲门，合家欢小当头照，福禄财神紧拥抱！
+                </div>
+            </div>
+            <div class="card-user-icon-area">
+                <img id="userIcon-img" alt=""/>
+            </div>
+            <div class="card-user-name-area">
+                <span class="signed-name"></span>
+            </div>
+        </div>
+    </div>
+    <div class="card-bg-area card-pet-area">
+        <div class="pet-group pull-right">
+            <div class="text-center">
+                <img id="sprite-img" src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet05.png" alt=""/>
+            </div>
+            <div class="text-center">
+                <span><span class="signed-name"></span>的宠物(<span id="count-span"></span>级)</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-bg-area card-button-area">
+        <a onclick="handleCollectCard()"><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button.png" alt=""/></a>
+    </div>
+</div>
+
+<footer class="text-center">
+    <p><span><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ 团队提供 </span></p>
+    <p><span> 联系我们:camproz@xingyunzh.com</span></p>
+</footer>
+
+</body>
+</html>

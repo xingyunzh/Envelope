@@ -23,53 +23,74 @@ function populateCardHtml(html, card, config){
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.themeConfig.textCandidates[card.textIndex]);
-    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝:' + card.theme.title);
+    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝福:' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     cardHtml = cardHtml.replace(theWechatConfigPlaceHolder,JSON.stringify(config));
     return cardHtml;
 }
 
-exports.getCardViewByUserId = function(req, res){
-    var actions = [];
-    actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
-    actions[1] = cardRepository.getLatestCardBySender(req.params.id);
-    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    actions[2] = wechatRepository.getConfigParams(fullUrl);
+function getCardTemplate(name){
+//    if (getCardTemplate.cache.hasOwnProperty(name)) {
+//        return q.fcall(function(){
+//            return getCardTemplate.cache[name];
+//        });
+//    }
 
-    q.all(actions).then(function(dataGroup){
-        var cardHtml = dataGroup[0];
-        var card = dataGroup[1];
-        var config = dataGroup[2];
-        
-        if(card){
-            cardHtml = populateCardHtml(cardHtml, card, config);
+    return q.nfbind(fs.readFile)(__dirname + "/../views/"+name, "utf-8").then(function(template){
+        getCardTemplate.cache[name] = template;
+        return template;
+    });
+}
+
+getCardTemplate.cache = {};
+
+exports.getCardViewByUserId = function (req, res) {
+    var card = null;
+    cardRepository.getLatestCardBySender(req.params.id).then(function (data) {
+        card = data;
+        if (!card) {
+            res.send("<h2>卡尚未创建！</h2>");
+            throw "Not created yet!";
         }
+
+        var actions = [
+            getCardTemplate(card.theme.cardTemplate),
+            wechatRepository.getConfigParams(req.protocol + '://' + req.get('host') + req.originalUrl)
+        ];
+
+        return q.all(actions);
+    }).then(function (dataGroup) {
+        var cardHtml = dataGroup[0];
+        var config = dataGroup[1];
+        cardHtml = populateCardHtml(cardHtml, card, config);
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
-    }).catch(util.responseInternalError(res, function(error){
+    }).catch(util.responseInternalError(res), function(error){
+        console.log(JSON.stringify(error));
         log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
-    }));
+    });
 };
 
 exports.getCardViewByCardId = function(req, res){
-
-    var actions = [];
-    actions[0] = q.nfbind(fs.readFile)(__dirname + "/../views/card.html", "utf-8");
-    actions[1] = cardRepository.getCardById(req.params.id);
-
-    q.all(actions).then(function(dataGroup){
-        var cardHtml = dataGroup[0];
-        var card = dataGroup[1];
-        if(card){
-            cardHtml = populateCardHtml(cardHtml, card);
+    var card = null;
+    cardRepository.getCardById(req.params.id).then(function(data){
+        card = data;
+        if (!data) {
+            res.send("<h2>卡尚未创建！</h2>");
+            throw "Card does not exist!";
         }
+
+        return getCardTemplate(card.theme.cardTemplate);
+    }).then(function(template){
+        var cardHtml = template;
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
-    }).catch(util.responseInternalError(res, function(error){
+    }).catch(util.responseInternalError(res), function(error){
+        console.log(JSON.stringify(error));
         log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
-    }));
+    });
 };
 
 exports.getCardByUserId = function(req, res){
@@ -100,6 +121,11 @@ exports.getCardById = function(req, res){
 };
 
 exports.collectCard = function(req, res){
+    if(req.body.me == req.body.sender){
+        res.json(util.wrapBody("can not collect yourself card", "E"));
+        return;
+    }
+
     cardRepository.getLatestCardBySender(req.body.sender).then(function(card){
         return cardRepository.createCollectedCard({collector:req.body.me, card:card});
     }).then(function(collectedCard){
