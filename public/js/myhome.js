@@ -94,7 +94,7 @@ function getUserInfoAndCollect(code,senderId){
                 me:theUser._id
             }).then(function(collect){
                 alert("已收藏 id:"+collect._id);
-                //window.location.reload();
+                window.location.reload();
             });
         }else{
             return true;
@@ -156,9 +156,10 @@ function configMyHomeWithThemeConfig(){
 //event
 function createCard(){
     if (theCurrentCard && theCurrentCard.theme._id == theThemes[theThemeIndex]._id
-        && theCurrentCard.text == theThemeConfig.textCandidates[theTextIndex]) {
-        window.location.href = '/envelope/api/card/view/user/' + theUser._id;
+        && theCurrentCard.textIndex == theThemeConfig.textCandidates[theTextIndex]) {
+//        window.location.href = '/envelope/api/card/view/user/' + theUser._id;
 
+        document.getElementById('preview-iframe').contentWindow.location.reload(true);
         return;
     }
 
@@ -172,7 +173,8 @@ function createCard(){
         textIndex:theTextIndex,
         logoIndex:logoIndex
     }).then(function(data){
-        window.location.href = '/envelope/api/card/view/user/'+theUser._id;
+//        window.location.href = '/envelope/api/card/view/user/'+theUser._id;
+        document.getElementById('preview-iframe').contentWindow.location.reload(true);
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });

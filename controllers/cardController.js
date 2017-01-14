@@ -65,9 +65,10 @@ exports.getCardViewByUserId = function (req, res) {
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
-    }).catch(util.responseInternalError(res, function (error) {
+    }).catch(function (error) {
         log.add(log.ActionType.Error, JSON.stringify({url: req.url, err: error}), req);
-    }));
+        res.send("<h2>卡尚未创建！</h2>");
+    });
 };
 
 exports.getCardViewByCardId = function(req, res){
