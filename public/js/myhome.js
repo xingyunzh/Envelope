@@ -234,3 +234,7 @@ function handleTextClick(){
 
     configMyHomeWithThemeConfig();
 }
+
+function handleSend(){
+    window.location.href = '/envelope/api/card/view/user/'+theUser._id;
+}

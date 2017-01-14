@@ -49,7 +49,8 @@ exports.getCardViewByUserId = function (req, res) {
     cardRepository.getLatestCardBySender(req.params.id).then(function (data) {
         card = data;
         if (!card) {
-            throw "Card does not exist!";
+            res.send("<h2>卡尚未创建！</h2>");
+            throw "Not created yet!";
         }
 
         var actions = [
@@ -65,9 +66,9 @@ exports.getCardViewByUserId = function (req, res) {
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
-    }).catch(function (error) {
-        log.add(log.ActionType.Error, JSON.stringify({url: req.url, err: error}), req);
-        res.send("<h2>卡尚未创建！</h2>");
+    }).catch(util.responseInternalError(res), function(error){
+        console.log(JSON.stringify(error));
+        log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
     });
 };
 
@@ -76,6 +77,7 @@ exports.getCardViewByCardId = function(req, res){
     cardRepository.getCardById(req.params.id).then(function(data){
         card = data;
         if (!data) {
+            res.send("<h2>卡尚未创建！</h2>");
             throw "Card does not exist!";
         }
 
@@ -85,9 +87,10 @@ exports.getCardViewByCardId = function(req, res){
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
-    }).catch(util.responseInternalError(res, function(error){
+    }).catch(util.responseInternalError(res), function(error){
+        console.log(JSON.stringify(error));
         log.add(log.ActionType.Error, JSON.stringify({url:req.url, err:error}), req);
-    }));
+    });
 };
 
 exports.getCardByUserId = function(req, res){
