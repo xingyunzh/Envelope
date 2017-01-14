@@ -136,6 +136,7 @@ function doCollectCard(){
         alert("收藏成功！");
         $('.card-status-bar').show();
         $('.card-status-bar span').text("成功收藏此卡！");
+        window.location.href = '/envelope/myhome.html';
     }).fail(function(error){
         alert("Server Error" + JSON.stringify(error));
     });
