@@ -112,9 +112,7 @@ function getIfCollected() {
 
 function handleCollectCard(){
     if(theUser){
-        if(theSpecificSenderData.theCard.sender._id == theUser._id){
-            window.location.href = '/envelope/myhome.html';
-        }
+        window.location.href = '/envelope/myhome.html';
     }
     else {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
