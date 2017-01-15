@@ -23,7 +23,7 @@ function populateCardHtml(html, card, config){
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.themeConfig.textCandidates[card.textIndex]);
-    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝福:' + card.theme.title);
+    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + ':' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     cardHtml = cardHtml.replace(theWechatConfigPlaceHolder,JSON.stringify(config));
     return cardHtml;
@@ -84,6 +84,7 @@ exports.getCardViewByCardId = function(req, res){
         return getCardTemplate(card.theme.cardTemplate);
     }).then(function(template){
         var cardHtml = template;
+        cardHtml = populateCardHtml(cardHtml, card);
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
@@ -126,8 +127,18 @@ exports.collectCard = function(req, res){
         return;
     }
 
-    cardRepository.getLatestCardBySender(req.body.sender).then(function(card){
-        return cardRepository.createCollectedCard({collector:req.body.me, card:card});
+    var latestCard = null;
+    cardRepository.getLatestCardBySender(req.body.sender).then(function(card) {
+        latestCard = card;
+        return cardRepository.isCardCollected(req.body.me, card)
+    }).then(function(isCollected){
+            if(isCollected){
+                res.json(util.wrapBody("Error:Already Collected!", "E"));
+                throw "Error:Already Collected!";
+            }
+            else {
+                return cardRepository.createCollectedCard({collector: req.body.me, card: latestCard});
+            }
     }).then(function(collectedCard){
         res.json(util.wrapBody(collectedCard));
         log.add(log.ActionType.Collect, null, req);

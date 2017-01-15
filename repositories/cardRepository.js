@@ -17,12 +17,12 @@ exports.getCardsBySender = function(user){
 };
 
 exports.getLatestCardBySender = function(user){
-    return Card.findOne({sender:user}).sort("-createDate").populate("sender theme themeConfig").exec();
+    return Card.findOne({sender:user}).sort("-createDate").populate("sender theme themeConfig").lean().exec();
 };
 
 exports.createCard = function (param) {
     param.createDate = new Date();
-    return Card.create(param);
+    return Card.create(param).lean();
 };
 
 exports.listAllCards = function(){
@@ -46,7 +46,7 @@ exports.isCardCollected = function(user, cardId){
 };
 
 exports.getCollectedCardsByUser = function(user){
-    return CollectedCard.find({collector:user}).deepPopulate('card.sender collector').sort("createDate").exec();
+    return CollectedCard.find({collector:user}).deepPopulate('card.sender collector').sort("createDate").lean().exec();
 };
 
 exports.createCollectedCard = function(param){
@@ -55,5 +55,5 @@ exports.createCollectedCard = function(param){
 };
 
 exports.listAllCollectedCards = function(){
-    return CollectedCard.find().deepPopulate('card.sender collector').sort("-createDate").exec();
+    return CollectedCard.find().deepPopulate('card.sender collector').sort("-createDate").lean().exec();
 };
