@@ -126,8 +126,16 @@ exports.collectCard = function(req, res){
         return;
     }
 
-    cardRepository.getLatestCardBySender(req.body.sender).then(function(card){
-        return cardRepository.createCollectedCard({collector:req.body.me, card:card});
+    cardRepository.getLatestCardBySender(req.body.sender).then(function(card) {
+        return cardRepository.isCardCollected(req.body.me, card)
+    }).then(function(isCollected){
+            if(isCollected){
+                res.json(util.wrapBody("Error:Already Collected!", "E"));
+                throw "Error:Already Collected!";
+            }
+            else {
+                return cardRepository.createCollectedCard({collector: req.body.me, card: card});
+            }
     }).then(function(collectedCard){
         res.json(util.wrapBody(collectedCard));
         log.add(log.ActionType.Collect, null, req);

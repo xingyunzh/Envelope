@@ -13,6 +13,7 @@ var CardThemeSchema = Schema({
     name:String,
     createDate:Date,
     cardTemplate:String,
+    imageURL:String,
 
     title:String
 });
