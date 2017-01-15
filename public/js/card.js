@@ -76,7 +76,7 @@ function wechatInit(){
         });
 
         wx.onMenuShareAppMessage({
-            title:card.sender.nickname + '祝:' + card.theme.title,
+            title:card.sender.nickname + ':' + card.theme.title,
             desc:card.themeConfig.textCandidates[card.textIndex],
             link:window.location.href,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
