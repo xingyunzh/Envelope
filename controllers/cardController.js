@@ -23,7 +23,7 @@ function populateCardHtml(html, card, config){
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.themeConfig.textCandidates[card.textIndex]);
-    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + '祝福:' + card.theme.title);
+    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + ':' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     cardHtml = cardHtml.replace(theWechatConfigPlaceHolder,JSON.stringify(config));
     return cardHtml;

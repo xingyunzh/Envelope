@@ -65,7 +65,7 @@ function wechatInit(){
     wx.ready(function(){
         console.log('ready');
         wx.onMenuShareTimeline({
-            title:card.sender.nickname + '祝:' + card.theme.title,
+            title:card.sender.nickname + ':' + card.theme.title,
             link:window.location.href,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             success:function(){
