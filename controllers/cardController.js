@@ -84,6 +84,7 @@ exports.getCardViewByCardId = function(req, res){
         return getCardTemplate(card.theme.cardTemplate);
     }).then(function(template){
         var cardHtml = template;
+        cardHtml = populateCardHtml(cardHtml, card);
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
@@ -126,7 +127,9 @@ exports.collectCard = function(req, res){
         return;
     }
 
+    var latestCard = null;
     cardRepository.getLatestCardBySender(req.body.sender).then(function(card) {
+        latestCard = card;
         return cardRepository.isCardCollected(req.body.me, card)
     }).then(function(isCollected){
             if(isCollected){
@@ -134,7 +137,7 @@ exports.collectCard = function(req, res){
                 throw "Error:Already Collected!";
             }
             else {
-                return cardRepository.createCollectedCard({collector: req.body.me, card: card});
+                return cardRepository.createCollectedCard({collector: req.body.me, card: latestCard});
             }
     }).then(function(collectedCard){
         res.json(util.wrapBody(collectedCard));

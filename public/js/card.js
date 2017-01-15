@@ -48,6 +48,9 @@ $(function(){
 });
 
 function wechatInit(){
+    if(!wechatConfig){
+        return;
+    }
     var card = theSpecificSenderData.theCard;
 
     wx.config({
@@ -110,7 +113,7 @@ function getIfCollected() {
     return httpHelper().authRequest('GET', '/envelope/api/collect/exist?me='+theUser._id+'&card='+theSpecificSenderData.theCard._id);
 }
 
-function handleCollectCard(){
+function handleMyCard(){
     if(theUser){
         window.location.href = '/envelope/myhome.html';
     }
@@ -131,7 +134,6 @@ function doCollectCard(){
         alert("收藏成功！");
         $('.card-status-bar').show();
         $('.card-status-bar span').text("成功收藏此卡！");
-        window.location.href = '/envelope/myhome.html';
     }).fail(function(error){
         alert("Server Error" + JSON.stringify(error));
     });
