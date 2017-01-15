@@ -62,12 +62,15 @@
                 <img id="sprite-img" src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet05.png" alt=""/>
             </div>
             <div class="text-center">
-                <span><span class="signed-name"></span>的宠物(<span id="count-span"></span>级)</span>
+                <span><span id="count-span"></span>级</span>
             </div>
         </div>
     </div>
     <div class="card-bg-area card-button-area">
-        <a onclick="handleCollectCard()"><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button.png" alt=""/></a>
+        <a onclick="handleCollectCard()">
+            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button.png" alt=""/>
+            <span id="on-button-text-span">我也来发卡</span>
+        </a>
     </div>
 </div>
 

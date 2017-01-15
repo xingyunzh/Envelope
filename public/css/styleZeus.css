@@ -94,7 +94,31 @@ footer img {
     top:85%;
 }
 
-.card-button-area img {
-    height: 44px;
+.card-button-area a {
+    display: block;
+    position: relative;
     margin:0px auto;
+    width: 210px;
+}
+
+.card-button-area img {
+    position: relative;
+    display: inline-block;
+    height: 44px;
+}
+
+#on-button-text-span {
+    display: inline-block;
+    position: relative;
+    line-height: 44px;
+    top: -44px;
+
+    text-align: center;
+    color: black;
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+    -webkit-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+    -moz-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
 }
