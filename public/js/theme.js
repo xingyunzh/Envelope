@@ -10,8 +10,12 @@ $(function(){
 
 });
 
+function getAdminToken(){
+    return $("#admin-token-input").val();
+}
+
 function refreshThemes() {
-    httpHelper().authRequest("GET", "./console/themes").then(function (data) {
+    httpHelper().adminRequest(getAdminToken(),"GET", "./console/themes").then(function (data) {
         var themes = data;
         _.forEach(themes, function (theme) {
             $('#theme-panel-ul').append(cellForTheme(theme));
@@ -102,7 +106,7 @@ function onSubmitButton(){
         url = './api/theme/id/'+id;
     }
 
-    httpHelper().authRequest("POST", url, data).then(function(res){
+    httpHelper().adminRequest(getAdminToken(),"POST", url, data).then(function(res){
         location.reload();
     }).fail(function(error){
         alert(error);
@@ -112,7 +116,7 @@ function onSubmitButton(){
 function deleteTheme(theme){
     var id = theme._id;
     if(id){
-        httpHelper().authRequest("GET", './api/theme/delete/'+id).then(function(res){
+        httpHelper().adminRequest(getAdminToken(),"GET", './api/theme/delete/'+id).then(function(res){
             location.reload();
         }).fail(function(error){
             alert(error);

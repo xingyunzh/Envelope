@@ -50,23 +50,23 @@ module.exports = function(app, contextRoot) {
     rootRouter.get('/api/card/id/:id', cardController.getCardById);
 
     //id card
-    rootRouter.get('/api/card/delete/:id', cardController.deleteCardById);
+    rootRouter.get('/api/card/delete/:id', auth.adminAuthenticate, cardController.deleteCardById);
 
     // body
     // category:String
     // textCandidates:[String],
     // return themeConfig entity
-    rootRouter.post('/api/tconfig/create', themeController.createThemeConfig);
+    rootRouter.post('/api/tconfig/create', auth.adminAuthenticate, themeController.createThemeConfig);
 
     // params id - theme config id
     // body: config entity
     // return config enetity
-    rootRouter.post('/api/tconfig/id/:id', themeController.updateThemeConfig);
+    rootRouter.post('/api/tconfig/id/:id', auth.adminAuthenticate, themeController.updateThemeConfig);
 
     //return theme entity
     rootRouter.get('/api/tconfig/current', themeController.getThemeConfig);
 
-    rootRouter.get('/api/tconfig/delete/:id', themeController.deleteThemeConfig);
+    rootRouter.get('/api/tconfig/delete/:id', auth.adminAuthenticate, themeController.deleteThemeConfig);
 
     //body
     // category:String
@@ -76,17 +76,17 @@ module.exports = function(app, contextRoot) {
     //     headiconCSS:String,
     //     spriteCSS:String
     //return - theme entity
-    rootRouter.post('/api/theme/create', themeController.createTheme);
+    rootRouter.post('/api/theme/create', auth.adminAuthenticate, themeController.createTheme);
 
     //params id - theme id
     //body: content (theme entity)
     //return - theme entity
-    rootRouter.post('/api/theme/id/:id', themeController.updateTheme);
+    rootRouter.post('/api/theme/id/:id', auth.adminAuthenticate, themeController.updateTheme);
 
     //id - theme id
     //return theme entity
     rootRouter.get('/api/theme/id/:id', themeController.getThemeById);
-    rootRouter.get('/api/theme/delete/:id', themeController.deleteTheme);
+    rootRouter.get('/api/theme/delete/:id', auth.adminAuthenticate, themeController.deleteTheme);
 
     //get all candidates themes
     //return [theme entity]
@@ -96,14 +96,14 @@ module.exports = function(app, contextRoot) {
     //sender:id
     //me:id
     //return collectCard entity
-    rootRouter.post('/api/collect', cardController.collectCard);
+    rootRouter.post('/api/collect', auth.authenticate, cardController.collectCard);
 
     //param id - user id
     //return [cards entity]
     rootRouter.get('/api/collect/cards/:id', cardController.getCollectedCardsByUser);
 
     // id - CollectedCard
-    rootRouter.get('/api/collect/delete/:id', cardController.deleteCollectedCardById);
+    rootRouter.get('/api/collect/delete/:id', auth.adminAuthenticate, cardController.deleteCollectedCardById);
 
     //param id - user id
     //return count:Integer
@@ -119,14 +119,13 @@ module.exports = function(app, contextRoot) {
 
 
     //logger
-    rootRouter.get('/api/log/count/action/:action', logController.countByActionWithResourceMatch);
-    rootRouter.get('/api/log/count/user/:id', logController.countByUser);
-    rootRouter.get('/api/log/count/resource/:reg', logController.countByResourceMatch);
-    rootRouter.get('/api/log/recent/:limit', logController.getRecent);
-    rootRouter.get('/api/log/error/:limit', logController.getErrors);
+    rootRouter.get('/api/log/count/action/:action', auth.adminAuthenticate, logController.countByActionWithResourceMatch);
+    rootRouter.get('/api/log/count/user/:id', auth.adminAuthenticate, logController.countByUser);
+    rootRouter.get('/api/log/count/resource/:reg', auth.adminAuthenticate, logController.countByResourceMatch);
+    rootRouter.get('/api/log/recent/:limit', auth.adminAuthenticate, logController.getRecent);
+    rootRouter.get('/api/log/error/:limit',auth.adminAuthenticate, logController.getErrors);
 
     //for test only
-    rootRouter.post('/api/log/count/create', logController.create);
     rootRouter.get('/test/cards', cardController.listAllCards);
     rootRouter.get('/test/collect/cards', cardController.listAllCollectedCards);
 

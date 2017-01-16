@@ -47,7 +47,6 @@ module.exports.pass = function(req, res, next){
 };
 
 module.exports.authenticate = function(req, res, next) {
-	var tokenString = req.get('x-access-token');
 	if (!req.token) {
 		res.send(util.wrapBody('Invalid token','E'));
 	}else {
@@ -66,4 +65,23 @@ module.exports.authenticate = function(req, res, next) {
             next();
         }
 	}
+};
+
+module.exports.adminAuthenticate = function(req, res, next){
+    var adminToken = req.get('x-admin-token');
+    if(!adminToken){
+        res.send(util.wrapBody('Not Authorized!', 'E'));
+    }
+    else {
+        scr.getAdminToken().then(function(token){
+            if(token == adminToken){
+                next();
+            }
+            else {
+                res.send(util.wrapBody('Not Authorized!', 'E'));
+            }
+        }).catch(function(error){
+            res.send(util.wrapBody('Not Authorized! error=' + error, 'E'));
+        });
+    }
 };
