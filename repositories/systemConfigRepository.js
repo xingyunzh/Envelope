@@ -29,11 +29,13 @@ exports.getMongoEnv = function(){
 };
 
 exports.getTokenSecret = function(){
+
     if ('jwt' in cacheHere) {
         return q.fcall(function(){
             return cacheHere.jwt;
         });
     }else{
+        
         return q.nfcall(fs.readFile, SystemConfigKeysFile, "utf8").then(function(data){
             cacheHere.jwt = JSON.parse(data).jwt;
             return cacheHere.jwt; 

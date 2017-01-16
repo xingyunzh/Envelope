@@ -120,7 +120,7 @@ function getThemeConfig(){
 }
 
 function getCurrentCard(){
-    if(theUser){
+    if(!!theUser){
         return httpHelper().authRequest('GET', '/envelope/api/card/user/'+theUser._id);
     }
     else {
@@ -197,24 +197,27 @@ function getQueryString(){
 }
 
 function updateCount() {
-    httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
-        .then(function (count) {
-            var level = getLevelByCount(count);
-            switch(count){
-                case 5:
+    if (!!theUser) {
+        httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
+            .then(function (count) {
+                var level = getLevelByCount(count);
+                switch(count){
+                    case 5:
 
-                case 4:
-                case 4:
-                case 2:
-                case 1:
-                case 0:
-            }
+                    case 4:
+                    case 4:
+                    case 2:
+                    case 1:
+                    case 0:
+                }
 
-            $('.requiredCardCount').html(getRequiredCardCount(count) + '张');
+                $('.requiredCardCount').html(getRequiredCardCount(count) + '张');
 
-        }).fail(function (error) {
-        console.log("Server Error" + JSON.stringify(error));
-    });
+            }).fail(function (error) {
+            console.log("Server Error" + JSON.stringify(error));
+        });
+    }
+
 }
 
 function handleThemeClick(){

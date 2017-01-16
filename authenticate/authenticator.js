@@ -9,11 +9,11 @@ module.exports.create = function(userId){
 };
 
 function generate(id){
-    return systemConfigRepository.getTokenSecret().then(function(jwt){
-        console.log('jwt',jwt);
+    return systemConfigRepository.getTokenSecret().then(function(data){
+
         return q.nfcall(jwt.sign,{
             userId:id
-        },jwt.secret,{
+        },data.secret,{
             expiresIn:60 * 60 * 24 * 45
         });
     });
@@ -22,12 +22,18 @@ function generate(id){
 module.exports.pass = function(req, res, next){
     var tokenString = req.get('x-access-token');
     if(!!tokenString){
-        jwt.verify(tokenString,getSecret(),function(err,tokenObject){
-            if (!err) {
-                req.token = tokenObject;
-            }
+        systemConfigRepository.getTokenSecret().then(function(data){
+            jwt.verify(tokenString,data.secret,function(err,tokenObject){
+                if (!err) {
+                    req.token = tokenObject;
+                }
+                next();
+            });
+
+        }).catch(function(){
             next();
         });
+
     }
     else {
         next();
