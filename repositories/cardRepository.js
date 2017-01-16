@@ -22,7 +22,7 @@ exports.getLatestCardBySender = function(user){
 
 exports.createCard = function (param) {
     param.createDate = new Date();
-    return Card.create(param).lean();
+    return Card.create(param);
 };
 
 exports.listAllCards = function(){
