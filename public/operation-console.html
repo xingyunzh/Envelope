@@ -31,9 +31,15 @@
         <tr><td>View Card by Id</td><td><span id="op-view-card-by-id-span"></span></td></tr>
         <tr><td>View MyHome</td><td><span id="op-view-myhome-span"></span></td></tr>
         <tr><td>Collect Card</td><td><span id="op-collect-card-span"></span></td></tr>
-        <tr><td>Error</td><td><a href="./api/log/error/20"><span id="op-error-span"></span></a></td></tr>
+        <tr><td>Error</td><td><a onclick="handleRecentError()"><span id="op-error-span"></span></a></td></tr>
         </tbody>
     </table>
+</div>
+
+<div class="container">
+    <div class="row">
+        <input type="text" id="admin-token-input"/>
+    </div>
 </div>
 
 <div class="container">
@@ -42,6 +48,11 @@
     </div>
 </div>
 
+<div class="container">
+    <ul id="recent-error-ul" class="list-group">
+
+    </ul>
+</div>
 
 </body>
 </html>

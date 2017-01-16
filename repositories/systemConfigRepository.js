@@ -39,4 +39,11 @@ exports.getTokenSecret = function(){
     var data = fs.readFileSync(SystemConfigKeysFile, "utf8");
     var jwt = JSON.parse(data).jwt;
     return jwt;
-}
+};
+
+exports.getAdminToken = function(){
+    return q.nfcall(fs.readFile, SystemConfigKeysFile, "utf8").then(function(data){
+        var admin = JSON.parse(data).admin;
+        return admin;
+    });
+};

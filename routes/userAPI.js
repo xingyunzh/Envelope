@@ -46,6 +46,6 @@ router.post('/profile/update/:id',authenticator.authenticate,userController.upda
 //{total:TotalNumber,ideas:[UserEntities]}
 router.get('/list',userController.listUser);
 
-router.get('/count', userController.countUser);
+router.get('/count', authenticator.adminAuthenticate, userController.countUser);
 
 module.exports = router;

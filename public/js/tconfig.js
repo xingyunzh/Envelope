@@ -6,8 +6,12 @@ $(function(){
     $("#theThemeConfigPanel").show();
 });
 
+function getAdminToken(){
+    return $("#admin-token-input").val();
+}
+
 function refreshThemeConfigs(){
-    httpHelper().authRequest('GET', './console/themeconfigs').then(function (data) {
+    httpHelper().adminRequest(getAdminToken(), 'GET', './console/themeconfigs').then(function (data) {
         var configs = data;
         _.forEach(configs, function (config) {
             $('#theme-config-panel-ul').append(cellForConfig(config));
@@ -49,7 +53,7 @@ function onSubmitButton(){
         logoCandidates:logos
     };
 
-    httpHelper().authRequest("POST", './api/tconfig/create', params).then(function(data){
+    httpHelper().adminRequest(getAdminToken(),"POST", './api/tconfig/create', params).then(function(data){
         location.reload();
     }).fail(function(error){
         alert(error);
@@ -62,7 +66,7 @@ function onResetButton(){
 }
 
 function deleteConfig(config){
-    httpHelper().authRequest("GET", './api/tconfig/delete/'+config._id).then(function(data){
+    httpHelper().adminRequest(getAdminToken(),"GET", './api/tconfig/delete/'+config._id).then(function(data){
         location.reload();
     }).fail(function(error){
         alert(error);
