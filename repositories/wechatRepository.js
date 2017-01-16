@@ -10,18 +10,22 @@ var cacheFilePath = '/root/keys/cache.json';
 exports.getConfigParams = function(url){
 	return getJSApiTicket().then(function(ticket){
 
-		var appId = systemConfigRepository.getWechatCredentials().camproz.appId;
-		var nonceStr = stringHelper.randomString(10,'all');
-		var timeStamp = Math.floor(new Date() / 1000);
-		var string1 = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timeStamp + "&url=" + url;
-		var signature = generateSignature(string1);
+		return systemConfigRepository.getWechatCredentials().then(function(wechat){
+			
+			var appId = wechat.camproz.appId;
+			var nonceStr = stringHelper.randomString(10,'all');
+			var timeStamp = Math.floor(new Date() / 1000);
+			var string1 = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timeStamp + "&url=" + url;
+			var signature = generateSignature(string1);
 
-		return {
-			appId:appId,
-			nonceStr:nonceStr,
-			timestamp:timeStamp,
-			signature:signature
-		};
+			return {
+				appId:appId,
+				nonceStr:nonceStr,
+				timestamp:timeStamp,
+				signature:signature
+			};
+		});
+
 	});
 	
 };

@@ -1,34 +1,21 @@
 
 var jwt = require('jsonwebtoken');
 var util = require('../util/util');
-var scr = require('../repositories/systemConfigRepository');
+var q = require('q');
+var systemConfigRepository = require('../repositories/systemConfigRepository');
 
-var secret = null;
-
-function getSecret(){
-	if (secret) {
-		return secret;
-	}else{
-		secret = scr.getTokenSecret().secret;
-		return secret;
-	}
-
-}
-
-// module.exports.verify = function(tokenString,callback){
-// 	jwt.verify(tokenString,getSecret(),callback);
-// };
-
-module.exports.create = function(userId,callback){
-	generate(userId,callback);
+module.exports.create = function(userId){
+	return generate(userId);
 };
 
-function generate(id,callback){
-	jwt.sign({
-		userId:id
-	},getSecret(),{
-		expiresIn:60 * 60 * 24 * 45
-	},callback);
+function generate(id){
+    return systemConfigRepository.getTokenSecret().then(function(jwt){
+        return q.nfcall(jwt.sign,{
+            userId:id
+        },jwt.secret,{
+            expiresIn:60 * 60 * 24 * 45
+        });
+    });
 }
 
 module.exports.pass = function(req, res, next){
@@ -51,14 +38,12 @@ module.exports.authenticate = function(req, res, next) {
 		res.send(util.wrapBody('Invalid token','E'));
 	}else {
         if (req.token.exp - Math.floor(Date.now() / 1000) < 6 * 60 * 60) {
-            generate(req.token.userId, function (err, newTokenString) {
-                if (err) {
-                    console.log(err);
-                    res.send(util.wrapBody('Internal Error', 'E'));
-                } else {
-                    res.setHeader('set-token', newTokenString);
-                    next();
-                }
+            generate(req.token.userId).then(function(newTokenString){
+                res.setHeader('set-token', newTokenString);
+                next();
+            }).catch(function(err){
+                console.log(err);
+                res.send(util.wrapBody('Internal Error', 'E'));
             });
 
         } else {
