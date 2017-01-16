@@ -10,6 +10,7 @@ module.exports.create = function(userId){
 
 function generate(id){
     return systemConfigRepository.getTokenSecret().then(function(jwt){
+        console.log('jwt',jwt);
         return q.nfcall(jwt.sign,{
             userId:id
         },jwt.secret,{

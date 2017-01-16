@@ -11,7 +11,7 @@ exports.getConfigParams = function(url){
 	return getJSApiTicket().then(function(ticket){
 
 		return systemConfigRepository.getWechatCredentials().then(function(wechat){
-			
+			console.log('wechat',wechat);
 			var appId = wechat.camproz.appId;
 			var nonceStr = stringHelper.randomString(10,'all');
 			var timeStamp = Math.floor(new Date() / 1000);
