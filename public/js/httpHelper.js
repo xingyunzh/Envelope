@@ -41,11 +41,6 @@ httpHelper.adminRequest = function(token, method, url, params){
             "x-admin-token":token
         }
     }).then(function (data, textMessage, xhr) {
-        var token = xhr.getResponseHeader("set-token");
-        if (!!token) {
-            localStorage.token = token;
-        }
-
         if(data.status == 'S'){
             return data.body;
         }
