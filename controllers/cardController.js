@@ -81,10 +81,16 @@ exports.getCardViewByCardId = function(req, res){
             throw "Card does not exist!";
         }
 
-        return getCardTemplate(card.theme.cardTemplate);
-    }).then(function(template){
-        var cardHtml = template;
-        cardHtml = populateCardHtml(cardHtml, card);
+        var actions = [
+            getCardTemplate(card.theme.cardTemplate),
+            wechatRepository.getConfigParams(req.protocol + '://' + req.get('host') + req.originalUrl)
+        ];
+
+        return q.all(actions);
+    }).then(function(dataGroup){
+        var cardHtml = dataGroup[0];
+        var config = dataGroup[1];
+        cardHtml = populateCardHtml(cardHtml, card, config);
 
         log.add(log.ActionType.View, req.url, req);
         res.send(cardHtml);
