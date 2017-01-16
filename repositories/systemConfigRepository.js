@@ -9,7 +9,7 @@ var SystemConfigKeysFile = "/root/keys/envelopeKeys.json";
 
 exports.getOSSConfig = function(){
     var deferred = q.defer();
-    fs.readFile("SystemConfigKeysFile", "utf8", function(err, data){
+    fs.readFile(SystemConfigKeysFile, "utf8", function(err, data){
         if (err) {
             deferred.reject(err);
         }
