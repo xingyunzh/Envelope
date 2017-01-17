@@ -14,11 +14,99 @@
     <script src="lib/lodash/lodash.js"></script>
 
     <script src="js/httpHelper.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script src="js/myhome.js"></script>
 </head>
 <body>
 <div class="container text-center">
     <h2><span id="nickname-span"></span>的菠萝卡</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="grow-progress-block width-container center-block">
+            <div class="grow-progress-image-wrapper">
+                <div id="growProgressPhaseAlpha" class="grow-progress-image">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-hyphen-wrapper">
+                <div class="grow-progress-hyphen">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-image-wrapper">
+                <div id="growProgressPhaseBeta" class="grow-progress-image">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-hyphen-wrapper">
+                <div class="grow-progress-hyphen">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-image-wrapper">
+                <div id="growProgressPhaseGamma" class="grow-progress-image">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-hyphen-wrapper">
+                <div class="grow-progress-hyphen">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-image-wrapper">
+                <div id="growProgressPhaseDelta" class="grow-progress-image">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-hyphen-wrapper">
+                <div class="grow-progress-hyphen">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-image-wrapper">
+                <div id="growProgressPhaseEpsilon" class="grow-progress-image">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-hyphen-wrapper">
+                <div class="grow-progress-hyphen">
+                    <img src="">
+                </div>
+            </div>
+            <div class="grow-progress-image-wrapper">
+                <div id="growProgressPhaseZeta" class="grow-progress-image">
+                    <img src="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="width-container center-block">
+            金鸡升级还需收集的卡片:
+            <div class="requiredCardCount">
+                <img src="" alt="?">
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="width-container center-block">
+            <span>点击更换祝福语：</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="wish-text-container center-block text-center">
+            <a onclick="handleTextClick()" id="text-a">
+                鸡年大吉,鸿运当头!
+            </a>
+        </div>
+    </div>
+
 </div>
 
 <div class="container">
@@ -33,39 +121,6 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <span>选择祝福文字：</span>
-    </div>
-    <div class="row">
-        <div class="list-group width-container center-block text-center">
-            <a class="list-group-item" onclick="handleTextClick()" id="text-a">
-                鸡年大吉,鸿运当头!
-            </a>
-        </div>
-    </div>
-    <div class="row">
-        <span>我的祝福：</span>
-    </div>
-    <div class="row">
-        <iframe frameborder="1" id="preview-iframe">
-        </iframe>
-    </div>
-    <div class="row text-center">
-        <button class="btn btn-primary" onclick="handleSend()">分享发送</button>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        我的收藏：
-    </div>
-
-    <div class="row">
-        <div class="list-group width-container center-block" id="collects-list-div">
-        </div>
-    </div>
-</div>
 
 <footer class="text-center">
     <p><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ团队提供 </p>

@@ -22,8 +22,6 @@ $(function(){
        $('#nickname-span').text(theUser.nickname);
        $('#nickname-span').show();
        $('.login-button').hide();
-
-        $('#preview-iframe').attr("src", '/envelope/api/card/view/user/'+theUser._id);
    }
    else {
        delete localStorage.user;
@@ -73,7 +71,7 @@ $(function(){
         alert("Server Error:"+JSON.stringify(error));
     });
 
-    getCollects();
+    updateCount();
 });
 
 function getUserInfoAndCollect(code,senderId){
@@ -121,23 +119,8 @@ function getThemeConfig(){
     });
 }
 
-function getCollects(){
-    if(theUser){
-        httpHelper().authRequest('GET', '/envelope/api/collect/cards/'+theUser._id).then(function(collects){
-            $('#count-span').text(""+collects.length);
-
-            _.forEach(collects, function(collect){
-                $('#collects-list-div').append('<a class="list-group-item" href="/envelope/api/card/view/id/'+collect.card._id+'"> <i>From: </i>'+collect.card.sender.nickname+'</a>');
-            });
-
-        }).fail(function(error){
-            alert("Server Error:"+JSON.stringify(error));
-        });
-    }
-}
-
 function getCurrentCard(){
-    if(theUser){
+    if(!!theUser){
         return httpHelper().authRequest('GET', '/envelope/api/card/user/'+theUser._id);
     }
     else {
@@ -173,8 +156,8 @@ function createCard(){
         textIndex:theTextIndex,
         logoIndex:logoIndex
     }).then(function(data){
-//        window.location.href = '/envelope/api/card/view/user/'+theUser._id;
-        document.getElementById('preview-iframe').contentWindow.location.reload(true);
+        window.location.href = '/envelope/api/card/view/user/'+theUser._id;
+//        document.getElementById('preview-iframe').contentWindow.location.reload(true);
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -211,6 +194,30 @@ function getQueryString(){
     } 
 
     return query_string;
+}
+
+function updateCount() {
+    if (!!theUser) {
+        httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
+            .then(function (count) {
+                var level = getLevelByCount(count);
+                switch(count){
+                    case 5:
+
+                    case 4:
+                    case 4:
+                    case 2:
+                    case 1:
+                    case 0:
+                }
+
+                $('.requiredCardCount').html(getRequiredCardCount(count) + '张');
+
+            }).fail(function (error) {
+            console.log("Server Error" + JSON.stringify(error));
+        });
+    }
+
 }
 
 function handleThemeClick(){
