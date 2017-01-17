@@ -1,9 +1,14 @@
 .card-status-bar {
-    height:20px;
-    font-size:1.25rem;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height:1.1rem;
+    width: 100%;
+    font-size:1rem;
     color: #d07b2f;
-    line-height: 20px;
-    background-color: #a02c1e;
+    line-height: 1.1rem;
+    background-color: transparent;
+    z-index: 99;
 }
 
 #bg-img {
