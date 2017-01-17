@@ -65,6 +65,12 @@ div.left-right {
 }
 
 #master-img {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
+
     z-index:90;
 }
 
