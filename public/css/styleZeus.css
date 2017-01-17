@@ -1,8 +1,9 @@
 .card-status-bar {
     height:20px;
     font-size:1.25rem;
-    color: #808080;
+    color: #d07b2f;
     line-height: 20px;
+    background-color: #a02c1e;
 }
 
 #bg-img {
@@ -126,7 +127,7 @@
 }
 
 .pet-desc-area {
-    margin-top: -20%;
+    margin-top: -8%;
 }
 
 .card-button-area a {
