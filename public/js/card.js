@@ -24,7 +24,7 @@ $(function(){
     $('#userIcon-img').attr('src', userImage);
     $('.wx_pic>img').attr('src', theSpecificSenderData.theCard.themeConfig.logoCandidates[theSpecificSenderData.theCard.logoIndex]);
 
-    if(theUser){
+    if(!!theUser){
         if(theUser._id == theSpecificSenderData.theCard.sender._id){
             //view my own card
             $('.card-status-bar').hide();
@@ -114,7 +114,7 @@ function getIfCollected() {
 }
 
 function handleMyCard(){
-    if(theUser){
+    if(!!theUser){
         window.location.href = '/envelope/myhome.html';
     }
     else {

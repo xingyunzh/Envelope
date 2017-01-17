@@ -148,18 +148,11 @@ function login(req,res,type){
 			return null;
 		}
 
-		var deferred = q.defer();
-
-		authenticator.create(user._id,function(err,newToken){
-			if (err) {
-				deferred.reject(err);
-			}else{
-				res.setHeader('set-token',newToken);
-				deferred.resolve(user);
-			}				
+		return authenticator.create(user._id).then(function(newToken){
+			res.setHeader('set-token',newToken);
+			return user;			
 		});
 
-		return deferred.promise;
 	}).then(function sendResponse(user){
 		
 		var responseBody = {
@@ -178,31 +171,3 @@ function login(req,res,type){
 	});
 
 }
-
-// function importProfile(user){
-
-// 	var imageName = stringHelper.randomString(10,['lower','digit']);
-
-// 	imageName = globalNameForFile(imageName,user);
-
-// 	return imageRepository
-// 	.getFromUrl(imageName,user.headImageUrl)
-// 	.then(function(tempPath){
-// 		return imageRepository.putToOSS(imageName,tempPath);
-// 	}).then(function(res){
-		
-// 		var newUser = {
-// 			uid:user._id,
-// 			headImageUrl:res.url
-// 		};
-
-// 		if (!!user.nickname) {
-// 			newUser.nickname = user.nickname;
-// 		} else {
-// 			newUser.nickname = '新用户' + stringHelper.generate(4,'all');
-// 		}
-
-// 		return userRepository.create(newUser);
-// 	});
-
-// }
