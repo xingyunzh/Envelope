@@ -73,7 +73,7 @@ function getJSApiTicket(){
 			
 		}else{
 
-			return jsApiTicketCache.jsApiTicket;
+			return jsApiTicketCache.ticket;
 		}
 	});
 
