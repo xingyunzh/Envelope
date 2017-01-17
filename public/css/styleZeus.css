@@ -18,6 +18,35 @@ footer img {
     line-height: 20px;
 }
 
+.bg2 {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    z-index : 2;
+    max-height: 1739px;
+}
+
+.bg1 {
+    float: left;
+}
+
+.bg3 {
+    float: right;
+}
+
+div.left-right {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    z-index: 80;
+}
+
+#bg-pure-color-div {
+    background-color: red;
+}
+
 .card-area{
     position: relative;
     padding: 0px; !important
@@ -33,6 +62,10 @@ footer img {
     left: 0px;
     top:0px;
     width: 100%;
+}
+
+#master-img {
+    z-index:90;
 }
 
 .card-pet-area{
