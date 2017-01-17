@@ -67,37 +67,35 @@ function wechatInit(){
 
     wx.ready(function(){
         console.log('ready');
+        wx.onMenuShareTimeline({
+            title:card.sender.nickname + ':' + card.theme.title,
+            link:window.location.href,
+            imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
+            success:function(){
+                console.log('分享成功');
+            },cancel:function(){
+                console.log('取消分享');
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title:card.sender.nickname + ':' + card.theme.title,
+            desc:card.themeConfig.textCandidates[card.textIndex],
+            link:window.location.href,
+            imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
+            // type:'link',
+            // dataUrl:null,
+            success:function(){
+                console.log('分享成功');
+            },cancel:function(){
+                console.log('取消分享');
+            }
+        });
     });
 
     wx.error(function(res){
         console.log('error',res);
     });
-
-    wx.onMenuShareTimeline({
-        title:card.sender.nickname + ':' + card.theme.title,
-        link:window.location.href,
-        imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
-        success:function(){
-            console.log('分享成功');
-        },cancel:function(){
-            console.log('取消分享');
-        }
-    });
-
-    wx.onMenuShareAppMessage({
-        title:card.sender.nickname + ':' + card.theme.title,
-        desc:card.themeConfig.textCandidates[card.textIndex],
-        link:window.location.href,
-        imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
-        // type:'link',
-        // dataUrl:null,
-        success:function(){
-            console.log('分享成功');
-        },cancel:function(){
-            console.log('取消分享');
-        }
-    });
-
 }
 
 function updateCount() {
