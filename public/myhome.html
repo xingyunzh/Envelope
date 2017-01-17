@@ -18,59 +18,49 @@
     <script src="js/myhome.js"></script>
 </head>
 <body>
-
-<div class="">
-    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg.jpg" alt="" id="bg-img"/>
     
-    <div class="container home-area">
-        <div class="row">
-            
-            <div class="grow-progress-block">
-                <img src="">
-            </div>
-        </div>
+<div class="home-area">
+    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg.jpg" alt="" id="bg-img"/>
 
-        <div class="row">
-            <div class="width-container center-block">
-                金鸡升级还需收集的卡片:
-                <div class="requiredCardCount">
-                    <img src="" alt="?">
-                </div>
-            </div>
-            
+    <div class="card-bg-area card-progress-area">
+        
+        <div class="grow-progress-block">
+            <img src="">
         </div>
+        <span>您的金鸡升级还需收到<span id="requiredCardCount"></span>张卡片</span>
+    </div>
 
-        <div class="row">
-            <div class="width-container center-block">
-                <span>点击更换祝福语：</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="wish-text-container center-block text-center">
-                <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/box_2.png" id="text-box-img" alt=""/>
-                <a onclick="handleTextClick()" id="text-a">
-                    鸡年大吉,鸿运当头!
-                </a>
-            </div>
-        </div>
+    <div class="card-bg-area card-message-area">
+        <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/box_2.png" id="text-box-img" alt=""/>
+        <span id="clickToChangeText">点击更换祝福语：</span>
+        <a onclick="handleTextClick()" id="text-a">
+            鸡年大吉,鸿运当头!
+        </a>
+    </div>
 
-        <div class="row">
-            <div class="width-container center-block">
-                <div class="pull-right user-panel">
-                    <button class="btn btn-primary login-button">测试登录</button>
-                    <button class="btn btn-primary create-button" onclick="createCard()">生成卡片</button>
-                    <button class="btn btn-default logout-button" onclick="logout()">测试退出登录</button>
-                </div>
+    <div class="card-bg-area card-create-button-area">
+        <a onclick="createCard()">
+            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png" class="img-responsive" style="visibility: hidden" alt=""/>
+            <div class="on-button-text-area">
+                <span id="on-button-text-span">预览卡片</span>
             </div>
-        </div>
+        </a>
+    </div>
 
-        <footer class="text-center">
-            <p><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ团队提供 </p>
-            <p> 联系我们:camproz@xingyunzh.com</p>
-        </footer>
+    <div class="card-bg-area card-collection-button-area">
+        <a onclick="goCollection()">
+            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png" class="img-responsive" style="visibility: hidden" alt=""/>
+            <div class="on-button-text-area">
+                <span id="on-button-text-span">查看收到的卡片</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="card-bg-area card-copy-right-area">
+        <p class="copy-right-team"><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png" alt="Camproz" class="img-responsive">CamproZ 团队提供</p>
+        <p class="copy-right-contact"><span>联系我们: <a href="mailto:camproz@xingyunzh.com">camproz@xingyunzh.com</a> </span>|<span> ©2017 星云智慧</span></p>
     </div>
 </div>
-
 
 
 </body>

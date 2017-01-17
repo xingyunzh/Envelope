@@ -32,7 +32,7 @@ body{
 }
 
 .home-area{
-    position: absolute;
+    position: relative;
     top:0;
     left: 0;
     width: 100%;
@@ -42,16 +42,19 @@ body{
     width: 100%;
 }
 
-.container{
-    z-index: 999;
+.card-bg-area{
+    display: block;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
 }
 
-.chicken img {
-    padding: 10px;
-}
-
-.user-panel {
-    margin-bottom: 10px;
+.card-button-area {
+    width:100%;
+    text-align: center;
+    top:77%;
+    z-index:80;
 }
 
 .wish-text-container {
@@ -68,10 +71,120 @@ body{
     width: 100%;
 }
 
-.requiredCardCount{
-    float:right;
+#requiredCardCount{
+
 }
 
+#clickToChangeText{
+    color: #d04239;
+    font-size: 0.5em;
+    position: absolute;
+    top: 12%;
+    left: 12%;
+}
 
+.card-message-area {
+    width: 100%;
+    top:15%;
+}
+
+.card-progress-area {
+    width: 100%;
+    top:2%;
+}
+
+.card-create-button-area {
+    width:100%;
+    text-align: center;
+    top:65%;
+    z-index:80;
+}
+
+.card-create-button-area a {
+    display: block;
+    position: relative;
+    margin:0px auto;
+    width: 90%;
+
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png");
+    background-size: 100% 100%;
+}
+
+.card-collection-button-area {
+    width:100%;
+    text-align: center;
+    top:75%;
+    z-index:80;
+}
+
+.card-create-button-area a.active {
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
+    background-size: 100% 100%;
+}
+
+.card-collection-button-area a {
+    display: block;
+    position: relative;
+    margin:0px auto;
+    width: 90%;
+
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
+    background-size: 100% 100%;
+}
+
+.card-collection-button-area a.active {
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
+    background-size: 100% 100%;
+}
+
+.on-button-text-area {
+    position: absolute;
+    top:33%;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+#on-button-text-span {
+    color: black;
+    font-size: 2rem;
+    font-weight: 900;
+
+    text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+    -webkit-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+    -moz-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+}
+
+.card-copy-right-area {
+    width: 100%;
+    top:92%;
+}
+
+.card-copy-right-area img {
+    display: inline-block;
+    height:20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.card-copy-right-area p {
+    /*color: #ffd488;*/
+    color: #450c01;
+    text-align: center;
+    font-size: 1rem;
+    margin: 0px auto;
+}
+
+.card-copy-right-area p.copy-right-team {
+    font-weight: 700;
+}
+
+.card-copy-right-area p.copy-right-contact {
+    margin-top: -3px;
+}
+
+.card-copy-right-area a {
+    color: #450c01;
+}
 
 

@@ -199,28 +199,9 @@ function updateCount() {
         httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
             .then(function (count) {
                 var level = getLevelByCount(count);
-                switch(level){
-                    case 5:
-                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_6.png');
-                        break;
-                    case 4:
-                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_5.png');
-                        break;
-                    case 4:
-                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_4.png');
-                        break;
-                    case 2:
-                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_3.png');
-                        break;
-                    case 1:
-                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_2.png');
-                        break;
-                    case 0:
-                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_1.png');
-                        break;
-                }
+                $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_' + (level + 1) + '.png');
 
-                $('.requiredCardCount').html(getRequiredCardCount(count) + '张');
+                $('#requiredCardCount').html(getRequiredCardCount(count));
 
             }).fail(function (error) {
             console.log("Server Error" + JSON.stringify(error));
@@ -249,6 +230,10 @@ function handleTextClick(){
     }
 
     configMyHomeWithThemeConfig();
+}
+
+function goCollection(){
+    window.location.href = '/envelope/collection.html';
 }
 
 function handleSend(){
