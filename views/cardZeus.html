@@ -13,6 +13,7 @@
     <script src="/envelope/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/envelope/js/httpHelper.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="/envelope/js/common.js"></script>
     <script src="/envelope/js/card.js"></script>
     <link rel="stylesheet" href="/envelope/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/lib/bootstrap/dist/css/bootstrap.css">
@@ -36,54 +37,49 @@
 </div>
 
 <div class="container-fluid card-area">
-
-    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg_m.png" alt="bg" class="bg2"/>
-    <div class="left-right">
-        <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg_l.png" alt="bg" class="bg1"/>
-        <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg_r.png" alt="bg" class="bg3"/>
-        <img alt="main-card" id="master-img"/>
-    </div>
-
-
+    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg.jpg" alt="" id="bg-img"/>
+    <img alt="main-card" id="master-img"/>
 
     <div class="card-bg-area card-message-area">
-        <div class="card-message">
-            <div class="card-message-text-area">
-                <div id="ev-card-text-id">
-                    金鸡来敲门，合家欢小当头照，福禄财神紧拥抱！
-                </div>
+        <div>
+            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/box_1.png" id="text-box-img" alt=""/>
+            <div id="ev-card-text-id">
+                金鸡来敲门，合家欢小当头照，福禄财神紧拥抱！
             </div>
-            <div class="card-user-icon-area">
-                <img id="userIcon-img" alt=""/>
-            </div>
-            <div class="card-user-name-area">
-                <span class="signed-name"></span>
-            </div>
+        </div>
+        <div class="card-user-icon-area">
+            <img id="userIcon-img" alt=""/>
+        </div>
+        <div class="card-user-name-area">
+            <span class="signed-name"></span>
         </div>
     </div>
     <div class="card-bg-area card-pet-area">
         <div class="pet-group pull-right">
-            <div class="text-center">
-                <img id="sprite-img" src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet05.png" alt=""/>
+            <div>
+                <img id="sprite-img" alt=""/>
             </div>
-            <div class="text-center">
+            <div class="text-center pet-desc-area">
                 <span><span id="count-span"></span>级</span>
             </div>
         </div>
     </div>
     <div class="card-bg-area card-button-area">
         <a onclick="handleMyCard()">
-            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button.png" alt=""/>
-            <span id="on-button-text-span">我也来发卡</span>
+            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png" class="img-responsive" style="visibility: hidden" alt=""/>
+            <div class="on-button-text-area">
+                <span id="on-button-text-span">我也来发卡</span>
+            </div>
         </a>
+    </div>
+
+    <div class="card-bg-area card-copy-right-area">
+        <p class="copy-right-team"><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png" alt="Camproz" class="img-responsive">CamproZ 团队提供</p>
+        <p class="copy-right-contact"><span>联系我们:camproz@xingyunzh.com </span>|<span> ©2017 星云智慧</span></p>
     </div>
 </div>
 
-<footer class="text-center">
-    <p><span><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ 团队提供</span></p>
-    <p><span>联系我们:camproz@xingyunzh.com</span></p>
-    <p><span>©2017 星云智慧 | 鄂ICP备16008344号 </span></p>
-</footer>
+
 
 </body>
 </html>
