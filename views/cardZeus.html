@@ -41,7 +41,7 @@
     <img alt="main-card" id="master-img"/>
 
     <div class="card-bg-area card-message-area">
-        <div>
+        <div class="card-message-box">
             <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/box_1.png" id="text-box-img" alt=""/>
             <div id="ev-card-text-id">
                 <span id="card-text-content-span">
@@ -67,12 +67,15 @@
         </div>
     </div>
     <div class="card-bg-area card-button-area">
-        <a onclick="handleMyCard()">
-            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png" class="img-responsive" style="visibility: hidden" alt=""/>
+        <a onclick="handleMyCard()" >
             <div class="on-button-text-area">
-                <span id="on-button-text-span">我也来发卡</span>
+                <div class="inner-text-area">
+                    我也来发卡
+                </div>
             </div>
+            <!--<img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png" class="img-responsive" style="visibility: hidden" alt=""/>-->
         </a>
+
     </div>
 
     <div class="card-bg-area card-copy-right-area">
