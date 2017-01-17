@@ -13,7 +13,7 @@ $(function(){
     }
 
     var textIndex = theSpecificSenderData.theCard.textIndex;
-    $("#ev-card-text-id").text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
+    $("#card-text-content-span").text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
 
     $('#master-img').attr('src', theSpecificSenderData.theCard.theme.imageURL);
     $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname);
@@ -68,7 +68,7 @@ function wechatInit(){
     wx.ready(function(){
         console.log('ready');
         wx.onMenuShareTimeline({
-            title:card.sender.nickname + ':' + card.theme.title,
+            title:card.sender.nickname + ': ' + card.theme.title,
             link:window.location.href,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             success:function(){
@@ -79,7 +79,7 @@ function wechatInit(){
         });
 
         wx.onMenuShareAppMessage({
-            title:card.sender.nickname + ':' + card.theme.title,
+            title:card.sender.nickname + ': ' + card.theme.title,
             desc:card.themeConfig.textCandidates[card.textIndex],
             link:window.location.href,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],

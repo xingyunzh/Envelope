@@ -62,13 +62,20 @@
 #ev-card-text-id {
     position: absolute;
     left: 0;
-    top: 16%;
+    top: 15%;
     width: 100%;
     padding-left: 12%;
     padding-right: 12%;
     color: #d04239;
     font-size: 1.5rem;
     font-weight: 600;
+
+    display: table;
+    height: 60%;
+}
+
+#card-text-content-span {
+
 }
 
 .card-pet-area{
@@ -105,6 +112,7 @@
     text-align: center;
     font-size: 1.25rem;
     color: white;
+    margin-top: 2px;
 }
 
 .pet-group{
@@ -125,7 +133,7 @@
     display: block;
     position: relative;
     margin:0px auto;
-    width: 100%;
+    width: 90%;
 
     background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png");
     background-size: 100% 100%;
@@ -138,7 +146,7 @@
 
 .on-button-text-area {
     position: absolute;
-    top:35%;
+    top:33%;
     left: 0px;
     width: 100%;
     text-align: center;
@@ -164,12 +172,20 @@
 
 .card-copy-right-area p {
     /*color: #ffd488;*/
-    color: #000000;
+    color: #450c01;
     text-align: center;
     font-size: 1rem;
     margin: 0px auto;
 }
 
+.card-copy-right-area p.copy-right-team {
+    font-weight: 700;
+}
+
 .card-copy-right-area p.copy-right-contact {
     margin-top: -3px;
+}
+
+.card-copy-right-area a {
+    color: #450c01;
 }
