@@ -15,15 +15,12 @@ var theTitlePlaceHolderToReplace = "theTitlePlaceHolderToReplace";
 var theWechatConfigPlaceHolder = "'theWechatConfigPlaceHolder'";
 
 function populateCardHtml(html, card, config){
-    //hijack user icon
-    //card.sender.headImgUrl = "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
-
     var theSpecificSenderData = {
         theCard:card
     };
 
     var cardHtml = html.replace(theMetaDescContentPlaceHolder, card.themeConfig.textCandidates[card.textIndex]);
-    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + ':' + card.theme.title);
+    cardHtml = cardHtml.replace(theTitlePlaceHolderToReplace, card.sender.nickname + ': ' + card.theme.title);
     cardHtml = cardHtml.replace(theSpecificSenderDataPlaceHolder, JSON.stringify(theSpecificSenderData));
     cardHtml = cardHtml.replace(theWechatConfigPlaceHolder,JSON.stringify(config));
     return cardHtml;

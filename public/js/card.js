@@ -13,7 +13,7 @@ $(function(){
     }
 
     var textIndex = theSpecificSenderData.theCard.textIndex;
-    $("#ev-card-text-id").text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
+    $("#card-text-content-span").text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
 
     $('#master-img').attr('src', theSpecificSenderData.theCard.theme.imageURL);
     $('.signed-name').text(theSpecificSenderData.theCard.sender.nickname);
