@@ -201,14 +201,20 @@ function updateCount() {
         httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
             .then(function (count) {
                 var level = getLevelByCount(count);
-                switch(count){
+                switch(level){
                     case 5:
-
+                        $('#growProgressPhaseZeta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_6.png');
                     case 4:
+                        $('#growProgressPhaseEpsilon>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_5.png');
                     case 4:
+                        $('#growProgressPhaseDelta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_4.png');
                     case 2:
+                        $('#growProgressPhaseGamma>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_3.png');
                     case 1:
+                        $('#growProgressPhaseBeta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_2.png');
                     case 0:
+                        $('#growProgressPhaseAlpha>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_1.png');
+                        break;
                 }
 
                 $('.requiredCardCount').html(getRequiredCardCount(count) + '张');

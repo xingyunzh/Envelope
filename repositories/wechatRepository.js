@@ -103,7 +103,7 @@ function getAccessToken(){
 					    	accessToken:resJSON.access_token,
 					    	expiresAt:getTimestamp() + resJSON.expires_in
 					    }).then(function(){
-					    	return resJSON.accessToken;
+					    	return resJSON.access_token;
 					    });
 
 					    deferred.resolve(promise);
@@ -116,6 +116,7 @@ function getAccessToken(){
 				});
 
 				return deferred.promise;
+				
 			});
 
 		}else{

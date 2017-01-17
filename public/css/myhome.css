@@ -60,6 +60,10 @@ footer img {
     padding-bottom: 100%;
 }
 
+.grow-progress-image img{
+    width: 100%;
+}
+
 .grow-progress-block{
     padding: 10% 0;
 }
