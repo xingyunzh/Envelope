@@ -18,6 +18,7 @@ exports.getConfigParams = function(url){
 			var nonceStr = stringHelper.randomString(10,'all');
 			var timeStamp = getTimestamp();
 			var string1 = "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + timeStamp + "&url=" + url;
+			console.log(string1);
 			var signature = generateSignature(string1);
 
 			return {
