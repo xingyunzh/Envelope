@@ -92,7 +92,6 @@ function getUserInfoAndCollect(code,senderId){
                 me:theUser._id
             }).then(function(collect){
                 alert("已收藏 id:"+collect._id);
-                window.location.reload();
             });
         }else{
             return true;
@@ -157,7 +156,6 @@ function createCard(){
         logoIndex:logoIndex
     }).then(function(data){
         window.location.href = '/envelope/api/card/view/user/'+theUser._id;
-//        document.getElementById('preview-iframe').contentWindow.location.reload(true);
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -203,17 +201,22 @@ function updateCount() {
                 var level = getLevelByCount(count);
                 switch(level){
                     case 5:
-                        $('#growProgressPhaseZeta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_6.png');
+                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_6.png');
+                        break;
                     case 4:
-                        $('#growProgressPhaseEpsilon>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_5.png');
+                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_5.png');
+                        break;
                     case 4:
-                        $('#growProgressPhaseDelta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_4.png');
+                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_4.png');
+                        break;
                     case 2:
-                        $('#growProgressPhaseGamma>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_3.png');
+                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_3.png');
+                        break;
                     case 1:
-                        $('#growProgressPhaseBeta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_2.png');
+                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_2.png');
+                        break;
                     case 0:
-                        $('#growProgressPhaseAlpha>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_1.png');
+                        $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_1.png');
                         break;
                 }
 

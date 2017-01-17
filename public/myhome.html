@@ -18,114 +18,59 @@
     <script src="js/myhome.js"></script>
 </head>
 <body>
-<div class="container text-center">
-    <h2><span id="nickname-span"></span>的菠萝卡</h2>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="grow-progress-block width-container center-block">
-            <div class="grow-progress-image-wrapper">
-                <div id="growProgressPhaseAlpha" class="grow-progress-image">
-                    <img src="">
+<div class="">
+    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg.jpg" alt="" id="bg-img"/>
+    
+    <div class="container home-area">
+        <div class="row">
+            
+            <div class="grow-progress-block">
+                <img src="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="width-container center-block">
+                金鸡升级还需收集的卡片:
+                <div class="requiredCardCount">
+                    <img src="" alt="?">
                 </div>
             </div>
-            <div class="grow-progress-hyphen-wrapper">
-                <div class="grow-progress-hyphen">
-                    <img src="">
-                </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="width-container center-block">
+                <span>点击更换祝福语：</span>
             </div>
-            <div class="grow-progress-image-wrapper">
-                <div id="growProgressPhaseBeta" class="grow-progress-image">
-                    <img src="">
-                </div>
+        </div>
+        <div class="row">
+            <div class="wish-text-container center-block text-center">
+                <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/box_2.png" id="text-box-img" alt=""/>
+                <a onclick="handleTextClick()" id="text-a">
+                    鸡年大吉,鸿运当头!
+                </a>
             </div>
-            <div class="grow-progress-hyphen-wrapper">
-                <div class="grow-progress-hyphen">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-image-wrapper">
-                <div id="growProgressPhaseGamma" class="grow-progress-image">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-hyphen-wrapper">
-                <div class="grow-progress-hyphen">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-image-wrapper">
-                <div id="growProgressPhaseDelta" class="grow-progress-image">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-hyphen-wrapper">
-                <div class="grow-progress-hyphen">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-image-wrapper">
-                <div id="growProgressPhaseEpsilon" class="grow-progress-image">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-hyphen-wrapper">
-                <div class="grow-progress-hyphen">
-                    <img src="">
-                </div>
-            </div>
-            <div class="grow-progress-image-wrapper">
-                <div id="growProgressPhaseZeta" class="grow-progress-image">
-                    <img src="">
+        </div>
+
+        <div class="row">
+            <div class="width-container center-block">
+                <div class="pull-right user-panel">
+                    <button class="btn btn-primary login-button">测试登录</button>
+                    <button class="btn btn-primary create-button" onclick="createCard()">生成卡片</button>
+                    <button class="btn btn-default logout-button" onclick="logout()">测试退出登录</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="width-container center-block">
-            金鸡升级还需收集的卡片:
-            <div class="requiredCardCount">
-                <img src="" alt="?">
-            </div>
-        </div>
-        
+
+        <footer class="text-center">
+            <p><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ团队提供 </p>
+            <p> 联系我们:camproz@xingyunzh.com</p>
+        </footer>
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="width-container center-block">
-            <span>点击更换祝福语：</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="wish-text-container center-block text-center">
-            <a onclick="handleTextClick()" id="text-a">
-                鸡年大吉,鸿运当头!
-            </a>
-        </div>
-    </div>
-
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="width-container center-block">
-            <div class="pull-right user-panel">
-                <button class="btn btn-primary login-button">测试登录</button>
-                <button class="btn btn-primary create-button" onclick="createCard()">生成卡片</button>
-                <button class="btn btn-default logout-button" onclick="logout()">测试退出登录</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<footer class="text-center">
-    <p><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ团队提供 </p>
-    <p> 联系我们:camproz@xingyunzh.com</p>
-</footer>
 
 
 </body>
