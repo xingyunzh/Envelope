@@ -1,0 +1,124 @@
+#bg-img {
+    width: 100%;
+}
+
+.card-area{
+    position: relative;
+    padding: 0px; !important;
+}
+
+.card-area img {
+    display: block;
+}
+
+.card-area>img {
+    float: left;
+}
+
+.card-bg-area{
+    display: block;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
+}
+
+.card-copy-right-area {
+    width: 100%;
+    top:92%;
+}
+
+
+.card-copy-right-area img {
+    display: inline-block;
+    height:20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.card-copy-right-area p {
+    /*color: #ffd488;*/
+    color: #450c01;
+    text-align: center;
+    font-size: 2.5vw;
+    margin: 0px auto;
+}
+
+.card-copy-right-area p.copy-right-team {
+    font-weight: 900;
+}
+
+.card-copy-right-area p.copy-right-contact {
+    margin-top: -3px;
+}
+
+.card-copy-right-area a {
+    color: #450c01;
+}
+
+
+.card-user-icon-area {
+    width: 100%;
+}
+
+.user-icon {
+    width:15vw;
+    margin: -5% auto 0 auto;
+    border-radius: 50%;
+    border: 4px solid #e36a37;
+}
+
+.card-user-name-area {
+    width: 100%;
+    text-align: center;
+    font-size: 3vw;
+    color: #f5c889;
+    margin-top: 2px;
+}
+
+.collected-cards-area {
+    width: 100%;
+    top:30%;
+}
+
+.card-sender-thumb {
+    float: left;
+    padding:4vw;
+    width: 24vw;
+}
+
+.card-sender-thumb a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.card-sender-thumb a:active {
+    text-decoration: none;
+}
+
+.collected-number-hint {
+    font-size: 3vw;
+    color: #ffffff;
+    padding:4vw 7.5vw 0 0;
+}
+
+#collected-number-span {
+    font-size: 5.5vw;
+    color: #f2bd50;
+}
+
+.collected-level-up {
+    font-size: 3vw;
+    color: #e4a53a;
+}
+
+#requiredCardCount {
+    font-size: 5vw;
+}
+
+.collected-cards-title {
+    text-align: left;
+    padding-left: 5vw;
+    color: #450c01;
+}
