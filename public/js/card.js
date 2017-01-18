@@ -28,6 +28,17 @@ $(function(){
         if(theUser._id == theSpecificSenderData.theCard.sender._id){
             //view my own card
             $('.card-status-bar').hide();
+
+            var query = window.location.href.split("?")[1];
+            if(query != null && query.search('create') >= 0){
+                $('.card-button-a-class').removeAttr("href");
+                $('.card-button-a-class').removeAttr("onclick");
+                $('.card-button-a-class').css('background-image', "none");
+                $('.card-button-a-class .inner-text-area').text("点击右上角发送给朋友(圈)");
+            }
+            else {
+                $('.card-button-a-class .inner-text-area').text("修改祝福语");
+            }
         }
         else {
             getIfCollected().then(function(collected){

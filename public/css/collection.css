@@ -76,6 +76,14 @@
     margin-top: 2px;
 }
 
+.card-collect-create-date-area {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5vw;
+    color: #f5c889;
+    margin-top: 2px;
+}
+
 .collected-cards-area {
     width: 100%;
     top:30%;

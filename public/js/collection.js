@@ -43,6 +43,7 @@ function getCollection() {
             $(".user-icon", card).attr("src", image);
             $(".signed-name", card).text(collect.card.sender.nickname);
             $("a", card).attr("href", '/envelope/api/card/view/id/'+collect.card._id);
+            $(".collect-create-date").text(stamp(new Date(collect.createDate)));
         });
 
     }).fail(function (error) {
@@ -50,3 +51,9 @@ function getCollection() {
     });
 }
 
+function stamp(date){
+    if(date){
+       return (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    }
+    return "";
+}
