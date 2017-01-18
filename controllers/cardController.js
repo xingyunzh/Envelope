@@ -27,11 +27,11 @@ function populateCardHtml(html, card, config){
 }
 
 function getCardTemplate(name){
-//    if (getCardTemplate.cache.hasOwnProperty(name)) {
-//        return q.fcall(function(){
-//            return getCardTemplate.cache[name];
-//        });
-//    }
+    if (getCardTemplate.cache.hasOwnProperty(name)) {
+        return q.fcall(function(){
+            return getCardTemplate.cache[name];
+        });
+    }
 
     return q.nfbind(fs.readFile)(__dirname + "/../views/"+name, "utf-8").then(function(template){
         getCardTemplate.cache[name] = template;
