@@ -39,7 +39,8 @@ function getCollection() {
                 card = card.clone();
                 $(".collected-cards-area").append(card);
             }
-            $(".user-icon", card).attr("src", collect.card.sender.headImgUrl);
+            var image = collect.card.sender.headImgUrl ? collect.card.sender.headImgUrl : "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
+            $(".user-icon", card).attr("src", image);
             $(".signed-name", card).text(collect.card.sender.nickname);
             $("a", card).attr("href", '/envelope/api/card/view/id/'+collect.card._id);
         });

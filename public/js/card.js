@@ -32,7 +32,7 @@ $(function(){
         else {
             getIfCollected().then(function(collected){
                 if(collected){
-                    $('.card-status-bar span').text("您已经收藏过此卡！");
+                    $('.card-status-bar').text("您已经收藏过此卡！");
                 }
                 else {
                     doCollectCard();
@@ -133,7 +133,6 @@ function doCollectCard(){
         sender:theSpecificSenderData.theCard.sender._id,
         me:theUser._id
     }).then(function(collect){
-        alert("收藏成功！");
         $('.card-status-bar').show();
         $('.card-status-bar span').text("成功收藏此卡！");
     }).fail(function(error){
