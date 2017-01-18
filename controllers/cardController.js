@@ -163,13 +163,13 @@ exports.deleteCollectedCardById = function(req, res){
 };
 
 exports.getCollectedCardsByUser = function(req, res){
-    cardRepository.getCollectedCardsByUser(req.params.id).then(function(cCards){
+    cardRepository.getCollectedCardsByUser(req.params.id, !!req.query.limit ? req.query.limit : 20).then(function(cCards){
         res.json(util.wrapBody(cCards));
     }).catch(util.responseInternalError(res));
 };
 
 exports.countCollectedCardsByUser = function(req, res){
-    cardRepository.countCollectedCardsByUser(req.params.id, !!req.query.limit ? req.query.limit : 100).then(function(count){
+    cardRepository.countCollectedCardsByUser(req.params.id).then(function(count){
         res.json(util.wrapBody(count));
     }).catch(util.responseInternalError(res));
 };

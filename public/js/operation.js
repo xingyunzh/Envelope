@@ -53,7 +53,7 @@ function handleRecentError(){
     httpHelper().adminRequest(getAdminToken(), "GET", './api/log/error/20').then(function(data){
         $("#recent-error-ul").empty();
         _.forEach(data, function(item){
-            $("#recent-error-ul").append("<li class='list-group-item'>"+JSON.stringify(item, null, "<br>")+"</li>");
+            $("#recent-error-ul").append("<li class='list-group-item'>"+JSON.stringify(item, null, "<br>")+"<div class='pull-right'>"+new Date(item.date).toLocaleString()+"</div></li>");
         });
     }).catch(function(error){
         $("#recent-error-ul").empty();
