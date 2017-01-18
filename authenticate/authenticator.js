@@ -65,7 +65,7 @@ module.exports.adminAuthenticate = function(req, res, next){
         res.send(util.wrapBody('Not Authorized!', 'E'));
     }
     else {
-        scr.getAdminToken().then(function(token){
+        systemConfigRepository.getAdminToken().then(function(token){
             if(token == adminToken){
                 next();
             }

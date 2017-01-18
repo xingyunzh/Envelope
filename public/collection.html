@@ -16,27 +16,52 @@
     <script src="lib/lodash/lodash.js"></script>
 
     <script src="js/httpHelper.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/collection.js"></script>
 </head>
 <body>
 
+<div class="container-fluid card-area">
+    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bg.jpg" alt="" id="bg-img"/>
 
-<div class="container">
-    <div class="row">
-        我的收藏：
+    <div class="card-bg-area card-progress-area">
+        <div class="collected-number-hint pull-right">
+            <p>已经收到 <span id="collected-number-span"></span> 张祝福卡</p>
+        </div>
+        <div class="grow-progress-block">
+            <img src="">
+        </div>
+        <div class="collected-level-up text-center">
+            <span>您的金鸡升级还需收到 <span id="requiredCardCount"></span> 张卡片</span>
+        </div>
+
     </div>
 
-    <div class="row">
-        <div class="list-group width-container center-block" id="collects-list-div">
+    <div class="card-bg-area collected-cards-area">
+        <div class="collected-cards-title">
+            最近收入的卡：
+        </div>
+        <div class="card-sender-thumb">
+            <a>
+                <div class="card-user-icon-area">
+                    <img class="user-icon" alt=""/>
+                </div>
+                <div class="card-user-name-area">
+                    <span class="signed-name"></span>
+                </div>
+                <div class="card-collect-create-date-area">
+                    <span class="collect-create-date"></span>
+                </div>
+            </a>
         </div>
     </div>
+
+    <div class="card-bg-area card-copy-right-area">
+        <p class="copy-right-team"><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png" alt="CamproZ" class="img-responsive">CamproZ 团队提供</p>
+        <p class="copy-right-contact"><span>联系我们: <a href="mailto:camproz@xingyunzh.com">camproz@xingyunzh.com</a> </span>|<span> ©2017 星云智慧</span></p>
+    </div>
+
 </div>
-
-<footer class="text-center">
-    <p><img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/logo.png" alt="Camproz">CamproZ团队提供 </p>
-    <p> 联系我们:camproz@xingyunzh.com</p>
-</footer>
-
 
 </body>
 </html>

@@ -27,11 +27,11 @@ function populateCardHtml(html, card, config){
 }
 
 function getCardTemplate(name){
-//    if (getCardTemplate.cache.hasOwnProperty(name)) {
-//        return q.fcall(function(){
-//            return getCardTemplate.cache[name];
-//        });
-//    }
+    if (getCardTemplate.cache.hasOwnProperty(name)) {
+        return q.fcall(function(){
+            return getCardTemplate.cache[name];
+        });
+    }
 
     return q.nfbind(fs.readFile)(__dirname + "/../views/"+name, "utf-8").then(function(template){
         getCardTemplate.cache[name] = template;
@@ -169,7 +169,7 @@ exports.getCollectedCardsByUser = function(req, res){
 };
 
 exports.countCollectedCardsByUser = function(req, res){
-    cardRepository.countCollectedCardsByUser(req.params.id).then(function(count){
+    cardRepository.countCollectedCardsByUser(req.params.id, !!req.query.limit ? req.query.limit : 100).then(function(count){
         res.json(util.wrapBody(count));
     }).catch(util.responseInternalError(res));
 };

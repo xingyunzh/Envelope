@@ -9,15 +9,14 @@
     <!--do not modify below line-->
     <meta name="description" content="theHeadMetaDescriptionContent">
 
-    <script src="/envelope/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/envelope/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/envelope/js/httpHelper.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="/envelope/js/httpHelper.js"></script>
     <script src="/envelope/js/common.js"></script>
     <script src="/envelope/js/card.js"></script>
-    <link rel="stylesheet" href="/envelope/lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/lib/bootstrap/dist/css/bootstrap.css">
 
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/envelope/css/styleZeus.css">
 
     <!--do not modify below script area-->
@@ -67,7 +66,7 @@
         </div>
     </div>
     <div class="card-bg-area card-button-area">
-        <a onclick="handleMyCard()" >
+        <a onclick="handleMyCard()" class="card-button-a-class" >
             <div class="on-button-text-area">
                 <div class="inner-text-area">
                     我也来发卡
@@ -84,7 +83,9 @@
     </div>
 </div>
 
-
+<div class='wx_pic' style='margin:0 auto;display:none;'>
+    <img />
+</div>
 
 </body>
 </html>

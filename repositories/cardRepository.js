@@ -45,8 +45,8 @@ exports.isCardCollected = function(user, cardId){
     return CollectedCard.findOne({collector:user, card:cardId}).lean().exec();
 };
 
-exports.getCollectedCardsByUser = function(user){
-    return CollectedCard.find({collector:user}).deepPopulate('card.sender collector').sort("createDate").lean().exec();
+exports.getCollectedCardsByUser = function(user, maxLimit){
+    return CollectedCard.find({collector:user}).deepPopulate('card.sender collector').sort("-createDate").limit(maxLimit).lean().exec();
 };
 
 exports.createCollectedCard = function(param){
