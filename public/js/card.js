@@ -68,7 +68,7 @@ function wechatInit(){
     wx.ready(function(){
         console.log('ready');
         wx.onMenuShareTimeline({
-            title:card.sender.nickname + ': ' + card.theme.title,
+            title:card.sender.nickname + ':' + card.theme.title,
             link:window.location.href,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             success:function(){
@@ -79,7 +79,7 @@ function wechatInit(){
         });
 
         wx.onMenuShareAppMessage({
-            title:card.sender.nickname + ': ' + card.theme.title,
+            title:card.sender.nickname + ':' + card.theme.title,
             desc:card.themeConfig.textCandidates[card.textIndex],
             link:window.location.href,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
@@ -96,7 +96,6 @@ function wechatInit(){
     wx.error(function(res){
         console.log('error',res);
     });
-
 }
 
 function updateCount() {
