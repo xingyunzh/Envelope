@@ -69,7 +69,7 @@ function wechatInit(){
         console.log('ready');
         wx.onMenuShareTimeline({
             title:card.sender.nickname + ':' + card.theme.title,
-            link:window.location.href,
+            link:'/envelope/api/card/view/user/'+card.sender._id,           
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             success:function(){
                 console.log('分享成功');
@@ -81,7 +81,7 @@ function wechatInit(){
         wx.onMenuShareAppMessage({
             title:card.sender.nickname + ':' + card.theme.title,
             desc:card.themeConfig.textCandidates[card.textIndex],
-            link:window.location.href,
+            link:'/envelope/api/card/view/user/'+card.sender._id,  
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             // type:'link',
             // dataUrl:null,

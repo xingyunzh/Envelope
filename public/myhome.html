@@ -27,32 +27,30 @@
         <div class="grow-progress-block">
             <img src="">
         </div>
-        <span>您的金鸡升级还需收到<span id="requiredCardCount"></span>张卡片</span>
+        <div class="grow-progress-prompt">您的金鸡升级还需收到<span id="requiredCardCount"></span>张卡片</div>
     </div>
 
     <div class="card-bg-area card-message-area">
         <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/box_2.png" id="text-box-img" alt=""/>
-        <span id="clickToChangeText">点击更换祝福语：</span>
+        <span id="clickToChangeText">点击更换祝福语&#8595;</span>
         <a onclick="handleTextClick()" id="text-a">
             鸡年大吉,鸿运当头!
         </a>
         <button class="btn btn-default logout-button" style="position: absolute;top: 70%;left: 35%;" onclick="logout()">测试退出登录</button>
     </div>
 
-    <div class="card-bg-area card-create-button-area">
-        <a onclick="createCard()">
-            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png" class="img-responsive" style="visibility: hidden" alt=""/>
+    <div class="card-bg-area card-create-button-area card-button-area">
+        <a onclick="handleMyCard()" >
             <div class="on-button-text-area">
-                <span id="on-button-text-span">预览卡片</span>
+                <div class="inner-text-area">选定卡片</div>
             </div>
         </a>
     </div>
 
-    <div class="card-bg-area card-collection-button-area">
+    <div class="card-bg-area card-collection-button-area card-button-area">
         <a onclick="goCollection()">
-            <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png" class="img-responsive" style="visibility: hidden" alt=""/>
-            <div class="on-button-text-area">
-                <span id="on-button-text-span">查看收到的卡片</span>
+            <div class="on-collection-button-text-area">
+                <div class="inner-text-area">查看收到的卡片</div>
             </div>
         </a>
     </div>

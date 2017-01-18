@@ -22,24 +22,17 @@ $(function(){
        $('#nickname-span').text(theUser.nickname);
        $('#nickname-span').show();
        $('.login-button').hide();
-   }
-   else {
-       delete localStorage.user;
-       delete localStorage.token;
+    }
+    else {
+        delete localStorage.user;
+        delete localStorage.token;
 
-       $('#nickname-span').text("我");
-       $('.login-button').show();
-       $('.create-button').hide();
-       $('.logout-button').hide();
-   }
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
+        + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
+        + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
+    }
 
-    $('.login-button').click(function(){
-        window.location.href = './login.html';
-        
-        // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
-        // + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
-        // + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
-    });
+    //wechatInit();
 
     $('.create-button').text('加载中').attr('disabled', true);
 
@@ -66,7 +59,7 @@ $(function(){
         configMyHomeWithTheme();
         configMyHomeWithThemeConfig();
 
-        $('.create-button').text('生成卡片').removeAttr('disabled');
+        $('.create-button').text('选定卡片').removeAttr('disabled');
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -85,20 +78,26 @@ function getUserInfoAndCollect(code,senderId){
         $('#nickname-span').show();
         return true;
 
-    }).then(function(){
-        if (senderId && senderId != '123') {
-            return httpHelper().authRequest('POST', '/envelope/api/collect', {
-                sender:senderId,
-                me:theUser._id
-            }).then(function(collect){
-                alert("已收藏 id:"+collect._id);
-            });
-        }else{
-            return true;
+    }).then(function getLatestCardId(){
+        return httpHelper().authRequest('GET','/envelope/api/card/user/' + senderId);
+    }).then(function checkCollected(card){
+        return httpHelper().authRequest('GET', '/envelope/api/collect/exist?me='+theUser._id+'&card='+card._id);
+    }).then(function collect(collected){
+        if (!collected) {
+            if (senderId && senderId != '123') {
+                return httpHelper().authRequest('POST', '/envelope/api/collect', {
+                    sender:senderId,
+                    me:theUser._id
+                }).then(function(collect){
+                    alert("已收藏 id:"+collect._id);
+                });
+            }else{
+                return true;
+            }
         }
         
     }).fail(function(error){
-        alert("Server Error" + JSON.stringify(error));
+        console.log("Server Error" + JSON.stringify(error));
     });
 }
 
@@ -155,7 +154,7 @@ function createCard(){
         textIndex:theTextIndex,
         logoIndex:logoIndex
     }).then(function(data){
-        window.location.href = '/envelope/api/card/view/user/'+theUser._id;
+        window.location.href = '/envelope/api/card/view/user/' + theUser._id + '?create=1';
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -196,14 +195,19 @@ function getQueryString(){
 
 function updateCount() {
     if (!!theUser) {
-        httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
-            .then(function (count) {
-                var level = getLevelByCount(count);
-                $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_' + (level + 1) + '.png');
+        httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id).then(function (count) {
+            var level = getLevelByCount(count);
+            $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_' + (level + 1) + '.png');
 
-                $('#requiredCardCount').html(getRequiredCardCount(count));
+            var requiredCount = getRequiredCardCount(count);
 
-            }).fail(function (error) {
+            if (requiredCount > 0) {
+                $('#requiredCardCount').html(requiredCount);
+            }else{
+                $('.grow-progress-prompt').html('恭喜！您的金鸡已经变身凤凰！');
+            }
+
+        }).fail(function (error) {
             console.log("Server Error" + JSON.stringify(error));
         });
     }
@@ -222,6 +226,8 @@ function handleThemeClick(){
 }
 
 function handleTextClick(){
+    $('#clickToChangeText').hide();
+
     if(theTextIndex < theThemeConfig.textCandidates.length - 1){
         theTextIndex++;
     }
@@ -236,6 +242,53 @@ function goCollection(){
     window.location.href = '/envelope/collection.html';
 }
 
-function handleSend(){
-    window.location.href = '/envelope/api/card/view/user/'+theUser._id;
+function wechatInit(){
+    if(!wechatConfig){
+        return;
+    }
+
+    wx.config({
+        debug:false,
+        appId:wechatConfig.appId,
+        timestamp:wechatConfig.timestamp,
+        nonceStr:wechatConfig.nonceStr,
+        signature:wechatConfig.signature,
+        jsApiList:[
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+        ]
+    });
+
+    wx.ready(function(){
+        console.log('ready');
+        wx.onMenuShareTimeline({
+            title:'一起来发卡',
+            link:'/envelope/myhome.html',           
+            imgUrl:'http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png',
+            success:function(){
+                console.log('分享成功');
+            },cancel:function(){
+                console.log('取消分享');
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title:'一起来发卡',
+            desc:'亲，快来挑选卡片，发给朋友们吧！',
+            link:'/envelope/myhome.html',  
+            imgUrl:'http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png',
+            // type:'link',
+            // dataUrl:null,
+            success:function(){
+                console.log('分享成功');
+            },cancel:function(){
+                console.log('取消分享');
+            }
+        });
+    });
+
+    wx.error(function(res){
+        console.log('error',res);
+    });
 }
+
