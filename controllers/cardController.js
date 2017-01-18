@@ -169,7 +169,7 @@ exports.getCollectedCardsByUser = function(req, res){
 };
 
 exports.countCollectedCardsByUser = function(req, res){
-    cardRepository.countCollectedCardsByUser(req.params.id).then(function(count){
+    cardRepository.countCollectedCardsByUser(req.params.id, !!req.query.limit ? req.query.limit : 100).then(function(count){
         res.json(util.wrapBody(count));
     }).catch(util.responseInternalError(res));
 };
