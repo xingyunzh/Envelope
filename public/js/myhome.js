@@ -263,7 +263,7 @@ function wechatInit(){
         console.log('ready');
         wx.onMenuShareTimeline({
             title:'一起来发卡',
-            link:'/envelope/myhome.html',           
+            link:'http://www.xingyunzh.com/envelope/myhome.html',
             imgUrl:'http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png',
             success:function(){
                 console.log('分享成功');
@@ -275,7 +275,7 @@ function wechatInit(){
         wx.onMenuShareAppMessage({
             title:'一起来发卡',
             desc:'亲，快来挑选卡片，发给朋友们吧！',
-            link:'/envelope/myhome.html',  
+            link:'http://www.xingyunzh.com/envelope/myhome.html',
             imgUrl:'http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png',
             // type:'link',
             // dataUrl:null,

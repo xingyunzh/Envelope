@@ -17,7 +17,7 @@ function getLevelByCount(count){
 }
 
 function getRequiredCardCount(count){
-	if (count > cardCountOfLevel[cardCountOfLevel.length]) {
+	if (count > cardCountOfLevel[cardCountOfLevel.length - 1]) {
 		return 0;
 	}
 	
