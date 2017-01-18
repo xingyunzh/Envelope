@@ -9,8 +9,11 @@ footer img {
     margin-bottom: 15px;
 }
 
-body{
-
+.grow-progress-prompt{
+    text-align: center;
+    margin-top: -4vw;
+    font-size: 3vw;
+    color: #e6a62b;
 }
 
 #text-box-img {
@@ -21,12 +24,12 @@ body{
 #text-a {
     position: absolute;
     left: 0;
-    top: 26%;
+    top: 20%;
     width: 100%;
     padding-left: 12%;
     padding-right: 12%;
     color: #d04239;
-    font-size: 1.5rem;
+    font-size: 5vw;
     font-weight: 600;
     text-decoration: none;
 }
@@ -50,13 +53,6 @@ body{
     width: 100%;
 }
 
-.card-button-area {
-    width:100%;
-    text-align: center;
-    top:77%;
-    z-index:80;
-}
-
 .wish-text-container {
     margin-top: 8px;
     margin-bottom: 10px;
@@ -72,15 +68,53 @@ body{
 }
 
 #requiredCardCount{
-
+    margin-left: 1vw;
+    margin-right: 1vw;
+    font-size: 4vw;
 }
 
 #clickToChangeText{
     color: #d04239;
-    font-size: 0.8em;
+    font-size: 3vw;
     position: absolute;
     top: 12%;
     left: 12%;
+}
+
+.card-button-area {
+    width:100%;
+    height: 15.4%;
+    text-align: center;
+    /*top:77%;*/
+    z-index:80;
+}
+
+.card-create-button-area{
+    top:63%;
+}
+
+.card-collection-button-area{
+    top:75%;
+}
+
+.card-collection-button-area a{
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png") !important;
+}
+
+.on-collection-button-text-area {
+    position: absolute;
+    left: 0px;
+    top:50%;
+    width: 100%;
+    z-index: 82;
+    height: 6vw;
+    line-height: 6vw;
+
+    text-align: center;
+    color: #e6a62b;
+    font-size: 5vw;
+    font-weight: 900;
+
 }
 
 .card-message-area {
@@ -93,67 +127,48 @@ body{
     top:2%;
 }
 
-.card-create-button-area {
-    width:100%;
-    text-align: center;
-    top:65%;
-    z-index:80;
-}
-
-.card-create-button-area a {
+.card-button-area a {
     display: block;
-    position: relative;
-    margin:0px auto;
+    position: absolute;
+    top: 0px;
+    left: 5%;
     width: 90%;
+    height: 100%;
 
     background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png");
     background-size: 100% 100%;
+    z-index: 81;
 }
 
-.card-collection-button-area {
-    width:100%;
-    text-align: center;
-    top:75%;
-    z-index:80;
-}
-
-.card-create-button-area a.active {
-    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
-    background-size: 100% 100%;
-}
-
-.card-collection-button-area a {
-    display: block;
-    position: relative;
-    margin:0px auto;
-    width: 90%;
-
-    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
-    background-size: 100% 100%;
-}
-
-.card-collection-button-area a.active {
+.card-button-area a.active {
     background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
     background-size: 100% 100%;
 }
 
 .on-button-text-area {
     position: absolute;
-    top:33%;
     left: 0px;
+    top:50%;
     width: 100%;
-    text-align: center;
-}
+    z-index: 82;
+    height: 6vw;
+    line-height: 6vw;
 
-#on-button-text-span {
-    color: black;
-    font-size: 2rem;
+    text-align: center;
+    color: #450c01;
+    font-size: 5vw;
     font-weight: 900;
+
 
     text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
     -webkit-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
     -moz-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
 }
+
+.inner-text-area {
+    margin-top: -3vw;
+}
+
 
 .card-copy-right-area {
     width: 100%;
@@ -171,7 +186,7 @@ body{
     /*color: #ffd488;*/
     color: #450c01;
     text-align: center;
-    font-size: 1rem;
+    font-size: 2.5vw;
     margin: 0px auto;
 }
 
