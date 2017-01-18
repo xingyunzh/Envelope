@@ -92,7 +92,6 @@ function getUserInfoAndCollect(code,senderId){
                 me:theUser._id
             }).then(function(collect){
                 alert("已收藏 id:"+collect._id);
-                window.location.reload();
             });
         }else{
             return true;
@@ -157,7 +156,6 @@ function createCard(){
         logoIndex:logoIndex
     }).then(function(data){
         window.location.href = '/envelope/api/card/view/user/'+theUser._id;
-//        document.getElementById('preview-iframe').contentWindow.location.reload(true);
     }).fail(function(error){
         alert("Server Error:"+JSON.stringify(error));
     });
@@ -201,23 +199,9 @@ function updateCount() {
         httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id)
             .then(function (count) {
                 var level = getLevelByCount(count);
-                switch(level){
-                    case 5:
-                        $('#growProgressPhaseZeta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_6.png');
-                    case 4:
-                        $('#growProgressPhaseEpsilon>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_5.png');
-                    case 4:
-                        $('#growProgressPhaseDelta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_4.png');
-                    case 2:
-                        $('#growProgressPhaseGamma>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_3.png');
-                    case 1:
-                        $('#growProgressPhaseBeta>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_2.png');
-                    case 0:
-                        $('#growProgressPhaseAlpha>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_1.png');
-                        break;
-                }
+                $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_' + (level + 1) + '.png');
 
-                $('.requiredCardCount').html(getRequiredCardCount(count) + '张');
+                $('#requiredCardCount').html(getRequiredCardCount(count));
 
             }).fail(function (error) {
             console.log("Server Error" + JSON.stringify(error));
@@ -246,6 +230,10 @@ function handleTextClick(){
     }
 
     configMyHomeWithThemeConfig();
+}
+
+function goCollection(){
+    window.location.href = '/envelope/collection.html';
 }
 
 function handleSend(){
