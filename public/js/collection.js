@@ -42,7 +42,7 @@ function getCollection() {
             else {
                 card.removeClass("hide");
             }
-            
+
             var image = collect.card.sender.headImgUrl ? collect.card.sender.headImgUrl : "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
             $(".user-icon", card).attr("src", image);
             $(".signed-name", card).text(collect.card.sender.nickname);
