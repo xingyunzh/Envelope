@@ -5,11 +5,13 @@ var cardCountOfLevel = [0,1,6,18,48,100];
 
 function getLevelByCount(count){
 
-	for(var level = 0;count > cardCountOfLevel[level + 1];level++){
-		if (level >= 5) break;
+	for (var i = cardCountOfLevel.length - 1; i >= 0; i--) {
+		if(count >= cardCountOfLevel[i]){
+			return i;
+		}
 	}
 
-	return level;
+	return 0;
 }
 
 function getRequiredCardCount(count){
