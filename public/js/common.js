@@ -1,6 +1,4 @@
-//var cardCountOfLevel = [1,4,10,20,50,100];
-
-var cardCountOfLevel = [1,2,3,4,5,6];
+var cardCountOfLevel = [1,4,10,20,50,100];
 
 function getLevelByCount(count){
 
