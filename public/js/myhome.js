@@ -28,8 +28,8 @@ $(function(){
         delete localStorage.token;
 
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
-        + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
-        + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
+        + encodeURIComponent('http://www.camproz.com/envelope/myhome.html')
+        + '&response_type=code&scope=snsapi_userinfo&state=fromus#wechat_redirect';
     }
 
     //wechatInit();
@@ -64,7 +64,7 @@ $(function(){
         alert("Server Error:"+JSON.stringify(error));
     });
 
-    updateCount();
+    
 });
 
 function getUserInfoAndCollect(code,senderId){
@@ -74,9 +74,12 @@ function getUserInfoAndCollect(code,senderId){
     }).then(function(data){
         localStorage.user = JSON.stringify(data.user);
         theUser = data.user;
+        updateCount();
         $('#nickname-span').text(theUser.nickname);
         $('#nickname-span').show();
-        return true;
+        if (!!senderId && senderId != 'fromus' && senderId != theUser._id) {
+            return true;
+        }
 
     }).then(function getLatestCardId(){
         return httpHelper().authRequest('GET','/envelope/api/card/user/' + senderId);
@@ -84,16 +87,12 @@ function getUserInfoAndCollect(code,senderId){
         return httpHelper().authRequest('GET', '/envelope/api/collect/exist?me='+theUser._id+'&card='+card._id);
     }).then(function collect(collected){
         if (!collected) {
-            if (senderId && senderId != '123') {
-                return httpHelper().authRequest('POST', '/envelope/api/collect', {
-                    sender:senderId,
-                    me:theUser._id
-                }).then(function(collect){
-                    alert("已收藏 id:"+collect._id);
-                });
-            }else{
-                return true;
-            }
+            return httpHelper().authRequest('POST', '/envelope/api/collect', {
+                sender:senderId,
+                me:theUser._id
+            }).then(function(collect){
+                alert("已收藏 id:"+collect._id);
+            });
         }
         
     }).fail(function(error){
@@ -263,7 +262,7 @@ function wechatInit(){
         console.log('ready');
         wx.onMenuShareTimeline({
             title:'一起来发卡',
-            link:'http://www.xingyunzh.com/envelope/myhome.html',
+            link:'http://www.camproz.com/envelope/myhome.html',
             imgUrl:'http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png',
             success:function(){
                 console.log('分享成功');
@@ -275,7 +274,7 @@ function wechatInit(){
         wx.onMenuShareAppMessage({
             title:'一起来发卡',
             desc:'亲，快来挑选卡片，发给朋友们吧！',
-            link:'http://www.xingyunzh.com/envelope/myhome.html',
+            link:'http://www.camproz.com/envelope/myhome.html',
             imgUrl:'http://envelope.oss-cn-shanghai.aliyuncs.com/logo.png',
             // type:'link',
             // dataUrl:null,

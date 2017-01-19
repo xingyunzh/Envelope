@@ -80,7 +80,7 @@ function wechatInit(){
         console.log('ready');
         wx.onMenuShareTimeline({
             title:card.sender.nickname + ':' + card.theme.title,
-            link:'http://www.xingyunzh.com/envelope/api/card/view/user/'+card.sender._id,
+            link:'http://www.camproz.com/envelope/api/card/view/user/'+card.sender._id,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             success:function(){
                 console.log('分享成功');
@@ -92,7 +92,7 @@ function wechatInit(){
         wx.onMenuShareAppMessage({
             title:card.sender.nickname + ':' + card.theme.title,
             desc:card.themeConfig.textCandidates[card.textIndex],
-            link:'http://www.xingyunzh.com/envelope/api/card/view/user/'+card.sender._id,
+            link:'http://www.camproz.com/envelope/api/card/view/user/'+card.sender._id,
             imgUrl:card.themeConfig.logoCandidates[card.logoIndex],
             // type:'link',
             // dataUrl:null,
@@ -132,7 +132,7 @@ function handleMyCard(){
     }
     else {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri=' 
-        + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
+        + encodeURIComponent('http://www.camproz.com/envelope/myhome.html')
         + '&response_type=code&scope=snsapi_userinfo&state='
         +  theSpecificSenderData.theCard.sender._id
         + '#wechat_redirect';

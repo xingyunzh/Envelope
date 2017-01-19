@@ -4,8 +4,8 @@ var theUser = localStorage.user ? JSON.parse(localStorage.user) : null;
 $(function(){
     if(!theUser) {
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd9afdfa36e78cc2c&redirect_uri='
-            + encodeURIComponent('http://www.xingyunzh.com/envelope/myhome.html')
-            + '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
+            + encodeURIComponent('http://www.camproz.com/envelope/myhome.html')
+            + '&response_type=code&scope=snsapi_userinfo&state=fromus#wechat_redirect';
 
         return;
     }
