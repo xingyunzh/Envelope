@@ -188,6 +188,7 @@ function getQueryString(){
 function updateCount() {
     if (!!theUser) {
         httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theUser._id).then(function (count) {
+
             var level = getLevelByCount(count);
             $('.grow-progress-block>img').attr('src','http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_' + (level + 1) + '.png');
 
