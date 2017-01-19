@@ -4,13 +4,12 @@
 var theUser = localStorage.user ? JSON.parse(localStorage.user) : null;
 
 $(function(){
-
-    wechatInit();
-
     if(!theSpecificSenderData.theCard){
-        alert("此人卡片未创建!");
+        console.log("此人卡片未创建!");
         return;
     }
+
+    wechatInit();
 
     var textIndex = theSpecificSenderData.theCard.textIndex;
     $("#card-text-content-span").text(theSpecificSenderData.theCard.themeConfig.textCandidates[textIndex]);
@@ -118,7 +117,7 @@ function updateCount() {
             $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_"+birdIndex+".png");
 
         }).fail(function (error) {
-        alert("Server Error" + JSON.stringify(error));
+        console.log("Server Error" + JSON.stringify(error));
     });
 }
 
@@ -147,6 +146,6 @@ function doCollectCard(){
         $('.card-status-bar').show();
         $('.card-status-bar span').text("成功收藏此卡！");
     }).fail(function(error){
-        alert("Server Error" + JSON.stringify(error));
+        console.log("Server Error" + JSON.stringify(error));
     });
 }

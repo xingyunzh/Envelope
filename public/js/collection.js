@@ -39,15 +39,19 @@ function getCollection() {
                 card = card.clone();
                 $(".collected-cards-area").append(card);
             }
+            else {
+                card.removeClass("hide");
+            }
+
             var image = collect.card.sender.headImgUrl ? collect.card.sender.headImgUrl : "http://envelope.oss-cn-shanghai.aliyuncs.com/duola.jpg";
             $(".user-icon", card).attr("src", image);
             $(".signed-name", card).text(collect.card.sender.nickname);
             $("a", card).attr("href", '/envelope/api/card/view/id/'+collect.card._id);
-            $(".collect-create-date").text(stamp(new Date(collect.createDate)));
+            $(".collect-create-date", card).text(stamp(new Date(collect.createDate)));
         });
 
     }).fail(function (error) {
-        alert("Server Error:" + JSON.stringify(error));
+        console.log("Server Error:" + JSON.stringify(error));
     });
 }
 

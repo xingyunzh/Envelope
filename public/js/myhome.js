@@ -61,7 +61,7 @@ $(function(){
 
         $('.create-button').text('选定卡片').removeAttr('disabled');
     }).fail(function(error){
-        alert("Server Error:"+JSON.stringify(error));
+        console.log("Server Error:"+JSON.stringify(error));
     });
 
     

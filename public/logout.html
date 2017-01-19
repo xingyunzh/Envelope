@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Logout Button</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class='wx_pic text-center' style='margin:0vh auto 5vh auto;'>
+    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/wx4.png"/>
+</div>
+
+<div class="container text-center">
+    <div class="row text-center">
+        <span>登录信息： <span id="user-info"></span> </span>
+    </div>
+    <br/>
+    <div class="row">
+        <button class="btn btn-primary" onclick="logout()">退出CamproZ登录</button>
+    </div>
+</div>
+
+<script>
+    if(localStorage.user){
+        theUser = JSON.parse(localStorage.user);
+        $('#user-info').text(theUser.nickname);
+    }
+
+    function logout(){
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+
+        location.reload();
+    }
+
+</script>
+
+<div class='wx_pic' style='margin:0 auto;display:none;'>
+    <img src="http://envelope.oss-cn-shanghai.aliyuncs.com/resource/wx4.png"/>
+</div>
+
+</body>
+</html>
