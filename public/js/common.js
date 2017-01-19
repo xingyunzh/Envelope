@@ -1,3 +1,4 @@
+
 var cardCountOfLevel = [0,1,6,18,48,100];
 
 //var cardCountOfLevel = [1,2,3,4,5,6];

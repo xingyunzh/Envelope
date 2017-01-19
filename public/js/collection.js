@@ -23,7 +23,11 @@ function updateCount() {
             var level = getLevelByCount(count);
             $('.grow-progress-block>img').attr('src', 'http://envelope.oss-cn-shanghai.aliyuncs.com/resource/pet_' + (level + 1) + '.png');
 
-            $('#requiredCardCount').html(getRequiredCardCount(count));
+            var nextCount = getRequiredCardCount(count);
+            if(nextCount <= 0){
+                $('.collected-level-up>span').empty().text("恭喜，您的金鸡已经变成凤凰啦！");
+            }
+            $('#requiredCardCount').html(nextCount);
 
         }).fail(function (error) {
             console.log("Server Error" + JSON.stringify(error));
@@ -56,8 +60,12 @@ function getCollection() {
 }
 
 function stamp(date){
+    function format(number){
+        return number < 10 ? "0" + number : "" + number;
+    }
+
     if(date){
-       return (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+       return "" + (date.getMonth() + 1) + "-" + date.getDate() + " " + format(date.getHours()) + ":" + format(date.getMinutes());
     }
     return "";
 }
