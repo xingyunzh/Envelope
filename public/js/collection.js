@@ -47,7 +47,7 @@ function getCollection() {
         });
 
     }).fail(function (error) {
-        alert("Server Error:" + JSON.stringify(error));
+        console.log("Server Error:" + JSON.stringify(error));
     });
 }
 

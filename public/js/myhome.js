@@ -61,7 +61,7 @@ $(function(){
 
         $('.create-button').text('选定卡片').removeAttr('disabled');
     }).fail(function(error){
-        alert("Server Error:"+JSON.stringify(error));
+        console.log("Server Error:"+JSON.stringify(error));
     });
 
     updateCount();
@@ -89,7 +89,7 @@ function getUserInfoAndCollect(code,senderId){
                     sender:senderId,
                     me:theUser._id
                 }).then(function(collect){
-                    alert("已收藏 id:"+collect._id);
+                    console.log("已收藏 id:"+collect._id);
                 });
             }else{
                 return true;
