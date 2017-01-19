@@ -14,14 +14,11 @@ $(function(){
     var query = getQueryString();
 
     if ('code' in query) {
-        $('.login-button').hide();
         getUserInfoAndCollect(query.code,query.state);
     }
     else if(localStorage.user && localStorage.token){
        theUser = JSON.parse(localStorage.user);
-       $('#nickname-span').text(theUser.nickname);
-       $('#nickname-span').show();
-       $('.login-button').hide();
+       updateCount();
     }
     else {
         delete localStorage.user;
@@ -34,7 +31,7 @@ $(function(){
 
     //wechatInit();
 
-    $('.create-button').text('加载中').attr('disabled', true);
+    $('.on-button-text-area>div').text('加载中').attr('disabled', true);
 
     $.when(getThemes(), getThemeConfig()).then(function (value) {
         return getCurrentCard();
@@ -59,7 +56,7 @@ $(function(){
         configMyHomeWithTheme();
         configMyHomeWithThemeConfig();
 
-        $('.create-button').text('选定卡片').removeAttr('disabled');
+        $('.on-button-text-area>div').text('选定卡片').removeAttr('disabled');
     }).fail(function(error){
         console.log("Server Error:"+JSON.stringify(error));
     });
@@ -75,8 +72,6 @@ function getUserInfoAndCollect(code,senderId){
         localStorage.user = JSON.stringify(data.user);
         theUser = data.user;
         updateCount();
-        $('#nickname-span').text(theUser.nickname);
-        $('#nickname-span').show();
         if (!!senderId && senderId != 'fromus' && senderId != theUser._id) {
             return true;
         }
@@ -91,7 +86,7 @@ function getUserInfoAndCollect(code,senderId){
                 sender:senderId,
                 me:theUser._id
             }).then(function(collect){
-                alert("已收藏 id:"+collect._id);
+                console.log("已收藏 id:"+collect._id);
             });
         }
         
@@ -110,7 +105,7 @@ function getThemes(){
 
 function getThemeConfig(){
     return httpHelper().authRequest('GET', '/envelope/api/tconfig/current').then(function(config){
-       theThemeConfig = config;
+        theThemeConfig = config;
 
         return true;
     });
@@ -135,28 +130,26 @@ function configMyHomeWithThemeConfig(){
 
 //event
 function createCard(){
-    if (theCurrentCard && theCurrentCard.theme._id == theThemes[theThemeIndex]._id
+    if (!!theCurrentCard && theCurrentCard.theme._id == theThemes[theThemeIndex]._id
         && theCurrentCard.textIndex == theThemeConfig.textCandidates[theTextIndex]) {
-//        window.location.href = '/envelope/api/card/view/user/' + theUser._id;
+        window.location.href = '/envelope/api/card/view/user/' + theUser._id + '?create=1';
+    }else{
+        var ms = new Date().getMilliseconds();
+        var logoIndex = ms % theThemeConfig.logoCandidates.length;
 
-        document.getElementById('preview-iframe').contentWindow.location.reload(true);
-        return;
+        httpHelper().authRequest("POST", '/envelope/api/card/create', {
+            theme:theThemes[theThemeIndex]._id,
+            themeConfig:theThemeConfig._id,
+            sender:theUser._id,
+            textIndex:theTextIndex,
+            logoIndex:logoIndex
+        }).then(function(data){
+            window.location.href = '/envelope/api/card/view/user/' + theUser._id + '?create=1';
+        }).fail(function(error){
+            alert("Server Error:"+JSON.stringify(error));
+        });
     }
 
-    var ms = new Date().getMilliseconds();
-    var logoIndex = ms % theThemeConfig.logoCandidates.length;
-
-    httpHelper().authRequest("POST", '/envelope/api/card/create', {
-        theme:theThemes[theThemeIndex]._id,
-        themeConfig:theThemeConfig._id,
-        sender:theUser._id,
-        textIndex:theTextIndex,
-        logoIndex:logoIndex
-    }).then(function(data){
-        window.location.href = '/envelope/api/card/view/user/' + theUser._id + '?create=1';
-    }).fail(function(error){
-        alert("Server Error:"+JSON.stringify(error));
-    });
 }
 
 function logout(){
