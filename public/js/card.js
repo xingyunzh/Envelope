@@ -111,14 +111,15 @@ function wechatInit(){
 function updateCount() {
     httpHelper().authRequest("GET", "/envelope/api/collect/count/" + theSpecificSenderData.theCard.sender._id)
         .then(function (count) {
-            var birdIndex = getLevelByCount(count) + 1;
+            var level = getLevelByCount(count);
 
-            $('#count-span').text("" + birdIndex);
-            $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_"+birdIndex+".png");
+            $('#count-span').text("" + level);
+            $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_"+(level + 1)+".png");
 
-            if(birdIndex == 6){
+            if(level == 5 || level == 0){
                 $('.pet-desc-area').hide();
             }
+
 
         }).fail(function (error) {
         console.log("Server Error" + JSON.stringify(error));
