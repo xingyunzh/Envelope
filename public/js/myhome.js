@@ -56,7 +56,7 @@ $(function(){
         configMyHomeWithTheme();
         configMyHomeWithThemeConfig();
 
-        $('.on-button-text-area>div').text('选定卡片').removeAttr('disabled');
+        $('.on-button-text-area>div').text('选定祝福语').removeAttr('disabled');
     }).fail(function(error){
         console.log("Server Error:"+JSON.stringify(error));
     });
