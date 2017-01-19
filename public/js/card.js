@@ -116,6 +116,10 @@ function updateCount() {
             $('#count-span').text("" + birdIndex);
             $('#sprite-img').attr('src', "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/bird_"+birdIndex+".png");
 
+            if(birdIndex == 6){
+                $('.pet-desc-area').hide();
+            }
+
         }).fail(function (error) {
         console.log("Server Error" + JSON.stringify(error));
     });

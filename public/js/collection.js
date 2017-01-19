@@ -56,8 +56,12 @@ function getCollection() {
 }
 
 function stamp(date){
+    function format(number){
+        return number < 10 ? "0" + number : "" + number;
+    }
+
     if(date){
-       return (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+       return "" + (date.getMonth() + 1) + "-" + date.getDate() + " " + format(date.getHours()) + ":" + format(date.getMinutes());
     }
     return "";
 }
