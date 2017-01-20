@@ -13,14 +13,12 @@ var theCurrentCard = null;
 $(function(){
     var query = getQueryString();
 
-    if ('code' in query) {
-        getUserInfoAndCollect(query.code,query.state);
-    }
-    else if(localStorage.user && localStorage.token){
+    if(localStorage.user && localStorage.token){
        theUser = JSON.parse(localStorage.user);
        updateCount();
-    }
-    else {
+    }else if('code' in query) {
+        getUserInfoAndCollect(query.code,query.state);
+    }else{
         delete localStorage.user;
         delete localStorage.token;
 
