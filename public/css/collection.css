@@ -91,8 +91,9 @@
 
 .card-sender-thumb {
     float: left;
-    padding:4vw;
-    width: 24vw;
+    width: 25vw;
+    padding: 2vw;
+    height:30vw;
 }
 
 .card-sender-thumb a {
