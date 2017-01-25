@@ -16,7 +16,7 @@ var scr = require('./repositories/systemConfigRepository');
 var logRepository = require('./repositories/logRepository');
 
 
-var contextRoot = "/envelope";  //Not set any contextRoot at the moment, but let's make it as easy to config
+var contextRoot = "/envelope";
 
 mongoose.Promise = q.Promise;
 var envMongo = scr.getMongoEnv();
