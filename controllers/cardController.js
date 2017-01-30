@@ -51,8 +51,8 @@ exports.getCardViewByUserId = function (req, res) {
         }
 
         //TEST CODE
-//        card.theme.imageURL = "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/card_cx.jpg";
-//        card.theme.cardTemplate = "cardAthena.html";
+//        card.theme.imageURL = "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/card_5.jpg";
+//        card.theme.cardTemplate = "cardPoseidon.html";
 
         var actions = [
             getCardTemplate(card.theme.cardTemplate),
