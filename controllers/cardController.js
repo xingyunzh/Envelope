@@ -50,6 +50,10 @@ exports.getCardViewByUserId = function (req, res) {
             throw "Not created yet!";
         }
 
+        //TEST CODE
+//        card.theme.imageURL = "http://envelope.oss-cn-shanghai.aliyuncs.com/resource/card_5.jpg";
+//        card.theme.cardTemplate = "cardPoseidon.html";
+
         var actions = [
             getCardTemplate(card.theme.cardTemplate),
             wechatRepository.getConfigParams(req.protocol + '://' + req.get('host') + req.originalUrl)

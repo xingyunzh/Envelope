@@ -1,0 +1,225 @@
+.card-status-bar {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height:1.1rem;
+    width: 100%;
+    font-size:1rem;
+    color: #d07b2f;
+    line-height: 1.1rem;
+    background-color: transparent;
+    z-index: 99;
+}
+
+#bg-img {
+    width: 100%;
+}
+
+.card-area{
+    position: relative;
+    padding: 0px; !important;
+}
+
+.card-area img {
+    display: block;
+}
+
+.card-area>img {
+    float: left;
+}
+
+.card-bg-area{
+    display: block;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
+}
+
+#master-img {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    width: 100%;
+}
+
+.card-message-area{
+    top:1.5%;
+    height: 36.4%;
+    z-index:60;
+}
+
+.card-message-box {
+    height: 70.6%;
+    padding-right: 3vw;
+}
+
+.card-message-icon-area {
+
+}
+
+.card-message-name-area {
+
+}
+
+#text-box-img {
+    margin: 0px auto;
+    width: 100%;
+}
+
+
+#ev-card-text-id {
+    position: absolute;
+    left: 0;
+    top: 14%;
+    width: 100%;
+    height: 36%;
+    padding-left: 13%;
+    padding-right: 12%;
+    color: #d04239;
+    font-size: 4vw;
+    font-weight: 600;
+
+    display: table;
+}
+
+#card-text-content-span {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.card-pet-area{
+    top:55%;
+    z-index:70;
+}
+
+.card-button-area {
+    width:100%;
+    height: 15.4%;
+    text-align: center;
+    top:77%;
+    z-index:80;
+}
+
+.card-user-icon-area {
+    width: 100%;
+}
+
+.card-copy-right-area {
+    width: 100%;
+    top:92%;
+}
+
+
+#userIcon-img {
+    width:16vw;
+    height: 16vw;
+    margin: -5% 44vw 0 40vw;
+    border-radius: 50%;
+    border: 4px solid #e36a37;
+}
+
+.signed-name {
+    display: inline-block;
+    width:18vw;
+    margin: 0% 44vw 0 40vw;
+}
+
+.card-user-name-area {
+    width: 100%;
+    text-align: center;
+    font-size: 3vw;
+    color: white;
+    margin-top: 2px;
+}
+
+.pet-group{
+    color: #ffffff;
+    font-size: 2.5vw;
+    width: 30%;
+    margin-left: auto;
+    margin-right: -1vw;
+}
+
+.pet-group img {
+    width:100%;
+}
+
+.pet-desc-area {
+    margin-top: -8%;
+}
+
+.card-button-area a {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 5%;
+    width: 90%;
+    height: 100%;
+
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_1.png");
+    background-size: 100% 100%;
+    z-index: 81;
+}
+
+.card-button-area a.active {
+    background-image: url("http://envelope.oss-cn-shanghai.aliyuncs.com/resource/button_2.png");
+    background-size: 100% 100%;
+}
+
+.on-button-text-area {
+    position: absolute;
+    left: 0px;
+    top:50%;
+    width: 100%;
+    z-index: 82;
+    height: 6vw;
+    line-height: 6vw;
+
+    text-align: center;
+    color: #450c01;
+    font-size: 5vw;
+    font-weight: 900;
+
+
+    text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+    -webkit-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+    -moz-text-shadow:white 1px 0 0,white 0 1px 0,white -1px 0 0,white 0 -1px 0;
+}
+
+.on-button-text-area .inner-text-area {
+    margin-top: -3vw;
+}
+
+#on-button-text-span {
+
+}
+
+
+.card-copy-right-area img {
+    display: inline-block;
+    height:20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.card-copy-right-area p {
+    /*color: #ffd488;*/
+    color: #450c01;
+    text-align: center;
+    font-size: 2.5vw;
+    margin: 0px auto;
+}
+
+.card-copy-right-area p.copy-right-team {
+    font-weight: 900;
+}
+
+.card-copy-right-area p.copy-right-contact {
+    margin-top: -3px;
+}
+
+.card-copy-right-area a {
+    color: #450c01;
+}
